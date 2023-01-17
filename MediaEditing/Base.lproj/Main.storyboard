@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eq4-Ed-8Fl">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Gallery Collection View Controller-->
+        <scene sceneID="0a9-xg-9ID">
+            <objects>
+                <collectionViewController id="eq4-Ed-8Fl" customClass="GalleryCollectionViewController" customModule="MediaEditing" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="3NZ-9Z-Xme">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="x6k-qc-0bj">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mediaCell" id="BDq-gN-Npj" customClass="MediaCell" customModule="MediaEditing" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ru7-gA-pnu">
+                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="62m-b9-uwq">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="62m-b9-uwq" secondAttribute="trailing" id="7An-Hg-uDr"/>
+                                        <constraint firstItem="62m-b9-uwq" firstAttribute="top" secondItem="ru7-gA-pnu" secondAttribute="top" id="Dj8-h6-3f0"/>
+                                        <constraint firstItem="62m-b9-uwq" firstAttribute="leading" secondItem="ru7-gA-pnu" secondAttribute="leading" id="U0I-0R-Pqg"/>
+                                        <constraint firstAttribute="bottom" secondItem="62m-b9-uwq" secondAttribute="bottom" id="b65-CX-pdU"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="imageView" destination="62m-b9-uwq" id="BYc-tj-1Db"/>
+                                    <segue destination="l3t-7F-sqD" kind="presentation" identifier="editorSegue" modalPresentationStyle="fullScreen" id="2jD-w2-Vux"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="eq4-Ed-8Fl" id="COE-8l-NEy"/>
+                            <outlet property="delegate" destination="eq4-Ed-8Fl" id="HqV-Ob-Iza"/>
+                        </connections>
+                    </collectionView>
+                    <connections>
+                        <outlet property="collectionViewFlowLayout" destination="x6k-qc-0bj" id="MLO-io-mjY"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pAC-5b-dW4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1151" y="215"/>
+        </scene>
+        <!--Editor View Controller-->
+        <scene sceneID="KFR-hh-qGW">
+            <objects>
+                <viewController id="l3t-7F-sqD" customClass="EditorViewController" customModule="MediaEditing" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hYN-Ve-wbd">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="1D1-vD-Dn2" customClass="ImageScrollView" customModule="MediaEditing" customModuleProvider="target">
+                                <rect key="frame" x="-1" y="0.0" width="393" height="851"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="CeJ-l8-hov"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Com-zz-P4k"/>
+                            </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eVw-Ha-8E8" customClass="ToolBar" customModule="MediaEditing" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="720" width="393" height="132"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="132" id="Ddl-mU-56i"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OMo-fJ-p4D" customClass="NavigationBar" customModule="MediaEditing" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="103"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="103" id="PEm-vg-eHe"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="TAh-6R-lYf"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="OMo-fJ-p4D" firstAttribute="trailing" secondItem="TAh-6R-lYf" secondAttribute="trailing" id="1ik-4R-lPB"/>
+                            <constraint firstItem="OMo-fJ-p4D" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="gjC-fP-jLv"/>
+                            <constraint firstItem="OMo-fJ-p4D" firstAttribute="top" secondItem="hYN-Ve-wbd" secondAttribute="top" id="hL0-3M-tQm"/>
+                            <constraint firstItem="eVw-Ha-8E8" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="kbC-89-CVH"/>
+                            <constraint firstAttribute="bottom" secondItem="eVw-Ha-8E8" secondAttribute="bottom" id="ouZ-6W-8uX"/>
+                            <constraint firstItem="TAh-6R-lYf" firstAttribute="trailing" secondItem="eVw-Ha-8E8" secondAttribute="trailing" id="x2I-K3-kSV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageScrollView" destination="1D1-vD-Dn2" id="MqT-Mr-ZNn"/>
+                        <outlet property="navigationBar" destination="OMo-fJ-p4D" id="aoX-GU-vFZ"/>
+                        <outlet property="toolBar" destination="eVw-Ha-8E8" id="Lj2-zd-xgZ"/>
+                        <segue destination="Si2-Bf-oaW" kind="unwind" identifier="clouseEditor" unwindAction="closeUnwindSegueWithUnwindSegue:" id="5Cg-BK-4nj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cD7-0e-t95" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Si2-Bf-oaW" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2093.8931297709923" y="214.78873239436621"/>
+        </scene>
+    </scenes>
+</document>
