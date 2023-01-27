@@ -11,12 +11,15 @@ import PhotosUI
 
 
 class EditorViewController: UIViewController {
-
+    
     var asset: PHAsset!
     
-    @IBOutlet weak var navigationBar: NavigationBar!
     @IBOutlet weak var imageScrollView: ImageScrollView!
-    @IBOutlet weak var toolBar: ToolBar!
+    
+    @IBOutlet weak var zoomView: UIStackView!
+    
+    @IBOutlet weak var navigationBarView: NavigationBar!
+    @IBOutlet weak var TabBarView: ToolBar!
     
     
     // MARK: - UIViewController / Life Cycle
@@ -27,24 +30,40 @@ class EditorViewController: UIViewController {
         
         PHPhotoLibrary.shared().register(self)
         setupImageScrollView()
-        
-        navigationBar.delegate = self
     }
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         updateImage()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        print(imageScrollView.isZooming)
+    
+    
+    // MARK: - Action
+    
+    
+    // MARK:  Navigation bar
+    
+    @IBAction func undo(_ sender: UIButton) { }
+    
+    @IBAction func clearAll(_ sender: UIButton) { }
+    
+    
+    // MARK:  Tab bar
+    
+    @IBAction func cancel(_ sender: UIButton) {
+        dismiss(animated: true)
     }
+    
+    @IBAction func download(_ sender: UIButton) {}
+    
+    
+    // MARK:  Tool bar
+    
+    @IBAction func pen(_ sender: UIButton) {}
     
     
     // MARK: - Segue
@@ -113,14 +132,4 @@ extension EditorViewController: PHPhotoLibraryChangeObserver {
 }
 
 
-extension EditorViewController: NavigationBarDelegate {
-    
-    func undo() {
-        print("push undo")
-    }
-    
-    func clearAll() {
-        print("push clear all")
-    }
-}
 

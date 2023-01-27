@@ -33,11 +33,13 @@ class ToolBar: UIView {
     }
     
     private func blur() {
-        let blurEffect = UIBlurEffect(style: .extraLight)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        insertSubview(blurEffectView, at: 0)
+        let gradient = CAGradientLayer()
+        let blue = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        let green = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        gradient.colors = [blue.cgColor, green.cgColor]
+        gradient.locations = [0, 0.6]
+        gradient.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
+        layer.insertSublayer(gradient, at: 0)
     }
     
 }
