@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B026307E2971C853003E94AB /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B026307C2971C853003E94AB /* NavigationBar.swift */; };
-		B026307F2971C853003E94AB /* NavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B026307D2971C853003E94AB /* NavigationBar.xib */; };
+		B0063BB52986714400FE32AC /* SettingColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0063BB42986714400FE32AC /* SettingColorViewController.swift */; };
+		B0063BB72986739D00FE32AC /* SettingColorRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0063BB62986739D00FE32AC /* SettingColorRGB.swift */; };
+		B00FDDC129867CC500F8F92F /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B00FDDC029867CC500F8F92F /* SF-Pro-Text-Semibold.otf */; };
+		B00FDDC72986B94600F8F92F /* ColorPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00FDDC62986B94600F8F92F /* ColorPickerButton.swift */; };
+		B00FDDC929892D6500F8F92F /* BlurGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00FDDC829892D6500F8F92F /* BlurGradientView.swift */; };
 		B02630812971CC26003E94AB /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02630802971CC26003E94AB /* ImageScrollView.swift */; };
-		B0263083297330F2003E94AB /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0263082297330F2003E94AB /* ToolBar.swift */; };
-		B026308529733118003E94AB /* ToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B026308429733118003E94AB /* ToolBar.xib */; };
 		B05DE14428F475CB0082A662 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DE14328F475CB0082A662 /* AppDelegate.swift */; };
 		B05DE14628F475CB0082A662 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DE14528F475CB0082A662 /* SceneDelegate.swift */; };
 		B05DE14B28F475CB0082A662 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05DE14928F475CB0082A662 /* Main.storyboard */; };
@@ -23,11 +24,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B026307C2971C853003E94AB /* NavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
-		B026307D2971C853003E94AB /* NavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavigationBar.xib; sourceTree = "<group>"; };
+		B0063BB42986714400FE32AC /* SettingColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingColorViewController.swift; sourceTree = "<group>"; };
+		B0063BB62986739D00FE32AC /* SettingColorRGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingColorRGB.swift; sourceTree = "<group>"; };
+		B00FDDC029867CC500F8F92F /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
+		B00FDDC62986B94600F8F92F /* ColorPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerButton.swift; sourceTree = "<group>"; };
+		B00FDDC829892D6500F8F92F /* BlurGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurGradientView.swift; sourceTree = "<group>"; };
 		B02630802971CC26003E94AB /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
-		B0263082297330F2003E94AB /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
-		B026308429733118003E94AB /* ToolBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolBar.xib; sourceTree = "<group>"; };
 		B05DE14028F475CB0082A662 /* MediaEditing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaEditing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B05DE14328F475CB0082A662 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B05DE14528F475CB0082A662 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,22 +53,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B026307B2971C853003E94AB /* NavigationBar */ = {
+		B00FDDC229867CCC00F8F92F /* fount */ = {
 			isa = PBXGroup;
 			children = (
-				B026307C2971C853003E94AB /* NavigationBar.swift */,
-				B026307D2971C853003E94AB /* NavigationBar.xib */,
+				B00FDDC029867CC500F8F92F /* SF-Pro-Text-Semibold.otf */,
 			);
-			path = NavigationBar;
+			path = fount;
 			sourceTree = "<group>";
 		};
-		B026308629733120003E94AB /* ToolBar */ = {
+		B00FDDC32986AD7100F8F92F /* SettingColor */ = {
 			isa = PBXGroup;
 			children = (
-				B0263082297330F2003E94AB /* ToolBar.swift */,
-				B026308429733118003E94AB /* ToolBar.xib */,
+				B0063BB62986739D00FE32AC /* SettingColorRGB.swift */,
+				B0063BB42986714400FE32AC /* SettingColorViewController.swift */,
 			);
-			path = ToolBar;
+			path = SettingColor;
+			sourceTree = "<group>";
+		};
+		B00FDDC42986B85600F8F92F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B00FDDC62986B94600F8F92F /* ColorPickerButton.swift */,
+				B00FDDC829892D6500F8F92F /* BlurGradientView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B00FDDC52986B86600F8F92F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */,
+				B02630802971CC26003E94AB /* ImageScrollView.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		B05DE13728F475CB0082A662 = {
@@ -93,6 +112,7 @@
 				B05DE14928F475CB0082A662 /* Main.storyboard */,
 				B05DE15C28F48C7F0082A662 /* GallaryScene */,
 				B0B1FF29296EB8DE00C7A487 /* EditorScene */,
+				B00FDDC32986AD7100F8F92F /* SettingColor */,
 				B05DE15128F475D20082A662 /* Info.plist */,
 				B0B1FF26296EB84000C7A487 /* Support File */,
 			);
@@ -121,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				B05DE14C28F475D20082A662 /* Assets.xcassets */,
+				B00FDDC229867CCC00F8F92F /* fount */,
 			);
 			path = "Support File";
 			sourceTree = "<group>";
@@ -128,10 +149,8 @@
 		B0B1FF29296EB8DE00C7A487 /* EditorScene */ = {
 			isa = PBXGroup;
 			children = (
-				B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */,
-				B02630802971CC26003E94AB /* ImageScrollView.swift */,
-				B026307B2971C853003E94AB /* NavigationBar */,
-				B026308629733120003E94AB /* ToolBar */,
+				B00FDDC52986B86600F8F92F /* Controller */,
+				B00FDDC42986B85600F8F92F /* View */,
 			);
 			path = EditorScene;
 			sourceTree = "<group>";
@@ -194,11 +213,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B00FDDC129867CC500F8F92F /* SF-Pro-Text-Semibold.otf in Resources */,
 				B05DE15028F475D20082A662 /* LaunchScreen.storyboard in Resources */,
-				B026308529733118003E94AB /* ToolBar.xib in Resources */,
 				B05DE14D28F475D20082A662 /* Assets.xcassets in Resources */,
 				B05DE14B28F475CB0082A662 /* Main.storyboard in Resources */,
-				B026307F2971C853003E94AB /* NavigationBar.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,11 +230,13 @@
 				B05DE14428F475CB0082A662 /* AppDelegate.swift in Sources */,
 				B02630812971CC26003E94AB /* ImageScrollView.swift in Sources */,
 				B05DE15928F47BE00082A662 /* GalleryCollectionViewController.swift in Sources */,
-				B0263083297330F2003E94AB /* ToolBar.swift in Sources */,
+				B0063BB52986714400FE32AC /* SettingColorViewController.swift in Sources */,
+				B0063BB72986739D00FE32AC /* SettingColorRGB.swift in Sources */,
 				B05DE15B28F4804E0082A662 /* MediaCell.swift in Sources */,
+				B00FDDC72986B94600F8F92F /* ColorPickerButton.swift in Sources */,
 				B0B1FF2C296EBA1B00C7A487 /* EditorViewController.swift in Sources */,
 				B05DE14628F475CB0082A662 /* SceneDelegate.swift in Sources */,
-				B026307E2971C853003E94AB /* NavigationBar.swift in Sources */,
+				B00FDDC929892D6500F8F92F /* BlurGradientView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,32 +7,29 @@
 
 import UIKit
 
+
 class ImageScrollView: UIScrollView, UIScrollViewDelegate {
 
     
     // MARK: - Drawing Feature
     
-    
     var lastPoint = CGPoint.zero
-    var red: CGFloat = 255
-    var green: CGFloat = 255
-    var blue: CGFloat = 255
     var brushWidth: CGFloat = 25.0
     var opacity: CGFloat = 1.0
     var swiped = false
     
+    var settingColorRGB = SettingColorRGB(red: 0, green: 0, blue: 0, opacity: 1)
     
     var imageSize: CGSize!
-    
     var imageZoomView: UIImageView!
 //    var tempImageView: UIImageView!
     
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         self.centerImage(view: imageZoomView)
-        
     }
+    
     
     func set(image: UIImage) {
         self.delegate = self
@@ -49,7 +46,6 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         self.addSubview(imageZoomView)
         
         configurateFor(imageSize: image.size)
-        
     }
     
     func configurateFor(imageSize: CGSize) {
@@ -116,18 +112,15 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     }
 
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        
         if scrollView.panGestureRecognizer.numberOfTouches == 2 {
             scrollView.isScrollEnabled = false
         } else {
             scrollView.isScrollEnabled = true
         }
-        
     }
     
     
     // MARK:  Draw
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         swiped = false
@@ -152,7 +145,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         
         context?.setLineCap(.round)
         context?.setLineWidth(brushWidth)
-        context?.setStrokeColor(red: red, green: green, blue: blue, alpha: 1.0)
+        context?.setStrokeColor(red: settingColorRGB.red, green: settingColorRGB.green, blue: settingColorRGB.blue, alpha: 1.0)
         context?.setBlendMode(.normal)
         
         context?.strokePath()
@@ -203,9 +196,4 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
 //
 //        tempImageView.image = nil
     }
-    
-    
-    
-    
-    
 }

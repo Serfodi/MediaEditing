@@ -12,28 +12,31 @@ import PhotosUI
 
 class EditorViewController: UIViewController {
     
+    
     var asset: PHAsset!
     
-    @IBOutlet weak var imageScrollView: ImageScrollView!
     
+    @IBOutlet weak var imageScrollView: ImageScrollView!
     @IBOutlet weak var zoomView: UIStackView!
     
-    @IBOutlet weak var navigationBarView: NavigationBar!
-    @IBOutlet weak var TabBarView: ToolBar!
+    @IBOutlet weak var colorPickerButton: ColorPickerButton!
     
     
     // MARK: - UIViewController / Life Cycle
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         PHPhotoLibrary.shared().register(self)
+        
         setupImageScrollView()
+        
+        colorUp(RGB: imageScrollView.settingColorRGB)
     }
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,19 +44,15 @@ class EditorViewController: UIViewController {
     }
     
     
-    
     // MARK: - Action
     
     
-    // MARK:  Navigation bar
-    
+    // Navigation bar
     @IBAction func undo(_ sender: UIButton) { }
-    
     @IBAction func clearAll(_ sender: UIButton) { }
     
     
-    // MARK:  Tab bar
-    
+    // Tab bar
     @IBAction func cancel(_ sender: UIButton) {
         dismiss(animated: true)
     }
@@ -61,15 +60,34 @@ class EditorViewController: UIViewController {
     @IBAction func download(_ sender: UIButton) {}
     
     
-    // MARK:  Tool bar
-    
+    // Tool bar
     @IBAction func pen(_ sender: UIButton) {}
     
     
     // MARK: - Segue
+        
+    @IBAction func closeUnwindSegue(unwindSegue: UIStoryboardSegue) {
+        switch unwindSegue.identifier {
+        case "closeSettingColorVC":
+            if let SCVC = unwindSegue.source as? SettingColorViewController {
+                imageScrollView.settingColorRGB = SCVC.settingColorRGB
+                colorUp(RGB: imageScrollView.settingColorRGB)
+            }
+        default:
+            fatalError("Error segue in EditorViewController")
+        }
+    }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "SettingColorVC":
+            if let SCVC = segue.destination as? SettingColorViewController {
+                SCVC.settingColorRGB = imageScrollView.settingColorRGB
+            }
+        default:
+            fatalError("Error segue in EditorViewController")
+        }
+    }
     
     
     // MARK: - Image display
@@ -96,6 +114,12 @@ class EditorViewController: UIViewController {
     }
     
     
+    // MARK: - view
+    
+    func colorUp(RGB: SettingColorRGB) {
+        colorPickerButton.colorUpdata(CGColor(red: RGB.red , green: RGB.green, blue: RGB.blue, alpha: 1))
+    }
+    
     
     // MARK: - Сonstraint
     
@@ -110,7 +134,8 @@ class EditorViewController: UIViewController {
 }
 
 
-// MARK: PHPhotoLibraryChangeObserver
+// MARK: - PHPhotoLibraryChangeObserver
+
 extension EditorViewController: PHPhotoLibraryChangeObserver {
     
     func photoLibraryDidChange(_ changeInstance: PHChange) {
@@ -130,6 +155,3 @@ extension EditorViewController: PHPhotoLibraryChangeObserver {
         }
     }
 }
-
-
-
