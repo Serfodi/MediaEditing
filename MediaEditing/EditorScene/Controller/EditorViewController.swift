@@ -22,6 +22,12 @@ class EditorViewController: UIViewController {
     @IBOutlet weak var colorPickerButton: ColorPickerButton!
     
     
+    @IBOutlet weak var segmentedControl: SegmentSliderView!
+    
+    
+    @IBOutlet weak var pen: UIButton!
+    
+    
     // MARK: - UIViewController / Life Cycle
     
     override func viewDidLoad() {
@@ -32,6 +38,13 @@ class EditorViewController: UIViewController {
         setupImageScrollView()
         
         colorUp(RGB: imageScrollView.settingColorRGB)
+        
+        segmentedControl.slider.delegate = self
+        
+        segmentedControl.slider.maximumValue = 24
+        segmentedControl.slider.minimumValue = 4
+        segmentedControl.slider.value = 14
+        
     }
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
@@ -47,10 +60,21 @@ class EditorViewController: UIViewController {
     // MARK: - Action
     
     
-    // Navigation bar
-    @IBAction func undo(_ sender: UIButton) { }
-    @IBAction func clearAll(_ sender: UIButton) { }
     
+    
+    // Navigation bar
+    @IBAction func undo(_ sender: UIButton) {
+        imageScrollView.undo()
+    }
+    
+    @IBAction func clearAll(_ sender: UIButton) {
+        imageScrollView.clearAll()
+    }
+    
+    
+    @IBAction func drawPen(_ sender: UIButton) {
+        segmentedControl.switchController()
+    }
     
     // Tab bar
     @IBAction func cancel(_ sender: UIButton) {
@@ -59,9 +83,6 @@ class EditorViewController: UIViewController {
     
     @IBAction func download(_ sender: UIButton) {}
     
-    
-    // Tool bar
-    @IBAction func pen(_ sender: UIButton) {}
     
     
     // MARK: - Segue
@@ -117,8 +138,9 @@ class EditorViewController: UIViewController {
     // MARK: - view
     
     func colorUp(RGB: SettingColorRGB) {
-        colorPickerButton.colorUpdata(CGColor(red: RGB.red , green: RGB.green, blue: RGB.blue, alpha: 1))
+        colorPickerButton.colorUpdata(CGColor(red: RGB.red , green: RGB.green, blue: RGB.blue, alpha: RGB.opacity))
     }
+    
     
     
     // MARK: - Сonstraint
@@ -154,4 +176,15 @@ extension EditorViewController: PHPhotoLibraryChangeObserver {
             }
         }
     }
+}
+
+
+extension EditorViewController: WidthSliderDelegate {
+    
+    func getValue() {
+        
+        imageScrollView.brushWidth = CGFloat(segmentedControl.slider.value)
+        
+    }
+    
 }

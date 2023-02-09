@@ -20,6 +20,13 @@
 		B05DE15028F475D20082A662 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05DE14E28F475D20082A662 /* LaunchScreen.storyboard */; };
 		B05DE15928F47BE00082A662 /* GalleryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DE15828F47BE00082A662 /* GalleryCollectionViewController.swift */; };
 		B05DE15B28F4804E0082A662 /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DE15A28F4804E0082A662 /* MediaCell.swift */; };
+		B05EF8242989A8FB00F05A96 /* ColorGradientSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EF8232989A8FB00F05A96 /* ColorGradientSlider.swift */; };
+		B05EF826298A952400F05A96 /* WidthSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EF825298A952400F05A96 /* WidthSlider.swift */; };
+		B05EF828298AC1FA00F05A96 /* RoundSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EF827298AC1FA00F05A96 /* RoundSegmentedControl.swift */; };
+		B0A87A13298D4C77001C525A /* Segment + Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A12298D4C77001C525A /* Segment + Slider.swift */; };
+		B0A87A15298E77F7001C525A /* UIBezierPatheExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A14298E77F6001C525A /* UIBezierPatheExtension.swift */; };
+		B0A87A1729943977001C525A /* ColorOpacitySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A1629943976001C525A /* ColorOpacitySlider.swift */; };
+		B0A87A1929950113001C525A /* ToolsDrawButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A1829950112001C525A /* ToolsDrawButton.swift */; };
 		B0B1FF2C296EBA1B00C7A487 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +46,13 @@
 		B05DE15128F475D20082A662 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = MediaEditing/Info.plist; sourceTree = SOURCE_ROOT; };
 		B05DE15828F47BE00082A662 /* GalleryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewController.swift; sourceTree = "<group>"; };
 		B05DE15A28F4804E0082A662 /* MediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCell.swift; sourceTree = "<group>"; };
+		B05EF8232989A8FB00F05A96 /* ColorGradientSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGradientSlider.swift; sourceTree = "<group>"; };
+		B05EF825298A952400F05A96 /* WidthSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthSlider.swift; sourceTree = "<group>"; };
+		B05EF827298AC1FA00F05A96 /* RoundSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundSegmentedControl.swift; sourceTree = "<group>"; };
+		B0A87A12298D4C77001C525A /* Segment + Slider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Segment + Slider.swift"; sourceTree = "<group>"; };
+		B0A87A14298E77F6001C525A /* UIBezierPatheExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPatheExtension.swift; sourceTree = "<group>"; };
+		B0A87A1629943976001C525A /* ColorOpacitySlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorOpacitySlider.swift; sourceTree = "<group>"; };
+		B0A87A1829950112001C525A /* ToolsDrawButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsDrawButton.swift; sourceTree = "<group>"; };
 		B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +80,8 @@
 			children = (
 				B0063BB62986739D00FE32AC /* SettingColorRGB.swift */,
 				B0063BB42986714400FE32AC /* SettingColorViewController.swift */,
+				B05EF8232989A8FB00F05A96 /* ColorGradientSlider.swift */,
+				B0A87A1629943976001C525A /* ColorOpacitySlider.swift */,
 			);
 			path = SettingColor;
 			sourceTree = "<group>";
@@ -74,7 +90,12 @@
 			isa = PBXGroup;
 			children = (
 				B00FDDC62986B94600F8F92F /* ColorPickerButton.swift */,
+				B0A87A1829950112001C525A /* ToolsDrawButton.swift */,
 				B00FDDC829892D6500F8F92F /* BlurGradientView.swift */,
+				B05EF825298A952400F05A96 /* WidthSlider.swift */,
+				B05EF827298AC1FA00F05A96 /* RoundSegmentedControl.swift */,
+				B0A87A12298D4C77001C525A /* Segment + Slider.swift */,
+				B0A87A14298E77F6001C525A /* UIBezierPatheExtension.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -227,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0A87A1929950113001C525A /* ToolsDrawButton.swift in Sources */,
 				B05DE14428F475CB0082A662 /* AppDelegate.swift in Sources */,
 				B02630812971CC26003E94AB /* ImageScrollView.swift in Sources */,
 				B05DE15928F47BE00082A662 /* GalleryCollectionViewController.swift in Sources */,
@@ -234,9 +256,15 @@
 				B0063BB72986739D00FE32AC /* SettingColorRGB.swift in Sources */,
 				B05DE15B28F4804E0082A662 /* MediaCell.swift in Sources */,
 				B00FDDC72986B94600F8F92F /* ColorPickerButton.swift in Sources */,
+				B05EF826298A952400F05A96 /* WidthSlider.swift in Sources */,
+				B0A87A15298E77F7001C525A /* UIBezierPatheExtension.swift in Sources */,
 				B0B1FF2C296EBA1B00C7A487 /* EditorViewController.swift in Sources */,
+				B05EF828298AC1FA00F05A96 /* RoundSegmentedControl.swift in Sources */,
+				B0A87A13298D4C77001C525A /* Segment + Slider.swift in Sources */,
 				B05DE14628F475CB0082A662 /* SceneDelegate.swift in Sources */,
 				B00FDDC929892D6500F8F92F /* BlurGradientView.swift in Sources */,
+				B0A87A1729943977001C525A /* ColorOpacitySlider.swift in Sources */,
+				B05EF8242989A8FB00F05A96 /* ColorGradientSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

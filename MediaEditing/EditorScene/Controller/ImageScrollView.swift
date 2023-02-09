@@ -9,26 +9,28 @@ import UIKit
 
 
 class ImageScrollView: UIScrollView, UIScrollViewDelegate {
+    
 
     
-    // MARK: - Drawing Feature
+    var settingColorRGB = SettingColorRGB(red: 1, green: 1, blue: 1, opacity: 1)
+    
+    var brushWidth: CGFloat = 14.0
+    var opacity: CGFloat = 1.0
     
     var lastPoint = CGPoint.zero
-    var brushWidth: CGFloat = 25.0
-    var opacity: CGFloat = 1.0
     var swiped = false
-    
-    var settingColorRGB = SettingColorRGB(red: 0, green: 0, blue: 0, opacity: 1)
     
     var imageSize: CGSize!
     var imageZoomView: UIImageView!
-//    var tempImageView: UIImageView!
+    var tempImageView: UIImageView!
+    
     
     
     override func layoutSubviews() {
         super.layoutSubviews()
         self.centerImage(view: imageZoomView)
     }
+    
     
     
     func set(image: UIImage) {
@@ -100,6 +102,20 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     
+    // MARK: - undu and clear
+    
+    open func undo() {
+        imageZoomView.subviews.last?.removeFromSuperview()
+    }
+    
+    open func clearAll() {
+        for view in imageZoomView.subviews {
+            view.removeFromSuperview()
+        }
+    }
+    
+    
+    
     // MARK: - UIScrollViewDelegate
     
     
@@ -110,32 +126,28 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.centerImage(view: imageZoomView)
     }
-
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        if scrollView.panGestureRecognizer.numberOfTouches == 2 {
-            scrollView.isScrollEnabled = false
-        } else {
-            scrollView.isScrollEnabled = true
-        }
-    }
+        
     
     
-    // MARK:  Draw
+    // MARK: Touches
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         swiped = false
         if let touch = touches.first {
+            tempImageView = UIImageView(frame: imageZoomView.bounds)
+            imageZoomView.addSubview(tempImageView)
             lastPoint = touch.location(in: imageZoomView)
         }
     }
     
     
     func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
+        
         UIGraphicsBeginImageContext(imageSize)
         
         let context = UIGraphicsGetCurrentContext()
         
-        imageZoomView.image?.draw(
+        tempImageView.image?.draw(
             in: CGRect(x: 0, y: 0,
                        width: imageSize.width,
                        height: imageSize.height))
@@ -145,13 +157,13 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         
         context?.setLineCap(.round)
         context?.setLineWidth(brushWidth)
-        context?.setStrokeColor(red: settingColorRGB.red, green: settingColorRGB.green, blue: settingColorRGB.blue, alpha: 1.0)
+        context?.setStrokeColor(red: settingColorRGB.red, green: settingColorRGB.green, blue: settingColorRGB.blue, alpha: settingColorRGB.opacity)
         context?.setBlendMode(.normal)
         
         context?.strokePath()
         
-        imageZoomView.image = UIGraphicsGetImageFromCurrentImageContext()
-        imageZoomView.alpha = opacity
+        tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        tempImageView.alpha = opacity
         
         UIGraphicsEndImageContext()
     }
@@ -168,32 +180,40 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !swiped {
-            // draw a single point
-            drawLineFrom(fromPoint: lastPoint, toPoint: lastPoint)
-        }
-        
-        // Merge tempImageView into mainImageView
-//        UIGraphicsBeginImageContext(imageSize)
-//
-//        imageZoomView.image?.draw(
-//            in: CGRect(x: 0, y: 0,
-//                       width: imageSize.width,
-//                       height: imageSize.height),
-//            blendMode: .normal,
-//            alpha: 1.0)
-//
-//        tempImageView.image?.draw(
-//            in: CGRect(x: 0, y: 0,
-//                       width: imageSize.width,
-//                       height: imageSize.height),
-//            blendMode: .normal,
-//            alpha: opacity)
-//
-//        imageZoomView.image = UIGraphicsGetImageFromCurrentImageContext()
-//
-//        UIGraphicsEndImageContext()
-//
-//        tempImageView.image = nil
+//        drawLineFrom(fromPoint: lastPoint, toPoint: lastPoint)
     }
+    
+    
+    
+    // Merge tempImageView into mainImageView
+    //        UIGraphicsBeginImageContext(imageSize)
+    //
+    //        imageZoomView.image?.draw(
+    //            in: CGRect(x: 0, y: 0,
+    //                       width: imageSize.width,
+    //                       height: imageSize.height),
+    //            blendMode: .normal,
+    //            alpha: 1.0)
+    //
+    //        tempImageView.image?.draw(
+    //            in: CGRect(x: 0, y: 0,
+    //                       width: imageSize.width,
+    //                       height: imageSize.height),
+    //            blendMode: .normal,
+    //            alpha: opacity)
+    //
+    //        imageZoomView.image = UIGraphicsGetImageFromCurrentImageContext()
+    //
+    //        UIGraphicsEndImageContext()
+    //
+    //        tempImageView.image = nil
+}
+
+
+extension ImageScrollView: UIGestureRecognizerDelegate {
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return gestureRecognizer.numberOfTouches == 2
+    }
+    
 }
