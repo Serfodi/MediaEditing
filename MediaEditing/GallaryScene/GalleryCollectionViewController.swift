@@ -25,13 +25,15 @@ class GalleryCollectionViewController: UICollectionViewController {
     
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
+    
     var viewNew: UICollectionViewFlowLayout!
+    
     
     var fetchResult: PHFetchResult<PHAsset>!
     var assetCollection: PHAssetCollection!
     var availableWidth: CGFloat = 0
-    
     fileprivate let imageManager = PHCachingImageManager()
+    
     
     fileprivate var thumbnailSize: CGSize!
     fileprivate var previousPreheatRect = CGRect.zero
@@ -41,11 +43,7 @@ class GalleryCollectionViewController: UICollectionViewController {
     var itemsPerRow: CGFloat = 3
     
     
-    
-    
-    
     // MARK: - UIViewController / Life Cycle
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +56,6 @@ class GalleryCollectionViewController: UICollectionViewController {
             allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
             fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
         }
-        
     }
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
@@ -100,11 +97,7 @@ class GalleryCollectionViewController: UICollectionViewController {
     }
     
     
-    
-    
     // MARK: - Segue
-    
-    @IBAction func closeUnwindSegue(unwindSegue: UIStoryboardSegue) {}
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -117,15 +110,8 @@ class GalleryCollectionViewController: UICollectionViewController {
     }
     
     
-    
-    
-    
-    
-    
-    
     // MARK: - UICollectionViewDataSource
     
-
     // Добавления контента в ячейку
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
@@ -149,10 +135,7 @@ class GalleryCollectionViewController: UICollectionViewController {
     }
     
     
-    
-    
     // MARK: UIScrollView
-    
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateCachedAssets()
@@ -161,7 +144,6 @@ class GalleryCollectionViewController: UICollectionViewController {
     
     
     // MARK: - Asset Caching
-    
     
     fileprivate func resetCachedAssets() {
         imageManager.stopCachingImagesForAllAssets()
@@ -247,10 +229,7 @@ extension GalleryCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 2
     }
-
 }
-
-
 
 
 // MARK: - PHPhotoLibraryChangeObserver

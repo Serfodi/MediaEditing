@@ -11,24 +11,40 @@ import PhotosUI
 
 
 class EditorViewController: UIViewController {
-
+    
+    
     var asset: PHAsset!
     
-    @IBOutlet weak var navigationBar: NavigationBar!
+    
     @IBOutlet weak var imageScrollView: ImageScrollView!
-    @IBOutlet weak var toolBar: ToolBar!
+    @IBOutlet weak var zoomView: UIStackView!
+    
+    @IBOutlet weak var colorPickerButton: ColorPickerButton!
+    
+    
+    @IBOutlet weak var segmentedControl: SegmentSliderView!
+    
+    
+    @IBOutlet weak var pen: UIButton!
     
     
     // MARK: - UIViewController / Life Cycle
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         PHPhotoLibrary.shared().register(self)
+        
         setupImageScrollView()
         
-        navigationBar.delegate = self
+        colorUp(RGB: imageScrollView.settingColorRGB)
+        
+        segmentedControl.slider.delegate = self
+        
+        segmentedControl.slider.maximumValue = 24
+        segmentedControl.slider.minimumValue = 4
+        segmentedControl.slider.value = 14
+        
     }
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
@@ -37,20 +53,62 @@ class EditorViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         updateImage()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        print(imageScrollView.isZooming)
+    
+    // MARK: - Action
+    
+    
+    
+    
+    // Navigation bar
+    @IBAction func undo(_ sender: UIButton) {
+        imageScrollView.undo()
+    }
+    
+    @IBAction func clearAll(_ sender: UIButton) {
+        imageScrollView.clearAll()
     }
     
     
+    @IBAction func drawPen(_ sender: UIButton) {
+        segmentedControl.switchController()
+    }
+    
+    // Tab bar
+    @IBAction func cancel(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
+    
+    @IBAction func download(_ sender: UIButton) {}
+    
+    
+    
     // MARK: - Segue
+        
+    @IBAction func closeUnwindSegue(unwindSegue: UIStoryboardSegue) {
+        switch unwindSegue.identifier {
+        case "closeSettingColorVC":
+            if let SCVC = unwindSegue.source as? SettingColorViewController {
+                imageScrollView.settingColorRGB = SCVC.settingColorRGB
+                colorUp(RGB: imageScrollView.settingColorRGB)
+            }
+        default:
+            fatalError("Error segue in EditorViewController")
+        }
+    }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "SettingColorVC":
+            if let SCVC = segue.destination as? SettingColorViewController {
+                SCVC.settingColorRGB = imageScrollView.settingColorRGB
+            }
+        default:
+            fatalError("Error segue in EditorViewController")
+        }
+    }
     
     
     // MARK: - Image display
@@ -77,6 +135,13 @@ class EditorViewController: UIViewController {
     }
     
     
+    // MARK: - view
+    
+    func colorUp(RGB: SettingColorRGB) {
+        colorPickerButton.colorUpdata(CGColor(red: RGB.red , green: RGB.green, blue: RGB.blue, alpha: RGB.opacity))
+    }
+    
+    
     
     // MARK: - Сonstraint
     
@@ -91,7 +156,8 @@ class EditorViewController: UIViewController {
 }
 
 
-// MARK: PHPhotoLibraryChangeObserver
+// MARK: - PHPhotoLibraryChangeObserver
+
 extension EditorViewController: PHPhotoLibraryChangeObserver {
     
     func photoLibraryDidChange(_ changeInstance: PHChange) {
@@ -113,14 +179,12 @@ extension EditorViewController: PHPhotoLibraryChangeObserver {
 }
 
 
-extension EditorViewController: NavigationBarDelegate {
+extension EditorViewController: WidthSliderDelegate {
     
-    func undo() {
-        print("push undo")
+    func getValue() {
+        
+        imageScrollView.brushWidth = CGFloat(segmentedControl.slider.value)
+        
     }
     
-    func clearAll() {
-        print("push clear all")
-    }
 }
-

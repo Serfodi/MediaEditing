@@ -12,7 +12,6 @@ class MediaCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
-    
     var representedAssetIdentifier: String!
     
     var thumbnailImage: UIImage! {
@@ -20,11 +19,9 @@ class MediaCell: UICollectionViewCell {
             imageView.image = thumbnailImage
         }
     }
-
     
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
     }
-    
 }
