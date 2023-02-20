@@ -125,6 +125,7 @@ class SegmentSliderView: UIView {
             
         }) { (true) in
             self.segment.isHidden = true
+            self.slider.isHidden = false
         }
     }
     

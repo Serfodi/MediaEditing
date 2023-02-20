@@ -15,17 +15,22 @@ class EditorViewController: UIViewController {
     
     var asset: PHAsset!
     
-    
     @IBOutlet weak var imageScrollView: ImageScrollView!
-    @IBOutlet weak var zoomView: UIStackView!
-    
-    @IBOutlet weak var colorPickerButton: ColorPickerButton!
     
     
-    @IBOutlet weak var segmentedControl: SegmentSliderView!
+    
     
     
     @IBOutlet weak var pen: UIButton!
+    
+    
+    @IBOutlet weak var zoomView: UIStackView!
+    @IBOutlet weak var segmentedControl: SegmentSliderView!
+    @IBOutlet weak var clouseButton: UIButton!
+    @IBOutlet weak var downloadButton: UIButton!
+    @IBOutlet weak var undoButton: UIButton!
+    @IBOutlet weak var clearAllButton: UIButton!
+    @IBOutlet weak var colorPickerButton: ColorPickerButton!
     
     
     // MARK: - UIViewController / Life Cycle

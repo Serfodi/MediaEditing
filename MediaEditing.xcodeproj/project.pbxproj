@@ -23,10 +23,16 @@
 		B05EF8242989A8FB00F05A96 /* ColorGradientSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EF8232989A8FB00F05A96 /* ColorGradientSlider.swift */; };
 		B05EF826298A952400F05A96 /* WidthSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EF825298A952400F05A96 /* WidthSlider.swift */; };
 		B05EF828298AC1FA00F05A96 /* RoundSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EF827298AC1FA00F05A96 /* RoundSegmentedControl.swift */; };
-		B0A87A13298D4C77001C525A /* Segment + Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A12298D4C77001C525A /* Segment + Slider.swift */; };
+		B0A45FA0299765FE0063D74A /* ColorSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A45F9F299765FE0063D74A /* ColorSpectrumView.swift */; };
+		B0A87A13298D4C77001C525A /* SegmentSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A12298D4C77001C525A /* SegmentSliderView.swift */; };
 		B0A87A15298E77F7001C525A /* UIBezierPatheExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A14298E77F6001C525A /* UIBezierPatheExtension.swift */; };
 		B0A87A1729943977001C525A /* ColorOpacitySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A1629943976001C525A /* ColorOpacitySlider.swift */; };
 		B0A87A1929950113001C525A /* ToolsDrawButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A1829950112001C525A /* ToolsDrawButton.swift */; };
+		B0B19B80299E5FE200BE2413 /* ColorSlidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B7F299E5FE200BE2413 /* ColorSlidersView.swift */; };
+		B0B19B82299E600A00BE2413 /* ColorSlidersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0B19B81299E600A00BE2413 /* ColorSlidersView.xib */; };
+		B0B19B85299E9FF900BE2413 /* ColorGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B84299E9FF900BE2413 /* ColorGridView.swift */; };
+		B0B19B8929A27DFA00BE2413 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B8829A27DFA00BE2413 /* UIColorExtension.swift */; };
+		B0B19B8B29A38EF100BE2413 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B8A29A38EF100BE2413 /* UIImageExtension.swift */; };
 		B0B1FF2C296EBA1B00C7A487 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,10 +55,16 @@
 		B05EF8232989A8FB00F05A96 /* ColorGradientSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGradientSlider.swift; sourceTree = "<group>"; };
 		B05EF825298A952400F05A96 /* WidthSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthSlider.swift; sourceTree = "<group>"; };
 		B05EF827298AC1FA00F05A96 /* RoundSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundSegmentedControl.swift; sourceTree = "<group>"; };
-		B0A87A12298D4C77001C525A /* Segment + Slider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Segment + Slider.swift"; sourceTree = "<group>"; };
+		B0A45F9F299765FE0063D74A /* ColorSpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSpectrumView.swift; sourceTree = "<group>"; };
+		B0A87A12298D4C77001C525A /* SegmentSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentSliderView.swift; sourceTree = "<group>"; };
 		B0A87A14298E77F6001C525A /* UIBezierPatheExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPatheExtension.swift; sourceTree = "<group>"; };
 		B0A87A1629943976001C525A /* ColorOpacitySlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorOpacitySlider.swift; sourceTree = "<group>"; };
 		B0A87A1829950112001C525A /* ToolsDrawButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsDrawButton.swift; sourceTree = "<group>"; };
+		B0B19B7F299E5FE200BE2413 /* ColorSlidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSlidersView.swift; sourceTree = "<group>"; };
+		B0B19B81299E600A00BE2413 /* ColorSlidersView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorSlidersView.xib; sourceTree = "<group>"; };
+		B0B19B84299E9FF900BE2413 /* ColorGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorGridView.swift; sourceTree = "<group>"; };
+		B0B19B8829A27DFA00BE2413 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		B0B19B8A29A38EF100BE2413 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,15 +87,14 @@
 			path = fount;
 			sourceTree = "<group>";
 		};
-		B00FDDC32986AD7100F8F92F /* SettingColor */ = {
+		B00FDDC32986AD7100F8F92F /* SettingColorScene */ = {
 			isa = PBXGroup;
 			children = (
-				B0063BB62986739D00FE32AC /* SettingColorRGB.swift */,
-				B0063BB42986714400FE32AC /* SettingColorViewController.swift */,
-				B05EF8232989A8FB00F05A96 /* ColorGradientSlider.swift */,
-				B0A87A1629943976001C525A /* ColorOpacitySlider.swift */,
+				B0A45F9B299765350063D74A /* Model */,
+				B0A45F9C2997653F0063D74A /* Controller */,
+				B0A45F9A2997652B0063D74A /* View */,
 			);
-			path = SettingColor;
+			path = SettingColorScene;
 			sourceTree = "<group>";
 		};
 		B00FDDC42986B85600F8F92F /* View */ = {
@@ -92,10 +103,7 @@
 				B00FDDC62986B94600F8F92F /* ColorPickerButton.swift */,
 				B0A87A1829950112001C525A /* ToolsDrawButton.swift */,
 				B00FDDC829892D6500F8F92F /* BlurGradientView.swift */,
-				B05EF825298A952400F05A96 /* WidthSlider.swift */,
-				B05EF827298AC1FA00F05A96 /* RoundSegmentedControl.swift */,
-				B0A87A12298D4C77001C525A /* Segment + Slider.swift */,
-				B0A87A14298E77F6001C525A /* UIBezierPatheExtension.swift */,
+				B0B19B7E299E5EA000BE2413 /* Segment + Slider */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -133,7 +141,8 @@
 				B05DE14928F475CB0082A662 /* Main.storyboard */,
 				B05DE15C28F48C7F0082A662 /* GallaryScene */,
 				B0B1FF29296EB8DE00C7A487 /* EditorScene */,
-				B00FDDC32986AD7100F8F92F /* SettingColor */,
+				B00FDDC32986AD7100F8F92F /* SettingColorScene */,
+				B0B19B7D299E5E4D00BE2413 /* Extension */,
 				B05DE15128F475D20082A662 /* Info.plist */,
 				B0B1FF26296EB84000C7A487 /* Support File */,
 			);
@@ -156,6 +165,71 @@
 				B05DE15A28F4804E0082A662 /* MediaCell.swift */,
 			);
 			path = GallaryScene;
+			sourceTree = "<group>";
+		};
+		B0A45F9A2997652B0063D74A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B0B19B84299E9FF900BE2413 /* ColorGridView.swift */,
+				B0A45F9F299765FE0063D74A /* ColorSpectrumView.swift */,
+				B0B19B83299E603C00BE2413 /* ColorSlidersView */,
+				B0B19B7C299E5DDF00BE2413 /* Sliders */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B0A45F9B299765350063D74A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B0063BB62986739D00FE32AC /* SettingColorRGB.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B0A45F9C2997653F0063D74A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B0063BB42986714400FE32AC /* SettingColorViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B0B19B7C299E5DDF00BE2413 /* Sliders */ = {
+			isa = PBXGroup;
+			children = (
+				B05EF8232989A8FB00F05A96 /* ColorGradientSlider.swift */,
+				B0A87A1629943976001C525A /* ColorOpacitySlider.swift */,
+			);
+			path = Sliders;
+			sourceTree = "<group>";
+		};
+		B0B19B7D299E5E4D00BE2413 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B0A87A14298E77F6001C525A /* UIBezierPatheExtension.swift */,
+				B0B19B8829A27DFA00BE2413 /* UIColorExtension.swift */,
+				B0B19B8A29A38EF100BE2413 /* UIImageExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		B0B19B7E299E5EA000BE2413 /* Segment + Slider */ = {
+			isa = PBXGroup;
+			children = (
+				B05EF825298A952400F05A96 /* WidthSlider.swift */,
+				B05EF827298AC1FA00F05A96 /* RoundSegmentedControl.swift */,
+				B0A87A12298D4C77001C525A /* SegmentSliderView.swift */,
+			);
+			path = "Segment + Slider";
+			sourceTree = "<group>";
+		};
+		B0B19B83299E603C00BE2413 /* ColorSlidersView */ = {
+			isa = PBXGroup;
+			children = (
+				B0B19B7F299E5FE200BE2413 /* ColorSlidersView.swift */,
+				B0B19B81299E600A00BE2413 /* ColorSlidersView.xib */,
+			);
+			path = ColorSlidersView;
 			sourceTree = "<group>";
 		};
 		B0B1FF26296EB84000C7A487 /* Support File */ = {
@@ -236,6 +310,7 @@
 			files = (
 				B00FDDC129867CC500F8F92F /* SF-Pro-Text-Semibold.otf in Resources */,
 				B05DE15028F475D20082A662 /* LaunchScreen.storyboard in Resources */,
+				B0B19B82299E600A00BE2413 /* ColorSlidersView.xib in Resources */,
 				B05DE14D28F475D20082A662 /* Assets.xcassets in Resources */,
 				B05DE14B28F475CB0082A662 /* Main.storyboard in Resources */,
 			);
@@ -251,16 +326,21 @@
 				B0A87A1929950113001C525A /* ToolsDrawButton.swift in Sources */,
 				B05DE14428F475CB0082A662 /* AppDelegate.swift in Sources */,
 				B02630812971CC26003E94AB /* ImageScrollView.swift in Sources */,
+				B0A45FA0299765FE0063D74A /* ColorSpectrumView.swift in Sources */,
 				B05DE15928F47BE00082A662 /* GalleryCollectionViewController.swift in Sources */,
 				B0063BB52986714400FE32AC /* SettingColorViewController.swift in Sources */,
+				B0B19B85299E9FF900BE2413 /* ColorGridView.swift in Sources */,
 				B0063BB72986739D00FE32AC /* SettingColorRGB.swift in Sources */,
+				B0B19B8929A27DFA00BE2413 /* UIColorExtension.swift in Sources */,
 				B05DE15B28F4804E0082A662 /* MediaCell.swift in Sources */,
 				B00FDDC72986B94600F8F92F /* ColorPickerButton.swift in Sources */,
+				B0B19B80299E5FE200BE2413 /* ColorSlidersView.swift in Sources */,
 				B05EF826298A952400F05A96 /* WidthSlider.swift in Sources */,
 				B0A87A15298E77F7001C525A /* UIBezierPatheExtension.swift in Sources */,
 				B0B1FF2C296EBA1B00C7A487 /* EditorViewController.swift in Sources */,
+				B0B19B8B29A38EF100BE2413 /* UIImageExtension.swift in Sources */,
 				B05EF828298AC1FA00F05A96 /* RoundSegmentedControl.swift in Sources */,
-				B0A87A13298D4C77001C525A /* Segment + Slider.swift in Sources */,
+				B0A87A13298D4C77001C525A /* SegmentSliderView.swift in Sources */,
 				B05DE14628F475CB0082A662 /* SceneDelegate.swift in Sources */,
 				B00FDDC929892D6500F8F92F /* BlurGradientView.swift in Sources */,
 				B0A87A1729943977001C525A /* ColorOpacitySlider.swift in Sources */,
