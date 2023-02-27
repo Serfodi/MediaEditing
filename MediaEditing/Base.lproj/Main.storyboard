@@ -194,7 +194,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MoA-dz-6Hh">
+                                    <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MoA-dz-6Hh" customClass="ToolsCollectionView" customModule="MediaEditing" customModuleProvider="target">
                                         <rect key="frame" x="57" y="-31" width="279" height="88"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="88" id="Trh-UA-Gkz"/>

@@ -9,10 +9,6 @@ import UIKit
 import Lottie
 
 
-enum ButtonState {
-    case cancel
-    case back
-}
 
 protocol ButtonDelegate: AnyObject {
     
@@ -22,6 +18,11 @@ protocol ButtonDelegate: AnyObject {
 
 
 class BackToCancelButton: UIView {
+    
+    enum ButtonState {
+        case cancel
+        case back
+    }
 
     private var animationButtonView: AnimationView!
     private var button: UIButton!

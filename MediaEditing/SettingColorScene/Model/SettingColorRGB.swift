@@ -14,4 +14,10 @@ struct SettingColorRGB {
     var blue: CGFloat
     var opacity: CGFloat
     
+    var color: UIColor {
+        get {
+            return UIColor(red: red, green: green, blue: blue, alpha: opacity)
+        }
+    }
+    
 }

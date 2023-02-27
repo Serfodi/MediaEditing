@@ -10,24 +10,24 @@ import UIKit
 
 class ToolsDrawCell: UICollectionViewCell {
 
+    var tool: Tool! {
+        didSet {
+            toolImageView.image = UIImage(named: tool.toolName.rawValue)
+            if tool.widht == nil {
+                viewWidth.isHidden = true
+            } else {
+                setWidth(CGFloat(tool.widht))
+            }
+            if let colorRGB = tool.color {
+                tipImageView.image = UIImage(named: tool.toolName.rawValue + "Tip")
+                setColor(colorRGB.color)
+            }
+        }
+    }
+    
     var viewWidth: UIView!
     var toolImageView: UIImageView!
     var tipImageView: UIImageView!
-    
-    var hightConstraints: NSLayoutConstraint!
-    
-    var toolImage: UIImage! {
-        didSet {
-            toolImageView.image = toolImage
-        }
-    }
-    
-    var tipImage: UIImage! {
-        didSet {
-            tipImageView.image = tipImage
-            tipImageView.image?.withRenderingMode(.alwaysTemplate)
-        }
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,6 +51,7 @@ class ToolsDrawCell: UICollectionViewCell {
     
     /// Устонавливает ширину корондаша
     open func setWidth(_ height: CGFloat) {
+        tool.widht = Float(height)
         viewWidth.frame = CGRect(origin: viewWidth.frame.origin, size: CGSize(width: viewWidth.frame.width, height: height))
     }
     

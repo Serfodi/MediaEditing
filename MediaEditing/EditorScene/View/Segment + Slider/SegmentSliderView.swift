@@ -8,14 +8,15 @@
 import UIKit
 
 
-enum Controller {
-    case segment
-    case slider
-}
 
 
 @IBDesignable
 class SegmentSliderView: UIView {
+    
+    enum Controller {
+        case segment
+        case slider
+    }
     
     var baseLayer = CAShapeLayer()
     

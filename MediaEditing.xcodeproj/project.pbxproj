@@ -42,6 +42,7 @@
 		B0B19B9829A509F900BE2413 /* duck.json in Resources */ = {isa = PBXBuildFile; fileRef = B0B19B9729A509F900BE2413 /* duck.json */; };
 		B0B19B9A29A515AC00BE2413 /* DuckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B9929A515AC00BE2413 /* DuckViewController.swift */; };
 		B0B1FF2C296EBA1B00C7A487 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */; };
+		B0CAD10129ACD2E200124855 /* ToolsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CAD10029ACD2E200124855 /* ToolsCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		B0B19B9729A509F900BE2413 /* duck.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = duck.json; sourceTree = "<group>"; };
 		B0B19B9929A515AC00BE2413 /* DuckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuckViewController.swift; sourceTree = "<group>"; };
 		B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
+		B0CAD10029ACD2E200124855 /* ToolsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				B0A45F9B299765350063D74A /* Model */,
-				B0A45F9C2997653F0063D74A /* Controller */,
 				B0A45F9A2997652B0063D74A /* View */,
+				B0A45F9C2997653F0063D74A /* Controller */,
 			);
 			path = SettingColorScene;
 			sourceTree = "<group>";
@@ -117,9 +119,9 @@
 			isa = PBXGroup;
 			children = (
 				B02630802971CC26003E94AB /* ImageScrollView.swift */,
+				B0CAD10229ACEB5800124855 /* ToolsCollection */,
 				B08B6CA529A9E427002748E9 /* DownnloadToRoundButton.swift */,
 				B0B19B9329A5090A00BE2413 /* BackToCancelButton.swift */,
-				B0A87A1829950112001C525A /* ToolsDrawCell.swift */,
 				B00FDDC62986B94600F8F92F /* ColorPickerButton.swift */,
 				B00FDDC829892D6500F8F92F /* BlurGradientView.swift */,
 				B0B19B7E299E5EA000BE2413 /* Segment + Slider */,
@@ -157,7 +159,7 @@
 				B05DE15728F47A550082A662 /* Delegate */,
 				B05DE14E28F475D20082A662 /* LaunchScreen.storyboard */,
 				B05DE14928F475CB0082A662 /* Main.storyboard */,
-				B0B19B9929A515AC00BE2413 /* DuckViewController.swift */,
+				B0CAD0FF29ACBBFF00124855 /* DuckScene */,
 				B05DE15C28F48C7F0082A662 /* GallaryScene */,
 				B0B1FF29296EB8DE00C7A487 /* EditorScene */,
 				B00FDDC32986AD7100F8F92F /* SettingColorScene */,
@@ -281,6 +283,23 @@
 			path = EditorScene;
 			sourceTree = "<group>";
 		};
+		B0CAD0FF29ACBBFF00124855 /* DuckScene */ = {
+			isa = PBXGroup;
+			children = (
+				B0B19B9929A515AC00BE2413 /* DuckViewController.swift */,
+			);
+			path = DuckScene;
+			sourceTree = "<group>";
+		};
+		B0CAD10229ACEB5800124855 /* ToolsCollection */ = {
+			isa = PBXGroup;
+			children = (
+				B0CAD10029ACD2E200124855 /* ToolsCollectionView.swift */,
+				B0A87A1829950112001C525A /* ToolsDrawCell.swift */,
+			);
+			path = ToolsCollection;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -374,6 +393,7 @@
 				B0063BB72986739D00FE32AC /* SettingColorRGB.swift in Sources */,
 				B0B19B8929A27DFA00BE2413 /* UIColorExtension.swift in Sources */,
 				B0B19B9429A5090A00BE2413 /* BackToCancelButton.swift in Sources */,
+				B0CAD10129ACD2E200124855 /* ToolsCollectionView.swift in Sources */,
 				B05DE15B28F4804E0082A662 /* MediaCell.swift in Sources */,
 				B00FDDC72986B94600F8F92F /* ColorPickerButton.swift in Sources */,
 				B0B19B80299E5FE200BE2413 /* ColorSlidersView.swift in Sources */,

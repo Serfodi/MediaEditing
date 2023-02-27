@@ -7,26 +7,25 @@
 
 import Foundation
 
-enum ToolImageName: String {
-    case pen = "pen"
-    case pencil = "pencil"
-    case brush = "brush"
-    case lasso = "lasso"
-    case eraser = "eraser"
-}
-
 
 class Tool {
     
-    let toolImageName:String
+    enum ToolName: String {
+        case pen = "pen"
+        case pencil = "pencil"
+        case brush = "brush"
+        case lasso = "lasso"
+        case eraser = "eraser"
+    }
     
-    var widht:CGFloat!
+    let toolName: ToolName
+    
+    var widht:Float!
     var color:SettingColorRGB!
     
-    init(toolImageName: String, color: SettingColorRGB! = nil, widht: CGFloat! = nil) {
-        self.toolImageName = toolImageName
+    init(toolName: ToolName, color: SettingColorRGB! = nil, widht: Float! = nil) {
+        self.toolName = toolName
         self.color = color
         self.widht = widht
     }
-    
 }
