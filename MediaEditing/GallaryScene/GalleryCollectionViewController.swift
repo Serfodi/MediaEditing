@@ -26,7 +26,7 @@ class GalleryCollectionViewController: UICollectionViewController {
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
     
-    var viewNew: UICollectionViewFlowLayout!
+    
     
     
     var fetchResult: PHFetchResult<PHAsset>!

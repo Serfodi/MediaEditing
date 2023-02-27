@@ -38,7 +38,11 @@ class RoundSegmentedControl: UIView {
         super.init(coder: aDecoder)
         setupView()
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
+    }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -71,12 +75,6 @@ class RoundSegmentedControl: UIView {
         return UIBezierPath().roundedRectPath(point1, point2, point3, point4, cornerRadius1: radius, cornerRadius2: radius)
     }
     
-        
-    open func slideViewRect(_ rect: CGRect) {
-        slideView.frame = rect
-        self.layoutIfNeeded()
-    }
-    
     
     open func baseLayerHide() {
         setNeedsDisplay()
@@ -102,7 +100,6 @@ class RoundSegmentedControl: UIView {
         }) { (true) in
             self.slideViewRect = self.slideView.frame
         }
-        
         currentIndex = index
     }
     

@@ -35,26 +35,25 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     
     func set(image: UIImage) {
         self.delegate = self
-        
         // reuse
         imageZoomView?.removeFromSuperview()
         imageZoomView = nil
         
         imageZoomView = UIImageView(image: image)
-        imageZoomView.backgroundColor = .green
-        
+//        imageZoomView.backgroundColor = .green
         imageSize = image.size
-        
         self.addSubview(imageZoomView)
         
         configurateFor(imageSize: image.size)
     }
+    
     
     func configurateFor(imageSize: CGSize) {
         self.contentSize = imageSize
         setCurrentMaxandMinZoomScale()
         self.zoomScale = self.minimumZoomScale
     }
+    
     
     func setCurrentMaxandMinZoomScale() {
         let boundsSize = self.bounds.size
@@ -80,6 +79,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         self.minimumZoomScale = minScale
     }
     
+    
     func centerImage(view: UIView!) {
         guard view != nil else { return }
         
@@ -97,16 +97,18 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         } else {
             frameToCenter.origin.y = 0
         }
-        
         view.frame = frameToCenter
     }
     
     
-    // MARK: - undu and clear
+    // MARK: - undo
     
     open func undo() {
         imageZoomView.subviews.last?.removeFromSuperview()
     }
+    
+    
+    // MARK: - undo
     
     open func clearAll() {
         for view in imageZoomView.subviews {
@@ -129,7 +131,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         
     
     
-    // MARK: Touches
+    // MARK: - Touches
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         swiped = false
@@ -156,8 +158,10 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         context?.addLine(to: CGPoint(x: toPoint.x, y: toPoint.y))
         
         context?.setLineCap(.round)
+        
         context?.setLineWidth(brushWidth)
         context?.setStrokeColor(red: settingColorRGB.red, green: settingColorRGB.green, blue: settingColorRGB.blue, alpha: settingColorRGB.opacity)
+        
         context?.setBlendMode(.normal)
         
         context?.strokePath()
@@ -167,6 +171,9 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         
         UIGraphicsEndImageContext()
     }
+    
+    
+    
     
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -208,6 +215,11 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     //
     //        tempImageView.image = nil
 }
+
+
+
+
+// MARK: - UIGestureRecognizerDelegate
 
 
 extension ImageScrollView: UIGestureRecognizerDelegate {

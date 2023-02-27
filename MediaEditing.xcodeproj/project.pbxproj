@@ -23,16 +23,24 @@
 		B05EF8242989A8FB00F05A96 /* ColorGradientSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EF8232989A8FB00F05A96 /* ColorGradientSlider.swift */; };
 		B05EF826298A952400F05A96 /* WidthSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EF825298A952400F05A96 /* WidthSlider.swift */; };
 		B05EF828298AC1FA00F05A96 /* RoundSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EF827298AC1FA00F05A96 /* RoundSegmentedControl.swift */; };
+		B08B6CA029A76915002748E9 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08B6C9F29A76915002748E9 /* Tool.swift */; };
+		B08B6CA229A7989E002748E9 /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08B6CA129A7989E002748E9 /* ModelController.swift */; };
+		B08B6CA629A9E427002748E9 /* DownnloadToRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08B6CA529A9E427002748E9 /* DownnloadToRoundButton.swift */; };
 		B0A45FA0299765FE0063D74A /* ColorSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A45F9F299765FE0063D74A /* ColorSpectrumView.swift */; };
 		B0A87A13298D4C77001C525A /* SegmentSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A12298D4C77001C525A /* SegmentSliderView.swift */; };
 		B0A87A15298E77F7001C525A /* UIBezierPatheExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A14298E77F6001C525A /* UIBezierPatheExtension.swift */; };
 		B0A87A1729943977001C525A /* ColorOpacitySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A1629943976001C525A /* ColorOpacitySlider.swift */; };
-		B0A87A1929950113001C525A /* ToolsDrawButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A1829950112001C525A /* ToolsDrawButton.swift */; };
+		B0A87A1929950113001C525A /* ToolsDrawCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A1829950112001C525A /* ToolsDrawCell.swift */; };
 		B0B19B80299E5FE200BE2413 /* ColorSlidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B7F299E5FE200BE2413 /* ColorSlidersView.swift */; };
 		B0B19B82299E600A00BE2413 /* ColorSlidersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0B19B81299E600A00BE2413 /* ColorSlidersView.xib */; };
 		B0B19B85299E9FF900BE2413 /* ColorGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B84299E9FF900BE2413 /* ColorGridView.swift */; };
 		B0B19B8929A27DFA00BE2413 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B8829A27DFA00BE2413 /* UIColorExtension.swift */; };
 		B0B19B8B29A38EF100BE2413 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B8A29A38EF100BE2413 /* UIImageExtension.swift */; };
+		B0B19B9229A5088D00BE2413 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B0B19B9129A5088D00BE2413 /* Lottie */; };
+		B0B19B9429A5090A00BE2413 /* BackToCancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B9329A5090A00BE2413 /* BackToCancelButton.swift */; };
+		B0B19B9629A509C400BE2413 /* backToCancel.json in Resources */ = {isa = PBXBuildFile; fileRef = B0B19B9529A509C400BE2413 /* backToCancel.json */; };
+		B0B19B9829A509F900BE2413 /* duck.json in Resources */ = {isa = PBXBuildFile; fileRef = B0B19B9729A509F900BE2413 /* duck.json */; };
+		B0B19B9A29A515AC00BE2413 /* DuckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B9929A515AC00BE2413 /* DuckViewController.swift */; };
 		B0B1FF2C296EBA1B00C7A487 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,16 +63,23 @@
 		B05EF8232989A8FB00F05A96 /* ColorGradientSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGradientSlider.swift; sourceTree = "<group>"; };
 		B05EF825298A952400F05A96 /* WidthSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthSlider.swift; sourceTree = "<group>"; };
 		B05EF827298AC1FA00F05A96 /* RoundSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundSegmentedControl.swift; sourceTree = "<group>"; };
+		B08B6C9F29A76915002748E9 /* Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
+		B08B6CA129A7989E002748E9 /* ModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelController.swift; sourceTree = "<group>"; };
+		B08B6CA529A9E427002748E9 /* DownnloadToRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownnloadToRoundButton.swift; sourceTree = "<group>"; };
 		B0A45F9F299765FE0063D74A /* ColorSpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSpectrumView.swift; sourceTree = "<group>"; };
 		B0A87A12298D4C77001C525A /* SegmentSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentSliderView.swift; sourceTree = "<group>"; };
 		B0A87A14298E77F6001C525A /* UIBezierPatheExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPatheExtension.swift; sourceTree = "<group>"; };
 		B0A87A1629943976001C525A /* ColorOpacitySlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorOpacitySlider.swift; sourceTree = "<group>"; };
-		B0A87A1829950112001C525A /* ToolsDrawButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsDrawButton.swift; sourceTree = "<group>"; };
+		B0A87A1829950112001C525A /* ToolsDrawCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsDrawCell.swift; sourceTree = "<group>"; };
 		B0B19B7F299E5FE200BE2413 /* ColorSlidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSlidersView.swift; sourceTree = "<group>"; };
 		B0B19B81299E600A00BE2413 /* ColorSlidersView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorSlidersView.xib; sourceTree = "<group>"; };
 		B0B19B84299E9FF900BE2413 /* ColorGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorGridView.swift; sourceTree = "<group>"; };
 		B0B19B8829A27DFA00BE2413 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		B0B19B8A29A38EF100BE2413 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		B0B19B9329A5090A00BE2413 /* BackToCancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackToCancelButton.swift; sourceTree = "<group>"; };
+		B0B19B9529A509C400BE2413 /* backToCancel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = backToCancel.json; sourceTree = "<group>"; };
+		B0B19B9729A509F900BE2413 /* duck.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = duck.json; sourceTree = "<group>"; };
+		B0B19B9929A515AC00BE2413 /* DuckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuckViewController.swift; sourceTree = "<group>"; };
 		B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B19B9229A5088D00BE2413 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,8 +116,11 @@
 		B00FDDC42986B85600F8F92F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B02630802971CC26003E94AB /* ImageScrollView.swift */,
+				B08B6CA529A9E427002748E9 /* DownnloadToRoundButton.swift */,
+				B0B19B9329A5090A00BE2413 /* BackToCancelButton.swift */,
+				B0A87A1829950112001C525A /* ToolsDrawCell.swift */,
 				B00FDDC62986B94600F8F92F /* ColorPickerButton.swift */,
-				B0A87A1829950112001C525A /* ToolsDrawButton.swift */,
 				B00FDDC829892D6500F8F92F /* BlurGradientView.swift */,
 				B0B19B7E299E5EA000BE2413 /* Segment + Slider */,
 			);
@@ -112,7 +131,6 @@
 			isa = PBXGroup;
 			children = (
 				B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */,
-				B02630802971CC26003E94AB /* ImageScrollView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -139,6 +157,7 @@
 				B05DE15728F47A550082A662 /* Delegate */,
 				B05DE14E28F475D20082A662 /* LaunchScreen.storyboard */,
 				B05DE14928F475CB0082A662 /* Main.storyboard */,
+				B0B19B9929A515AC00BE2413 /* DuckViewController.swift */,
 				B05DE15C28F48C7F0082A662 /* GallaryScene */,
 				B0B1FF29296EB8DE00C7A487 /* EditorScene */,
 				B00FDDC32986AD7100F8F92F /* SettingColorScene */,
@@ -165,6 +184,15 @@
 				B05DE15A28F4804E0082A662 /* MediaCell.swift */,
 			);
 			path = GallaryScene;
+			sourceTree = "<group>";
+		};
+		B08B6CA429A798B7002748E9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B08B6CA129A7989E002748E9 /* ModelController.swift */,
+				B08B6C9F29A76915002748E9 /* Tool.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B0A45F9A2997652B0063D74A /* View */ = {
@@ -235,6 +263,8 @@
 		B0B1FF26296EB84000C7A487 /* Support File */ = {
 			isa = PBXGroup;
 			children = (
+				B0B19B9529A509C400BE2413 /* backToCancel.json */,
+				B0B19B9729A509F900BE2413 /* duck.json */,
 				B05DE14C28F475D20082A662 /* Assets.xcassets */,
 				B00FDDC229867CCC00F8F92F /* fount */,
 			);
@@ -244,8 +274,9 @@
 		B0B1FF29296EB8DE00C7A487 /* EditorScene */ = {
 			isa = PBXGroup;
 			children = (
-				B00FDDC52986B86600F8F92F /* Controller */,
+				B08B6CA429A798B7002748E9 /* Model */,
 				B00FDDC42986B85600F8F92F /* View */,
+				B00FDDC52986B86600F8F92F /* Controller */,
 			);
 			path = EditorScene;
 			sourceTree = "<group>";
@@ -266,6 +297,9 @@
 			dependencies = (
 			);
 			name = MediaEditing;
+			packageProductDependencies = (
+				B0B19B9129A5088D00BE2413 /* Lottie */,
+			);
 			productName = MediaEditing;
 			productReference = B05DE14028F475CB0082A662 /* MediaEditing.app */;
 			productType = "com.apple.product-type.application";
@@ -294,6 +328,9 @@
 				Base,
 			);
 			mainGroup = B05DE13728F475CB0082A662;
+			packageReferences = (
+				B0B19B9029A5088D00BE2413 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = B05DE14128F475CB0082A662 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -309,10 +346,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B00FDDC129867CC500F8F92F /* SF-Pro-Text-Semibold.otf in Resources */,
+				B0B19B9629A509C400BE2413 /* backToCancel.json in Resources */,
 				B05DE15028F475D20082A662 /* LaunchScreen.storyboard in Resources */,
 				B0B19B82299E600A00BE2413 /* ColorSlidersView.xib in Resources */,
 				B05DE14D28F475D20082A662 /* Assets.xcassets in Resources */,
 				B05DE14B28F475CB0082A662 /* Main.storyboard in Resources */,
+				B0B19B9829A509F900BE2413 /* duck.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,15 +362,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0A87A1929950113001C525A /* ToolsDrawButton.swift in Sources */,
+				B0A87A1929950113001C525A /* ToolsDrawCell.swift in Sources */,
 				B05DE14428F475CB0082A662 /* AppDelegate.swift in Sources */,
 				B02630812971CC26003E94AB /* ImageScrollView.swift in Sources */,
 				B0A45FA0299765FE0063D74A /* ColorSpectrumView.swift in Sources */,
 				B05DE15928F47BE00082A662 /* GalleryCollectionViewController.swift in Sources */,
+				B08B6CA229A7989E002748E9 /* ModelController.swift in Sources */,
+				B08B6CA629A9E427002748E9 /* DownnloadToRoundButton.swift in Sources */,
 				B0063BB52986714400FE32AC /* SettingColorViewController.swift in Sources */,
 				B0B19B85299E9FF900BE2413 /* ColorGridView.swift in Sources */,
 				B0063BB72986739D00FE32AC /* SettingColorRGB.swift in Sources */,
 				B0B19B8929A27DFA00BE2413 /* UIColorExtension.swift in Sources */,
+				B0B19B9429A5090A00BE2413 /* BackToCancelButton.swift in Sources */,
 				B05DE15B28F4804E0082A662 /* MediaCell.swift in Sources */,
 				B00FDDC72986B94600F8F92F /* ColorPickerButton.swift in Sources */,
 				B0B19B80299E5FE200BE2413 /* ColorSlidersView.swift in Sources */,
@@ -339,7 +381,9 @@
 				B0A87A15298E77F7001C525A /* UIBezierPatheExtension.swift in Sources */,
 				B0B1FF2C296EBA1B00C7A487 /* EditorViewController.swift in Sources */,
 				B0B19B8B29A38EF100BE2413 /* UIImageExtension.swift in Sources */,
+				B0B19B9A29A515AC00BE2413 /* DuckViewController.swift in Sources */,
 				B05EF828298AC1FA00F05A96 /* RoundSegmentedControl.swift in Sources */,
+				B08B6CA029A76915002748E9 /* Tool.swift in Sources */,
 				B0A87A13298D4C77001C525A /* SegmentSliderView.swift in Sources */,
 				B05DE14628F475CB0082A662 /* SceneDelegate.swift in Sources */,
 				B00FDDC929892D6500F8F92F /* BlurGradientView.swift in Sources */,
@@ -576,6 +620,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B0B19B9029A5088D00BE2413 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/LottieFiles/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B0B19B9129A5088D00BE2413 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B0B19B9029A5088D00BE2413 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B05DE13828F475CB0082A662 /* Project object */;
 }

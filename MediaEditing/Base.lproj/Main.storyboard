@@ -78,7 +78,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="1D1-vD-Dn2" customClass="ImageScrollView" customModule="MediaEditing" customModuleProvider="target">
-                                <rect key="frame" x="-5" y="-1" width="392" height="853"/>
+                                <rect key="frame" x="0.0" y="0.0" width="392" height="853"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="CeJ-l8-hov"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Com-zz-P4k"/>
@@ -158,11 +158,11 @@
                                     <constraint firstAttribute="bottom" secondItem="yaJ-f3-y69" secondAttribute="bottom" constant="10" id="oyl-cC-L3e"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mmb-iq-yWU">
-                                <rect key="frame" x="0.0" y="709" width="393" height="80"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Src-Ct-nR5">
+                                <rect key="frame" x="0.0" y="720" width="393" height="49"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="auC-KI-QX8" customClass="ColorPickerButton" customModule="MediaEditing" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="19" width="33" height="33"/>
+                                        <rect key="frame" x="8" y="8" width="33" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="33" id="oTr-eW-7lA"/>
                                             <constraint firstAttribute="width" constant="33" id="zWS-Uh-RvW"/>
@@ -176,25 +176,57 @@
                                             <segue destination="Gw6-AE-Vls" kind="presentation" identifier="SettingColorVC" modalPresentationStyle="overCurrentContext" id="fya-V7-aeX"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGe-Wg-82L">
-                                        <rect key="frame" x="186.66666666666666" y="0.0" width="20" height="80"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xce-5L-ZOa">
+                                        <rect key="frame" x="352" y="8" width="33" height="33"/>
+                                        <color key="backgroundColor" white="1" alpha="0.1011809292218543" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="Hbd-OC-UF8"/>
-                                            <constraint firstAttribute="height" constant="80" id="nJV-Jg-N1H"/>
+                                            <constraint firstAttribute="width" constant="33" id="I48-Fs-u0E"/>
+                                            <constraint firstAttribute="height" constant="33" id="RSb-f0-42K"/>
                                         </constraints>
+                                        <color key="tintColor" systemColor="separatorColor"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="pen"/>
-                                        <connections>
-                                            <action selector="drawPen:" destination="l3t-7F-sqD" eventType="touchUpInside" id="2RG-LG-hUC"/>
-                                        </connections>
+                                        <state key="normal" image="add">
+                                            <color key="titleColor" systemColor="labelColor"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="16"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
+                                    <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MoA-dz-6Hh">
+                                        <rect key="frame" x="57" y="-31" width="279" height="88"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="88" id="Trh-UA-Gkz"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="E3T-2z-jUf">
+                                            <size key="itemSize" width="20" height="88"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="toolCell" id="WX1-ko-kih" customClass="ToolsDrawCell" customModule="MediaEditing" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="20" height="88"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="f5N-wm-Spg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="88"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </collectionViewCellContentView>
+                                                <size key="customSize" width="20" height="88"/>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="auC-KI-QX8" secondAttribute="bottom" constant="28" id="BUG-na-Xq3"/>
-                                    <constraint firstAttribute="height" constant="80" id="D2X-si-T0D"/>
-                                    <constraint firstItem="tGe-Wg-82L" firstAttribute="centerY" secondItem="Mmb-iq-yWU" secondAttribute="centerY" id="Jm6-8g-o2o"/>
-                                    <constraint firstItem="tGe-Wg-82L" firstAttribute="centerX" secondItem="Mmb-iq-yWU" secondAttribute="centerX" id="MD7-OK-yE5"/>
-                                    <constraint firstItem="auC-KI-QX8" firstAttribute="leading" secondItem="Mmb-iq-yWU" secondAttribute="leading" constant="8" id="iaz-kZ-YEb"/>
+                                    <constraint firstAttribute="trailing" secondItem="xce-5L-ZOa" secondAttribute="trailing" constant="8" id="8rd-ci-gYh"/>
+                                    <constraint firstItem="auC-KI-QX8" firstAttribute="centerY" secondItem="Src-Ct-nR5" secondAttribute="centerY" id="EWI-K6-FfE"/>
+                                    <constraint firstItem="xce-5L-ZOa" firstAttribute="leading" secondItem="MoA-dz-6Hh" secondAttribute="trailing" constant="16" id="SPT-vm-mu3"/>
+                                    <constraint firstItem="auC-KI-QX8" firstAttribute="leading" secondItem="Src-Ct-nR5" secondAttribute="leading" constant="8" id="Tr8-gE-ZKP"/>
+                                    <constraint firstItem="xce-5L-ZOa" firstAttribute="centerY" secondItem="Src-Ct-nR5" secondAttribute="centerY" id="cO2-4Y-sQm"/>
+                                    <constraint firstItem="MoA-dz-6Hh" firstAttribute="leading" secondItem="auC-KI-QX8" secondAttribute="trailing" constant="16" id="eiS-Hw-09o"/>
+                                    <constraint firstAttribute="bottom" secondItem="MoA-dz-6Hh" secondAttribute="bottom" constant="-8" id="jjI-ym-fJT"/>
+                                    <constraint firstAttribute="height" constant="49" id="zhm-QP-QGz"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZO-76-BOS" customClass="BlurGradientView" customModule="MediaEditing" customModuleProvider="target">
@@ -217,46 +249,39 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p42-n0-DYe">
                                 <rect key="frame" x="0.0" y="769" width="393" height="49"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJY-H6-mOr">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ABo-WQ-Iv4" customClass="BackToCancelButton" customModule="MediaEditing" customModuleProvider="target">
                                         <rect key="frame" x="8" y="8" width="33" height="33"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="33" id="3EN-cy-hCb"/>
-                                            <constraint firstAttribute="height" constant="33" id="cru-Lp-sw2"/>
+                                            <constraint firstAttribute="width" constant="33" id="erL-X6-1Tj"/>
+                                            <constraint firstAttribute="height" constant="33" id="lbS-6h-cmq"/>
                                         </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="cancel"/>
-                                        <connections>
-                                            <action selector="cancel:" destination="l3t-7F-sqD" eventType="touchUpInside" id="HfX-hJ-hGm"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="opQ-p1-fzi">
-                                        <rect key="frame" x="352" y="8" width="33" height="33"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="33" id="NCs-8I-14P"/>
-                                            <constraint firstAttribute="width" constant="33" id="T8v-c4-rZm"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="download"/>
-                                        <connections>
-                                            <action selector="download:" destination="l3t-7F-sqD" eventType="touchUpInside" id="h0F-rR-SVk"/>
-                                        </connections>
-                                    </button>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O0E-Fl-9hG" customClass="SegmentSliderView" customModule="MediaEditing" customModuleProvider="target">
                                         <rect key="frame" x="57" y="8" width="279" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="33" id="72j-pc-m77"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MZn-fD-705" customClass="DownnloadToRoundView" customModule="MediaEditing" customModuleProvider="target">
+                                        <rect key="frame" x="352" y="8" width="33" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="hSV-MR-Kr3"/>
+                                            <constraint firstAttribute="height" constant="33" id="m2e-4G-Aqz"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="O0E-Fl-9hG" secondAttribute="bottom" constant="8" id="1G5-I7-0No"/>
-                                    <constraint firstItem="O0E-Fl-9hG" firstAttribute="leading" secondItem="cJY-H6-mOr" secondAttribute="trailing" constant="16" id="6Ic-jJ-XB1"/>
-                                    <constraint firstAttribute="bottom" secondItem="opQ-p1-fzi" secondAttribute="bottom" constant="8" id="Czf-xK-e26"/>
+                                    <constraint firstItem="ABo-WQ-Iv4" firstAttribute="leading" secondItem="p42-n0-DYe" secondAttribute="leading" constant="8" id="Ex7-CM-0gA"/>
+                                    <constraint firstItem="MZn-fD-705" firstAttribute="top" secondItem="p42-n0-DYe" secondAttribute="top" constant="8" id="EyF-Of-YYS"/>
                                     <constraint firstAttribute="height" constant="49" id="MYS-UZ-toX"/>
-                                    <constraint firstItem="cJY-H6-mOr" firstAttribute="leading" secondItem="p42-n0-DYe" secondAttribute="leading" constant="8" id="PYr-OM-u3o"/>
-                                    <constraint firstAttribute="trailing" secondItem="opQ-p1-fzi" secondAttribute="trailing" constant="8" id="Pgo-hE-Lq9"/>
-                                    <constraint firstAttribute="bottom" secondItem="cJY-H6-mOr" secondAttribute="bottom" constant="8" id="Y2O-qG-J5q"/>
-                                    <constraint firstItem="opQ-p1-fzi" firstAttribute="leading" secondItem="O0E-Fl-9hG" secondAttribute="trailing" constant="16" id="f1n-Ny-y7M"/>
+                                    <constraint firstAttribute="bottom" secondItem="ABo-WQ-Iv4" secondAttribute="bottom" constant="8" id="OTb-JO-9xO"/>
+                                    <constraint firstItem="ABo-WQ-Iv4" firstAttribute="top" secondItem="p42-n0-DYe" secondAttribute="top" constant="8" id="Ufh-K0-uct"/>
+                                    <constraint firstAttribute="bottom" secondItem="O0E-Fl-9hG" secondAttribute="bottom" constant="8" id="e0L-I7-a4b"/>
+                                    <constraint firstAttribute="trailing" secondItem="MZn-fD-705" secondAttribute="trailing" constant="8" id="h7m-gt-jFV"/>
+                                    <constraint firstItem="O0E-Fl-9hG" firstAttribute="top" secondItem="p42-n0-DYe" secondAttribute="top" constant="8" id="hAC-Rt-F1P"/>
+                                    <constraint firstAttribute="bottom" secondItem="MZn-fD-705" secondAttribute="bottom" constant="8" id="qUi-9T-2lv"/>
+                                    <constraint firstItem="O0E-Fl-9hG" firstAttribute="leading" secondItem="ABo-WQ-Iv4" secondAttribute="trailing" constant="16" id="y6f-n9-eKW"/>
+                                    <constraint firstItem="MZn-fD-705" firstAttribute="leading" secondItem="O0E-Fl-9hG" secondAttribute="trailing" constant="16" id="zcD-Bn-IoH"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -264,16 +289,16 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="GX5-Qp-DSI" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="1hc-Ev-Zmz"/>
+                            <constraint firstItem="Src-Ct-nR5" firstAttribute="trailing" secondItem="TAh-6R-lYf" secondAttribute="trailing" id="25f-Yp-tF2"/>
                             <constraint firstItem="ZZO-76-BOS" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="4Yv-Xw-0pK"/>
                             <constraint firstItem="TAh-6R-lYf" firstAttribute="trailing" secondItem="GX5-Qp-DSI" secondAttribute="trailing" id="8pe-ao-Q8i"/>
                             <constraint firstItem="ZZO-76-BOS" firstAttribute="trailing" secondItem="TAh-6R-lYf" secondAttribute="trailing" id="CKb-TQ-gsT"/>
+                            <constraint firstItem="p42-n0-DYe" firstAttribute="top" secondItem="Src-Ct-nR5" secondAttribute="bottom" id="Cpm-1H-XNy"/>
                             <constraint firstItem="TAh-6R-lYf" firstAttribute="bottom" secondItem="p42-n0-DYe" secondAttribute="bottom" id="F3j-X2-Xl3"/>
                             <constraint firstItem="p42-n0-DYe" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="Kkf-NR-18t"/>
-                            <constraint firstItem="TAh-6R-lYf" firstAttribute="trailing" secondItem="Mmb-iq-yWU" secondAttribute="trailing" id="NXi-aS-KMr"/>
-                            <constraint firstItem="Mmb-iq-yWU" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="UrI-BA-U2O"/>
+                            <constraint firstItem="Src-Ct-nR5" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="Kmz-Z1-ugI"/>
                             <constraint firstItem="TAh-6R-lYf" firstAttribute="trailing" secondItem="p42-n0-DYe" secondAttribute="trailing" id="Yre-p7-0WI"/>
                             <constraint firstItem="V7V-EQ-sqG" firstAttribute="top" secondItem="TAh-6R-lYf" secondAttribute="top" id="ba1-b8-gmo"/>
-                            <constraint firstItem="p42-n0-DYe" firstAttribute="top" secondItem="Mmb-iq-yWU" secondAttribute="bottom" constant="-20" id="bow-1B-KOh"/>
                             <constraint firstItem="TAh-6R-lYf" firstAttribute="trailing" secondItem="V7V-EQ-sqG" secondAttribute="trailing" id="cfn-8Z-4z7"/>
                             <constraint firstItem="V7V-EQ-sqG" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="ea4-xh-RWh"/>
                             <constraint firstItem="V7V-EQ-sqG" firstAttribute="top" secondItem="GX5-Qp-DSI" secondAttribute="bottom" constant="-53" id="mlc-CD-nGL"/>
@@ -283,14 +308,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="xce-5L-ZOa" id="gpA-b6-kda"/>
+                        <outlet property="backToCancelButtonView" destination="ABo-WQ-Iv4" id="Q2Y-3E-kCD"/>
                         <outlet property="clearAllButton" destination="pb1-p0-Wfv" id="7z5-Nf-s0a"/>
-                        <outlet property="clouseButton" destination="cJY-H6-mOr" id="mWW-sO-DVQ"/>
                         <outlet property="colorPickerButton" destination="auC-KI-QX8" id="HD5-TG-kDs"/>
-                        <outlet property="downloadButton" destination="opQ-p1-fzi" id="RRv-dD-dEU"/>
+                        <outlet property="downloadButton" destination="MZn-fD-705" id="u3x-ed-FkP"/>
                         <outlet property="imageScrollView" destination="1D1-vD-Dn2" id="MqT-Mr-ZNn"/>
-                        <outlet property="pen" destination="tGe-Wg-82L" id="U2Z-LZ-Aph"/>
                         <outlet property="segmentedControl" destination="O0E-Fl-9hG" id="j0t-eb-gPL"/>
+                        <outlet property="toolBarView" destination="Src-Ct-nR5" id="rXl-eH-FdT"/>
+                        <outlet property="toolseCollectionView" destination="MoA-dz-6Hh" id="BJY-5n-8iz"/>
                         <outlet property="undoButton" destination="yaJ-f3-y69" id="pOA-zo-AOo"/>
+                        <outlet property="widhtButtonConstraint" destination="hSV-MR-Kr3" id="3JB-Ht-ahX"/>
                         <outlet property="zoomView" destination="48X-Mq-bGh" id="2Cp-Zz-zUf"/>
                         <segue destination="Si2-Bf-oaW" kind="unwind" identifier="closeEditor" unwindAction="closeUnwindSegueWithUnwindSegue:" id="5Cg-BK-4nj"/>
                     </connections>
@@ -494,10 +522,9 @@
         </designable>
     </designables>
     <resources>
+        <image name="add" width="49.5" height="49.5"/>
         <image name="cancel" width="49.5" height="49.5"/>
-        <image name="download" width="49.5" height="49.5"/>
         <image name="eyedropper" catalog="system" width="128" height="118"/>
-        <image name="pen" width="60" height="264"/>
         <image name="undo" width="36" height="36"/>
         <image name="zoomOut" width="36" height="36"/>
         <systemColor name="labelColor">

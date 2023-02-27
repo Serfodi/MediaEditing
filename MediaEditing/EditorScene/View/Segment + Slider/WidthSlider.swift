@@ -7,7 +7,7 @@
 
 import UIKit
 
-@IBDesignable
+
 class WidthSlider: UISlider {
 
     weak var delegate: WidthSliderDelegate?
@@ -17,7 +17,6 @@ class WidthSlider: UISlider {
     
     private var baseLayerColor = UIColor(white: 1, alpha: 0.1)
     private var slidLayerColor = UIColor(white: 1, alpha: 0.3)
-    
     
     
     // MARK: - init
@@ -32,10 +31,19 @@ class WidthSlider: UISlider {
         setup()
     }
     
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         setup()
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        baseLayer.path = baseLayerPath(frame).cgPath
+    }
+    
+    
+    
     
     
     // MARK: - Action
@@ -61,15 +69,20 @@ class WidthSlider: UISlider {
         return UIBezierPath().roundedRectPath(point1, point2, point3, point4, cornerRadius1: minRadius, cornerRadius2: maxRadius)
     }
     
+    
+    /// Скрывает базовый слой слайдера
     open func baseLayerHide() {
         setNeedsDisplay()
         baseLayerColor = UIColor.clear
     }
     
+    
+    /// Возврощаяет прямоугольник рычажка
     open func thumbRect() -> CGRect {
         let trackRect = self.trackRect(forBounds: bounds)
         return self.thumbRect(forBounds: bounds, trackRect: trackRect, value: value)
     }
+    
     
     // MARK: - setup
     
@@ -108,6 +121,7 @@ class WidthSlider: UISlider {
         setThumbImage(thumbSnapshot, for: .selected)
     }
 }
+
 
 @objc protocol WidthSliderDelegate: AnyObject {
     
