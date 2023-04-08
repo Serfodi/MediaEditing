@@ -20,25 +20,37 @@ extension UIView {
 }
 
 
-
 class ColorGradientSlider: UISlider {
+    
+    var thumbViewColor = CGColor(gray: 1, alpha: 1)
+    
+    private let thumbView = {
+        let view = ThumbRingView(frame: .init(x: 0, y: 0, width: 36, height: 36))
+        view.layer.cornerRadius = 18
+        return view
+    }()
     
     
     private let trackLayer = CAGradientLayer()
-    
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         setup()
     }
     
-    open func colorsGradient(_ closure: (Int)-> CGColor) {
+    open func colorsGradient(_ closure: (CGFloat)-> CGColor) {
         var colors:[CGColor] = []
-        for n in 0...2 {colors.append(closure(n))}
-        setNeedsDisplay()
+        let countColorGradient = 2
+        let stepColor = 1.0 / CGFloat(countColorGradient - 1)
+        for n in 0...(countColorGradient - 1) { colors.append(closure(stepColor * CGFloat(n))) }
         trackLayer.colors = colors
+        setNeedsDisplay()
     }
     
+    open func colorSetThumbView(_ color: CGColor) {
+        thumbView.color = color
+        setNeedsDisplay()
+    }
     
     private func setup() {
         clear()
@@ -63,8 +75,6 @@ class ColorGradientSlider: UISlider {
     }
     
     private func createThumbImageView() {
-        let thumbView = ThumbRingView(frame: .init(x: 0, y: 0, width: 36, height: 36))
-        thumbView.layer.cornerRadius = 18
         let thumbSnapshot = thumbView.snapshot
         setThumbImage(thumbSnapshot, for: .normal)
         setThumbImage(thumbSnapshot, for: .highlighted)
@@ -79,6 +89,14 @@ class ColorGradientSlider: UISlider {
 
 final class ThumbRingView: UIView {
     
+    var view = UIView()
+    
+    var color: CGColor = CGColor(gray: 0, alpha: 1) {
+        didSet {
+            view.layer.borderColor = color
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -90,11 +108,11 @@ final class ThumbRingView: UIView {
     }
     
     private func setup() {
-        let view = UIView(frame: CGRect(x: 3.5, y: 3.5, width: frame.width - 7, height: frame.height - 7))
+        view.frame =  CGRect(x: 3.5, y: 3.5, width: frame.width - 7, height: frame.height - 7)
         view.backgroundColor = .clear
-        view.layer.cornerRadius = view.frame.height / 2
         view.layer.borderWidth = 3
-        view.layer.borderColor = CGColor(gray: 0, alpha: 1)
+        view.layer.cornerRadius = view.frame.height / 2
+        view.layer.borderColor = color
         addSubview(view)
     }
 }

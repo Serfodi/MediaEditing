@@ -7,12 +7,20 @@
 
 import UIKit
 
+protocol ButtonTwo: AnyObject {
+    
+    func downnload()
+    func round()
+}
+
 class DownnloadToRoundView: UIView {
 
     enum StateButton {
         case downnload
         case round
     }
+    
+    var delegate: ButtonTwo!
     
     open var isState: StateButton = .downnload
     
@@ -42,16 +50,27 @@ class DownnloadToRoundView: UIView {
         }
     }
     
+    var button = UIButton()
     
     override func layoutSubviews() {
         super.layoutSubviews()
         stackView.frame = bounds
+        button.frame = bounds
     }
     
     // MARK: Draw
     
     override func draw(_ rect: CGRect) {
         setupView()
+    }
+    
+    @objc func tapButton() {
+        switch isState {
+        case .downnload:
+            delegate.downnload()
+        case .round:
+            delegate.round()
+        }
     }
     
     
@@ -63,6 +82,8 @@ class DownnloadToRoundView: UIView {
         setupStackView()
         stackView.alpha = 0
         stackView.isHidden = true
+        button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
+        addSubview(button)
     }
     
     private func setupImageView() {
@@ -82,10 +103,10 @@ class DownnloadToRoundView: UIView {
         label.sizeToFit()
         stackView.addArrangedSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        shapeImageView.sizeToFit()
-        shapeImageView.heightAnchor.constraint(equalToConstant: 33).isActive = true
-        shapeImageView.widthAnchor.constraint(equalToConstant: 33).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
+//        shapeImageView.sizeToFit()
+//        shapeImageView.heightAnchor.constraint(equalToConstant: 29).isActive = true
+//        shapeImageView.widthAnchor.constraint(equalToConstant: 29).isActive = true
         
         stackView.addArrangedSubview(shapeImageView)
         

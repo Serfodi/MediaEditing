@@ -10,12 +10,11 @@ import UIKit
 
 class ColorSpectrumView: UIView {
 
-    var delegate: ColorDelegate?
-    
-    open var selectedColor: UIColor!
+    var delegate: ColorObserver?
     
     private var image: UIImage!
     
+    open var selectedColor:UIColor!
     
     override func draw(_ rect: CGRect) {
         layer.cornerRadius = 10
@@ -149,7 +148,4 @@ class ColorSpectrumView: UIView {
         
         return gradientLayer
     }()
-    
-    
-    
 }

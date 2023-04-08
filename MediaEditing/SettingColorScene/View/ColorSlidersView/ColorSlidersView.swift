@@ -8,35 +8,36 @@
 import UIKit
 
 
-protocol ColorDelegate: AnyObject {
-    
-    func colorChanged()
-    
-}
-
-
-
 class ColorSlidersView: UIView {
 
-    
     private let kCONTENT_XIB_NAME = "ColorSlidersView"
-    
-    weak var colorDelegate: ColorDelegate?
     
     @IBOutlet var colorRGBSliders: [ColorGradientSlider]!
     @IBOutlet var colorRGBLabel: [UILabel]!
-
     @IBOutlet weak var HexTextField: UITextField!
-   
     @IBOutlet var contentView: UIView!
     
+    var delegate: ColorObserver?
     
-    open var colorRGB:[CGFloat] = []
+    open var color: UIColor! {
+        set {
+            if let rgb = newValue.cgColor.components {
+                if rgb.count == 2 {
+                    self.rgb = [rgb[0], rgb[0], rgb[0], 1]
+                } else {
+                    self.rgb = rgb
+                }
+            }
+            setupColor(color: newValue)
+        }
+        get {
+            UIColor(red: rgb[0], green: rgb[1], blue: rgb[2], alpha: rgb[3])
+        }
+    }
     
-    open var settingColorRGB:SettingColorRGB!
+    private var rgb:[CGFloat] = []
     
     
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -52,9 +53,9 @@ class ColorSlidersView: UIView {
     
     @IBAction func colorChanges(_ sender: ColorGradientSlider) {
         colorRGBLabel[sender.tag].text = NSString(format: "%d", Int(sender.value)) as String
-        colorRGB[sender.tag] = CGFloat(sender.value / 255.0)
+        rgb[sender.tag] = CGFloat(sender.value / 255.0)
         updataColorSlider()
-        colorDelegate?.colorChanged()
+        delegate?.colorChanged()
     }
 
     
@@ -67,15 +68,10 @@ class ColorSlidersView: UIView {
     private func setup() {
         Bundle.main.loadNibNamed(kCONTENT_XIB_NAME, owner: self, options: nil)
         contentView.fixInView(self)
-        
         setupSliders()
     }
     
-    open func setupColor(color: SettingColorRGB) {
-        settingColorRGB = color
-        colorRGB.append(settingColorRGB.red)
-        colorRGB.append(settingColorRGB.green)
-        colorRGB.append(settingColorRGB.blue)
+    private func setupColor(color: UIColor) {
         setupSliders()
         updataColorSlider()
     }
@@ -84,23 +80,41 @@ class ColorSlidersView: UIView {
     
     // MARK: - Slider
     
-    open func setupSliders() {
+    private func setupSliders() {
         colorRGBLabel = colorRGBLabel.sorted { $0.tag < $1.tag }
         colorRGBSliders = colorRGBSliders.sorted { $0.tag < $1.tag }
-        for (tag, color) in colorRGB.enumerated() {
+        for (tag, color) in rgb.enumerated() {
+            guard colorRGBSliders.count > tag else { return }
             colorRGBSliders[tag].value = Float(color * 255)
             colorRGBLabel[tag].text = NSString(format: "%d", Int(color * 255.0)) as String
         }
     }
     
-    open func updataColorSlider() {
-        let colors: [(Int)->CGColor] = [
-            { CGColor(red: self.colorRGB[0] * CGFloat($0), green: self.colorRGB[1], blue: self.colorRGB[2], alpha: 1) },
-            { CGColor(red: self.colorRGB[0], green: self.colorRGB[1] * CGFloat($0), blue: self.colorRGB[2], alpha: 1) },
-            { CGColor(red: self.colorRGB[0], green: self.colorRGB[1], blue: self.colorRGB[2] * CGFloat($0), alpha: 1) }
+    private func updataColorSlider() {
+        
+        let colors: [(CGFloat)->CGColor] = [
+            { CGColor(red:  $0, green: self.rgb[1], blue: self.rgb[2], alpha: 1) },
+            { CGColor(red: self.rgb[0], green:  $0, blue: self.rgb[2], alpha: 1) },
+            { CGColor(red: self.rgb[0], green: self.rgb[1], blue: $0, alpha: 1) }
         ]
-        for slider in colorRGBSliders { slider.colorsGradient { colors[slider.tag]($0) } }
+        
+        let isWhiteThember = colorRGBSliders.contains { slider in
+            slider.value > 60
+        }
+        
+        for slider in colorRGBSliders {
+            slider.colorsGradient { colors[slider.tag]($0) }
+            
+            if isWhiteThember {
+                slider.colorSetThumbView(CGColor(gray: 0, alpha: 1))
+            } else {
+                slider.colorSetThumbView(CGColor(gray: 0.2, alpha: 1))
+            }
+            
+        }
     }
+    
+    
     
     
     // MARK: - Text fild
@@ -108,12 +122,10 @@ class ColorSlidersView: UIView {
     private func updateHexTextFild() {
         
     }
-    
 }
 
 
-extension UIView
-{
+extension UIView {
     func fixInView(_ container: UIView!) -> Void{
         self.translatesAutoresizingMaskIntoConstraints = false;
         self.frame = container.frame;

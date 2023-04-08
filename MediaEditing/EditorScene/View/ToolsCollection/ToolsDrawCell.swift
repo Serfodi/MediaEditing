@@ -12,22 +12,27 @@ class ToolsDrawCell: UICollectionViewCell {
 
     var tool: Tool! {
         didSet {
-            toolImageView.image = UIImage(named: tool.toolName.rawValue)
+            if let image = UIImage(named: tool.toolName.rawValue) {
+                toolImageView.image = image
+            }
+            tipImageView.image = UIImage(named: tool.toolName.rawValue + "Tip")
             if tool.widht == nil {
                 viewWidth.isHidden = true
             } else {
                 setWidth(CGFloat(tool.widht))
             }
-            if let colorRGB = tool.color {
-                tipImageView.image = UIImage(named: tool.toolName.rawValue + "Tip")
-                setColor(colorRGB.color)
+            if let color = tool.color {
+                setColor(color)
             }
         }
     }
     
     var viewWidth: UIView!
+    var tipView: UIView!
+    
     var toolImageView: UIImageView!
     var tipImageView: UIImageView!
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,15 +43,15 @@ class ToolsDrawCell: UICollectionViewCell {
         super.init(coder: coder)
         setup()
     }
-    
-    
    
     /// Устонавливает цвет картинки грифиля
     open func setColor(_ color: UIColor) {
-        guard tipImageView != nil else { return }
-        tipImageView.image?.withRenderingMode(.alwaysTemplate)
-        tipImageView.tintColor = color
-        viewWidth.backgroundColor = color
+        if tipImageView.image != nil {
+            tipView.backgroundColor = color
+        }
+        if !viewWidth.isHidden {
+            viewWidth.backgroundColor = color
+        }
     }
     
     /// Устонавливает ширину корондаша
@@ -62,14 +67,16 @@ class ToolsDrawCell: UICollectionViewCell {
     private func setup() {
         toolImageView = UIImageView(frame: frame)
         addSubview(toolImageView)
+        
+        tipView = UIView(frame: frame)
         tipImageView = UIImageView(frame: frame)
-        addSubview(tipImageView)
+        tipView.mask = tipImageView
+        addSubview(tipView)
+        
         viewWidth = UIView(frame: CGRect(x: 1.5, y: 40, width: 17, height: 4))
         viewWidth.layer.cornerRadius = 2
-        viewWidth.backgroundColor = .white
         addSubview(viewWidth)
     }
-    
     
     
     override func prepareForReuse() {
@@ -77,4 +84,6 @@ class ToolsDrawCell: UICollectionViewCell {
         toolImageView.image = nil
         tipImageView.image = nil
     }
+    
+    
 }

@@ -8,6 +8,7 @@
 import UIKit
 import Photos
 import PhotosUI
+import PencilKit
 import Lottie
 
 
@@ -20,43 +21,38 @@ class EditorViewController: UIViewController {
     
     var asset: PHAsset!
     
-    @IBOutlet weak var imageScrollView: ImageScrollView!
     
+    @IBOutlet weak var imageDrawView: CanvasView!
     @IBOutlet weak var toolBarView: UIView!
-    
     @IBOutlet weak var zoomView: UIStackView!
     @IBOutlet weak var segmentedControl: SegmentSliderView!
-    
     @IBOutlet weak var downloadButton: DownnloadToRoundView!
-    
     @IBOutlet weak var undoButton: UIButton!
     @IBOutlet weak var clearAllButton: UIButton!
     @IBOutlet weak var colorPickerButton: ColorPickerButton!
-    
-    // Содержит набор инструментов
     @IBOutlet weak var toolseCollectionView: ToolsCollectionView!
-    
     @IBOutlet weak var backToCancelButtonView: BackToCancelButton!
-    
     @IBOutlet weak var addButton: UIButton!
-    
-    var animationWidhtTool: AnimationWidhtTool = .tools
-    
     @IBOutlet weak var widhtButtonConstraint: NSLayoutConstraint!
     
+    
+    var animationWidhtTool: AnimationWidhtTool = .tools
     
     
     // Набор инструментов
     private let tools = [
-        Tool(toolName: .pen, color: SettingColorRGB(red: 1, green: 1, blue: 1, opacity: 1), widht: 14),
-        Tool(toolName: .brush, color: SettingColorRGB(red: 6/255, green: 248/255, blue: 98/255, opacity: 1), widht: 18),
-        Tool(toolName: .brush, color: SettingColorRGB(red: 248/255, green: 22/255, blue: 6/255, opacity: 1), widht: 4),
-        Tool(toolName: .pencil, color: SettingColorRGB(red: 251/255, green: 249/255, blue: 105/255, opacity: 1), widht: 24),
+        Tool(toolName: .pen, color: .blue, widht: 12),
+        Tool(toolName: .brush, color: .red, widht: 14),
+        Tool(toolName: .brush, color: .black, widht: 8),
+        Tool(toolName: .pencil, color: .gray, widht: 28),
         Tool(toolName: .lasso),
         Tool(toolName: .eraser)
     ]
     
-    
+    private let toolsPK: [PKTool] = [
+        PKInkingTool(.pen, color: .blue, width: 12)
+        
+    ]
     
     // MARK: - UIViewController / Life Cycle
     
@@ -65,21 +61,24 @@ class EditorViewController: UIViewController {
         
         PHPhotoLibrary.shared().register(self)
         
-        setupImageScrollView()
+        setupImageDrawView()
         
         toolseCollectionView.tools = tools
         toolseCollectionView.toolsCollectionViewDelegate = self
         
+        imageDrawView.set(tools[0])
+        
         segmentedControl.slider.delegate = self
         backToCancelButtonView.delegate = self
+        downloadButton.delegate = self
         
         segmentedControl.slider.maximumValue = 24
         segmentedControl.slider.minimumValue = 4
-        segmentedControl.slider.value = 14
         
+        zoomView.isHidden = true
         
+        colorUp(tools[0].color)
         
-        colorUp(RGB: imageScrollView.settingColorRGB)
     }
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
@@ -97,11 +96,11 @@ class EditorViewController: UIViewController {
     
     // Navigation bar
     @IBAction func undo(_ sender: UIButton) {
-        imageScrollView.undo()
+        imageDrawView.undoManager?.undo()
     }
     
     @IBAction func clearAll(_ sender: UIButton) {
-        imageScrollView.clearAll()
+        imageDrawView.drawing = PKDrawing()
     }
     
     
@@ -112,8 +111,8 @@ class EditorViewController: UIViewController {
         switch unwindSegue.identifier {
         case "closeSettingColorVC":
             if let SCVC = unwindSegue.source as? SettingColorViewController {
-                imageScrollView.settingColorRGB = SCVC.settingColorRGB
-                colorUp(RGB: imageScrollView.settingColorRGB)
+                toolseCollectionView.currentCell.tool.color = SCVC.color
+                colorUp(toolseCollectionView.currentCell.tool.color)
             }
         default:
             fatalError("Error segue in EditorViewController")
@@ -124,7 +123,7 @@ class EditorViewController: UIViewController {
         switch segue.identifier {
         case "SettingColorVC":
             if let SCVC = segue.destination as? SettingColorViewController {
-                SCVC.settingColorRGB = imageScrollView.settingColorRGB
+                SCVC.color = toolseCollectionView.currentCell.tool.color
             }
         default:
             fatalError("Error segue in EditorViewController")
@@ -137,7 +136,7 @@ class EditorViewController: UIViewController {
     
     var targetSize: CGSize {
         let scale = UIScreen.main.scale
-        return CGSize(width: imageScrollView.bounds.width * scale, height: imageScrollView.bounds.height * scale)
+        return CGSize(width: imageDrawView.bounds.width * scale, height: imageDrawView.bounds.height * scale)
     }
     
     func updateImage() {
@@ -149,33 +148,72 @@ class EditorViewController: UIViewController {
         options.deliveryMode = .highQualityFormat
         options.isNetworkAccessAllowed = true
         
-        PHImageManager.default().requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options, resultHandler: { image, _ in
+        PHImageManager.default().requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options, resultHandler: { image, _ in
             guard let image = image else { return }
-            self.imageScrollView.set(image: image)
+            self.imageDrawView.image = image
         })
     }
     
     
+    // MARK:  Image downlaound
+    
+    func imageDownlound() {
+        
+        // imageDrawView.imageView.bounds.size
+        UIGraphicsBeginImageContextWithOptions(imageDrawView.imageView.bounds.size, false, UIScreen.main.scale / 2)
+//        imageDrawView.content .drawHierarchy(in: imageDrawView.imageView.bounds, afterScreenUpdates: false)
+        
+        let imageDraws = imageDrawView.drawing.image(from: imageDrawView.imageView.bounds, scale: UIScreen.main.scale / 2)
+        
+        // Merge tempImageView into mainImageView
+        imageDrawView.imageView.image?.draw(in: imageDrawView.imageView.bounds, blendMode: .normal, alpha: 1)
+        imageDraws.draw(in: imageDrawView.imageView.bounds, blendMode: .normal, alpha: 1)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        if let image = image {
+            PHPhotoLibrary.shared().performChanges {
+                PHAssetChangeRequest.creationRequestForAsset(from: image)
+            }
+        }
+    }
+    
+    
+//    func saveImage(drawing : UIImage) -> UIImage? {
+//        let bottomImage = self.imageDrawView.image
+//        let newImage = autoreleasepool { () -> UIImage in
+//            UIGraphicsBeginImageContextWithOptions(self.canvasView!.frame.size, false, 0.0)
+//            bottomImage.draw(in: CGRect(origin: CGPoint.zero, size: self.canvasView!.frame.size))
+//            drawing.draw(in: CGRect(origin: CGPoint.zero, size: self.canvasView!.frame.size))
+//            let createdImage = UIGraphicsGetImageFromCurrentImageContext()
+//            UIGraphicsEndImageContext() return createdImage!
+//        } return newImage
+//    }
+    
+    
+    
+    
+    
     // MARK: - view
     
-    func colorUp(RGB: SettingColorRGB) {
-        colorPickerButton.colorUpdata(CGColor(red: RGB.red , green: RGB.green, blue: RGB.blue, alpha: RGB.opacity))
+    func colorUp(_ color: UIColor) {
+        colorPickerButton.colorUpdata(color.cgColor)
         if let cell = toolseCollectionView.currentCell {
-            cell.setColor(UIColor(red: RGB.red, green: RGB.green, blue: RGB.blue, alpha: RGB.opacity))
+            cell.setColor(color)
+            imageDrawView.set(toolseCollectionView.currentCell.tool)
         }
     }
     
     func colorPickerButtonUP() {
         if let color = toolseCollectionView.currentCell.tool.color {
-            colorPickerButton.colorUpdata(color.color.cgColor)
-            imageScrollView.settingColorRGB = color
+            colorPickerButton.colorUpdata(color.cgColor)
         }
     }
     
-    func sliderUp() {
+    func sliderWidthUp() {
         if let widht = toolseCollectionView.currentCell.tool.widht {
             segmentedControl.slider.value = widht
-            imageScrollView.brushWidth = CGFloat(widht)
         }
     }
     
@@ -183,12 +221,12 @@ class EditorViewController: UIViewController {
     
     // MARK: - Сonstraint
     
-    func setupImageScrollView() {
-        imageScrollView.translatesAutoresizingMaskIntoConstraints = false
-        imageScrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        imageScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        imageScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        imageScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+    func setupImageDrawView() {
+        imageDrawView.translatesAutoresizingMaskIntoConstraints = false
+        imageDrawView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        imageDrawView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        imageDrawView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        imageDrawView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     }
  
     
@@ -205,6 +243,7 @@ class EditorViewController: UIViewController {
             backToCancelButtonView.animationButton(state: .back)
             animationScaleButton(to: .tools)
             toolseCollectionView.animation(to: .deselected)
+            animationCollection()
         case .width:
             animationWidhtDownloadButton(to: .round)
             downloadButton.animationSwicht(to: .round)
@@ -247,8 +286,87 @@ class EditorViewController: UIViewController {
             }
         }
     }
+    
+    func animationCollection() {
+        
+        let animation = CAKeyframeAnimation()
+
+        let pathArray = [[NSValue(cgPoint: CGPoint(x: 20.0, y: 10.0))],
+                         [NSValue(cgPoint: CGPoint(x: 100.0, y: 100.0))],
+                         [NSValue(cgPoint: CGPoint(x: 10.0, y: 100.0))],
+                         [NSValue(cgPoint: CGPoint(x: 10.0, y: 10.0))]]
+        animation.keyPath = "position"
+        animation.values = pathArray
+        animation.duration = 2.0
+//        self.toolseCollectionView.layer.add(animation, forKey: "position")
+        
+        self.colorPickerButton.layer.add(animation, forKey: "position")
+        
+    }
+    
 }
 
+
+
+
+
+
+
+// MARK: - Controllers
+
+
+extension EditorViewController: WidthSliderDelegate {
+    
+    func getValue() {
+        toolseCollectionView.currentCell.setWidth(CGFloat(segmentedControl.slider.value))
+        imageDrawView.set(toolseCollectionView.currentCell.tool)
+    }
+}
+
+
+extension EditorViewController: ToolsCollectionViewDelegate {
+    
+    func cellTap() {
+        if animationWidhtTool == .tools {
+            sliderWidthUp()
+            colorPickerButtonUP()
+            imageDrawView.set(toolseCollectionView.currentCell.tool)
+        }
+    }
+    
+    func cellWidht() {
+        if animationWidhtTool == .tools {
+            if let _ = toolseCollectionView.currentCell.tool.widht {
+                animationWidht(.width)
+            }
+        }
+    }
+}
+
+
+extension EditorViewController: ButtonDelegate {
+    
+    func tap() {
+        switch animationWidhtTool {
+        case .width:
+            animationWidht(.tools)
+        case .tools:
+            dismiss(animated: true)
+        }
+    }
+}
+
+extension EditorViewController: ButtonTwo {
+    
+    func downnload() {
+        print("downnload")
+        imageDownlound()
+    }
+    
+    func round() {
+        print("round")
+    }
+}
 
 
 
@@ -272,44 +390,4 @@ extension EditorViewController: PHPhotoLibraryChangeObserver {
             }
         }
     }
-}
-
-
-
-// MARK: - Controllers
-
-
-extension EditorViewController: WidthSliderDelegate {
-    
-    func getValue() {
-        imageScrollView.brushWidth = CGFloat(segmentedControl.slider.value)
-        toolseCollectionView.currentCell.setWidth(CGFloat(segmentedControl.slider.value))
-    }
-}
-
-extension EditorViewController: ToolsCollectionViewDelegate {
-    
-    func cellTap() {
-        sliderUp()
-        colorPickerButtonUP()
-    }
-    
-    func cellWidht() {
-        animationWidht(.width)
-    }
-    
-}
-
-extension EditorViewController: ButtonDelegate {
-    
-    func tap() {
-        switch animationWidhtTool {
-        case .width:
-            animationWidht(.tools)
-        case .tools:
-            dismiss(animated: true)
-        }
-    }
-    
-    
 }

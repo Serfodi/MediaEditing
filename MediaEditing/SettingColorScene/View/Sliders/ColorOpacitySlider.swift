@@ -10,6 +10,8 @@ import UIKit
 
 class ColorOpacitySlider: UISlider {
     
+    let thumbView = ThumbRingView(frame: .init(x: 0, y: 0, width: 36, height: 36))
+
     
     private let trackLayer = CAGradientLayer()
     
@@ -22,13 +24,15 @@ class ColorOpacitySlider: UISlider {
     }
     
     /// Принимает массив из трех цветов
-    open func colorsGradient(_ closure: (Int)-> CGColor) {
-        var colors:[CGColor] = []
-        for n in 0...1 {colors.append(closure(n))}
+    open func colorsGradient(color: UIColor) {
+        trackLayer.colors = [color.withAlphaComponent(0).cgColor , color.withAlphaComponent(1).cgColor]
         setNeedsDisplay()
-        trackLayer.colors = colors
     }
     
+    open func colorSetThumbView(_ color: CGColor) {
+        thumbView.color = color
+        setNeedsDisplay()
+    }
     
     private func setup() {
         clear()
@@ -78,10 +82,7 @@ class ColorOpacitySlider: UISlider {
         return UIColor(patternImage: image)
     }
     
-    
-    
     private func createThumbImageView() {
-        let thumbView = ThumbRingView(frame: .init(x: 0, y: 0, width: 36, height: 36))
         thumbView.layer.cornerRadius = 18
         let thumbSnapshot = thumbView.snapshot
         setThumbImage(thumbSnapshot, for: .normal)

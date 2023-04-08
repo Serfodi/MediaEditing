@@ -95,7 +95,7 @@ class ToolsCollectionView: UICollectionView {
             let left = tag - 1
             if left >= 0 {
                 let cell = visibleCells[left]
-                cell.transform = CGAffineTransform(translationX: -abs(distanceToCenter), y:  cell.frame.height * speed)
+                cell.transform = CGAffineTransform(translationX: -abs(distanceToCenter) * 1.5, y:  cell.frame.height * speed)
                 leftCell(tag: left, speed: speed + accelerate)
             }
         }
@@ -104,12 +104,11 @@ class ToolsCollectionView: UICollectionView {
             let right = tag + 1
             if right < tools.count {
                 let cell = visibleCells[right]
-                cell.transform = CGAffineTransform(translationX: abs(distanceToCenter), y:  cell.frame.height * speed)
+                cell.transform = CGAffineTransform(translationX: abs(distanceToCenter) * 1.5, y:  cell.frame.height * speed)
                 rightCell(tag: right, speed: speed + accelerate)
             }
         }
         
-       
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut) {
             leftCell(tag: topTag, speed: 1)
             rightCell(tag: topTag, speed: 1)
@@ -123,16 +122,32 @@ class ToolsCollectionView: UICollectionView {
     
     private func deselectedAnimation() {
         
-        let duration = 0.5
+        let duration = 0.3
         
-        UIView.animate(withDuration: duration, delay: 0) {
-            for cell in self.visibleCells {
+        let time = UISpringTimingParameters(damping: 0.8, response: 1, initialVelocity: CGVector(dx: -5, dy: -5))
+        
+        let animtaion = UIViewPropertyAnimator(duration: duration, timingParameters: time)
+        animtaion.addAnimations {
+            for cell in self.visibleCells.reversed() {
                 cell.transform = .identity
             }
             self.cell.transform = .identity
         }
+        animtaion.startAnimation()
+    }
+    
+}
+
+
+extension UISpringTimingParameters {
+    convenience init(damping: CGFloat, response: CGFloat, initialVelocity: CGVector = .zero) {
+        let stiffness = pow(2 * .pi / response, 2)
+        let damp = 4 * .pi * damping / response
+        self.init(mass: 1, stiffness: stiffness, damping: damp, initialVelocity: initialVelocity)
     }
 }
+
+
 
 
 

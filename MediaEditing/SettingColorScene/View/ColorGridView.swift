@@ -12,13 +12,11 @@ class ColorGridCollectionView: UIView {
     private let colomns = 12
     private let rows = 10
     
-    private var colors: [UIColor] = []
+    var delegate: ColorObserver?
     
-    var delegate: ColorDelegate?
-    
-    var colorSelected: UIColor!
-    var currectCell: UICollectionViewCell!
-    var currentIndex: Int = 0
+    open  var colorSelected: UIColor!
+    private var currectCell: UICollectionViewCell!
+    private var currentIndex: Int = 0
     
     private lazy var selectedShape: CAShapeLayer = {
         let layer = CAShapeLayer()
@@ -29,6 +27,7 @@ class ColorGridCollectionView: UIView {
         return layer
     }()
     
+    private var colors:[UIColor] = []
     
     // MARK: - init
     
@@ -50,12 +49,6 @@ class ColorGridCollectionView: UIView {
     }
     
     
-    
-    func changedColor() {}
-    
-    
-    
-    
     // MARK:  - setup
     
     private func setup() {
@@ -67,15 +60,14 @@ class ColorGridCollectionView: UIView {
     // MARK:  - setup Veiw
     
     private func setupView() {
-        
-        
-        
+        backgroundColor = .clear
         layer.cornerRadius = 10
+        
         translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            topAnchor.constraint(equalTo: superview!.topAnchor),
+            topAnchor.constraint(equalTo: superview!.topAnchor,  constant: 0),
             bottomAnchor.constraint(equalTo: superview!.bottomAnchor),
-            leadingAnchor.constraint(equalTo: superview!.leadingAnchor),
+            leadingAnchor.constraint(equalTo: superview!.leadingAnchor,  constant: 0),
             rightAnchor.constraint(equalTo: superview!.rightAnchor),
         ])
         
@@ -83,6 +75,8 @@ class ColorGridCollectionView: UIView {
         let width = frame.width / CGFloat(colomns)
         let height = frame.height / CGFloat(rows)
         layout.itemSize = CGSize(width: width, height: height)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
         
         let collection = UICollectionView(frame: frame, collectionViewLayout: layout)
         collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -161,18 +155,6 @@ extension ColorGridCollectionView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
         return false
-    }
-    
-}
-
-extension ColorGridCollectionView: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
     }
     
 }

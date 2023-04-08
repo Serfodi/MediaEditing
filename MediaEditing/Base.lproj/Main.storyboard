@@ -77,12 +77,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="1D1-vD-Dn2" customClass="ImageScrollView" customModule="MediaEditing" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="392" height="853"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <viewLayoutGuide key="contentLayoutGuide" id="CeJ-l8-hov"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="Com-zz-P4k"/>
-                            </scrollView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xrv-Dn-bP6" customClass="CanvasView" customModule="MediaEditing" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="170" width="393" height="476"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GX5-Qp-DSI" customClass="BlurGradientView" customModule="MediaEditing" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="112"/>
                                 <userDefinedRuntimeAttributes>
@@ -313,7 +311,7 @@
                         <outlet property="clearAllButton" destination="pb1-p0-Wfv" id="7z5-Nf-s0a"/>
                         <outlet property="colorPickerButton" destination="auC-KI-QX8" id="HD5-TG-kDs"/>
                         <outlet property="downloadButton" destination="MZn-fD-705" id="u3x-ed-FkP"/>
-                        <outlet property="imageScrollView" destination="1D1-vD-Dn2" id="MqT-Mr-ZNn"/>
+                        <outlet property="imageDrawView" destination="Xrv-Dn-bP6" id="gkc-th-hhm"/>
                         <outlet property="segmentedControl" destination="O0E-Fl-9hG" id="j0t-eb-gPL"/>
                         <outlet property="toolBarView" destination="Src-Ct-nR5" id="rXl-eH-FdT"/>
                         <outlet property="toolseCollectionView" destination="MoA-dz-6Hh" id="BJY-5n-8iz"/>
@@ -513,7 +511,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NzH-G5-b5E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="gn3-ki-kg6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3945.801526717557" y="957.74647887323954"/>
+            <point key="canvasLocation" x="4790" y="215"/>
         </scene>
     </scenes>
     <designables>

@@ -5,8 +5,8 @@
 //  Created by Сергей Насыбуллин on 23.02.2023.
 //
 
-import Foundation
-
+import UIKit
+import PencilKit
 
 class Tool {
     
@@ -21,11 +21,30 @@ class Tool {
     let toolName: ToolName
     
     var widht:Float!
-    var color:SettingColorRGB!
+    var color:UIColor!
     
-    init(toolName: ToolName, color: SettingColorRGB! = nil, widht: Float! = nil) {
+    var eraser: PKEraserTool.EraserType = .bitmap
+    
+    init(toolName: ToolName, color: UIColor! = nil, widht: Float! = nil) {
         self.toolName = toolName
         self.color = color
         self.widht = widht
     }
+    
+    open func getTool() -> PKTool {
+        switch toolName {
+        case .pen:
+            return PKInkingTool(.pen, color: color, width: CGFloat(widht) * UIScreen.main.scale)
+        case .pencil:
+            return PKInkingTool(.pencil, color: color, width: CGFloat(widht) * UIScreen.main.scale)
+        case .brush:
+            return PKInkingTool(.marker, color: color, width: CGFloat(widht) * UIScreen.main.scale)
+        case .lasso:
+            return PKLassoTool()
+        case .eraser:
+            return PKEraserTool(.bitmap)
+        }
+    }
 }
+
+

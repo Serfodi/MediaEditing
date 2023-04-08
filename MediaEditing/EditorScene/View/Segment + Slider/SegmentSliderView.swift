@@ -103,8 +103,6 @@ class SegmentSliderView: UIView {
     // Анимация из сегмента в слайдер
     private func animationToSlider() {
         
-        print("animation - ", bounds)
-        
         // Анимация базового слоя
         baseLayer.add(animationForm(at: segment.baseLayer, to: slider.baseLayer), forKey: nil)
         

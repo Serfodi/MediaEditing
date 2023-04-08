@@ -8,14 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		B0063BB52986714400FE32AC /* SettingColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0063BB42986714400FE32AC /* SettingColorViewController.swift */; };
-		B0063BB72986739D00FE32AC /* SettingColorRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0063BB62986739D00FE32AC /* SettingColorRGB.swift */; };
 		B00FDDC129867CC500F8F92F /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B00FDDC029867CC500F8F92F /* SF-Pro-Text-Semibold.otf */; };
 		B00FDDC72986B94600F8F92F /* ColorPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00FDDC62986B94600F8F92F /* ColorPickerButton.swift */; };
 		B00FDDC929892D6500F8F92F /* BlurGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00FDDC829892D6500F8F92F /* BlurGradientView.swift */; };
-		B02630812971CC26003E94AB /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02630802971CC26003E94AB /* ImageScrollView.swift */; };
+		B01DC19B29D4A8DB00796BE1 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01DC19A29D4A8DB00796BE1 /* CanvasView.swift */; };
 		B05DE14428F475CB0082A662 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DE14328F475CB0082A662 /* AppDelegate.swift */; };
 		B05DE14628F475CB0082A662 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DE14528F475CB0082A662 /* SceneDelegate.swift */; };
-		B05DE14B28F475CB0082A662 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05DE14928F475CB0082A662 /* Main.storyboard */; };
 		B05DE14D28F475D20082A662 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B05DE14C28F475D20082A662 /* Assets.xcassets */; };
 		B05DE15028F475D20082A662 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05DE14E28F475D20082A662 /* LaunchScreen.storyboard */; };
 		B05DE15928F47BE00082A662 /* GalleryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DE15828F47BE00082A662 /* GalleryCollectionViewController.swift */; };
@@ -24,7 +22,6 @@
 		B05EF826298A952400F05A96 /* WidthSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EF825298A952400F05A96 /* WidthSlider.swift */; };
 		B05EF828298AC1FA00F05A96 /* RoundSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EF827298AC1FA00F05A96 /* RoundSegmentedControl.swift */; };
 		B08B6CA029A76915002748E9 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08B6C9F29A76915002748E9 /* Tool.swift */; };
-		B08B6CA229A7989E002748E9 /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08B6CA129A7989E002748E9 /* ModelController.swift */; };
 		B08B6CA629A9E427002748E9 /* DownnloadToRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08B6CA529A9E427002748E9 /* DownnloadToRoundButton.swift */; };
 		B0A45FA0299765FE0063D74A /* ColorSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A45F9F299765FE0063D74A /* ColorSpectrumView.swift */; };
 		B0A87A13298D4C77001C525A /* SegmentSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A12298D4C77001C525A /* SegmentSliderView.swift */; };
@@ -40,17 +37,17 @@
 		B0B19B9429A5090A00BE2413 /* BackToCancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B9329A5090A00BE2413 /* BackToCancelButton.swift */; };
 		B0B19B9629A509C400BE2413 /* backToCancel.json in Resources */ = {isa = PBXBuildFile; fileRef = B0B19B9529A509C400BE2413 /* backToCancel.json */; };
 		B0B19B9829A509F900BE2413 /* duck.json in Resources */ = {isa = PBXBuildFile; fileRef = B0B19B9729A509F900BE2413 /* duck.json */; };
-		B0B19B9A29A515AC00BE2413 /* DuckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B9929A515AC00BE2413 /* DuckViewController.swift */; };
 		B0B1FF2C296EBA1B00C7A487 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */; };
 		B0CAD10129ACD2E200124855 /* ToolsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CAD10029ACD2E200124855 /* ToolsCollectionView.swift */; };
+		B0CAD11729B8818C00124855 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05DE14928F475CB0082A662 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B0063BB42986714400FE32AC /* SettingColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingColorViewController.swift; sourceTree = "<group>"; };
-		B0063BB62986739D00FE32AC /* SettingColorRGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingColorRGB.swift; sourceTree = "<group>"; };
 		B00FDDC029867CC500F8F92F /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		B00FDDC62986B94600F8F92F /* ColorPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerButton.swift; sourceTree = "<group>"; };
 		B00FDDC829892D6500F8F92F /* BlurGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurGradientView.swift; sourceTree = "<group>"; };
+		B01DC19A29D4A8DB00796BE1 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		B02630802971CC26003E94AB /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		B05DE14028F475CB0082A662 /* MediaEditing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaEditing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B05DE14328F475CB0082A662 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +62,6 @@
 		B05EF825298A952400F05A96 /* WidthSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthSlider.swift; sourceTree = "<group>"; };
 		B05EF827298AC1FA00F05A96 /* RoundSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundSegmentedControl.swift; sourceTree = "<group>"; };
 		B08B6C9F29A76915002748E9 /* Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
-		B08B6CA129A7989E002748E9 /* ModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelController.swift; sourceTree = "<group>"; };
 		B08B6CA529A9E427002748E9 /* DownnloadToRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownnloadToRoundButton.swift; sourceTree = "<group>"; };
 		B0A45F9F299765FE0063D74A /* ColorSpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSpectrumView.swift; sourceTree = "<group>"; };
 		B0A87A12298D4C77001C525A /* SegmentSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentSliderView.swift; sourceTree = "<group>"; };
@@ -108,7 +104,6 @@
 		B00FDDC32986AD7100F8F92F /* SettingColorScene */ = {
 			isa = PBXGroup;
 			children = (
-				B0A45F9B299765350063D74A /* Model */,
 				B0A45F9A2997652B0063D74A /* View */,
 				B0A45F9C2997653F0063D74A /* Controller */,
 			);
@@ -119,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				B02630802971CC26003E94AB /* ImageScrollView.swift */,
+				B01DC19A29D4A8DB00796BE1 /* CanvasView.swift */,
 				B0CAD10229ACEB5800124855 /* ToolsCollection */,
 				B08B6CA529A9E427002748E9 /* DownnloadToRoundButton.swift */,
 				B0B19B9329A5090A00BE2413 /* BackToCancelButton.swift */,
@@ -191,7 +187,6 @@
 		B08B6CA429A798B7002748E9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B08B6CA129A7989E002748E9 /* ModelController.swift */,
 				B08B6C9F29A76915002748E9 /* Tool.swift */,
 			);
 			path = Model;
@@ -206,14 +201,6 @@
 				B0B19B7C299E5DDF00BE2413 /* Sliders */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		B0A45F9B299765350063D74A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				B0063BB62986739D00FE32AC /* SettingColorRGB.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		B0A45F9C2997653F0063D74A /* Controller */ = {
@@ -364,12 +351,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0CAD11729B8818C00124855 /* Main.storyboard in Resources */,
 				B00FDDC129867CC500F8F92F /* SF-Pro-Text-Semibold.otf in Resources */,
 				B0B19B9629A509C400BE2413 /* backToCancel.json in Resources */,
 				B05DE15028F475D20082A662 /* LaunchScreen.storyboard in Resources */,
 				B0B19B82299E600A00BE2413 /* ColorSlidersView.xib in Resources */,
 				B05DE14D28F475D20082A662 /* Assets.xcassets in Resources */,
-				B05DE14B28F475CB0082A662 /* Main.storyboard in Resources */,
 				B0B19B9829A509F900BE2413 /* duck.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,14 +370,11 @@
 			files = (
 				B0A87A1929950113001C525A /* ToolsDrawCell.swift in Sources */,
 				B05DE14428F475CB0082A662 /* AppDelegate.swift in Sources */,
-				B02630812971CC26003E94AB /* ImageScrollView.swift in Sources */,
 				B0A45FA0299765FE0063D74A /* ColorSpectrumView.swift in Sources */,
 				B05DE15928F47BE00082A662 /* GalleryCollectionViewController.swift in Sources */,
-				B08B6CA229A7989E002748E9 /* ModelController.swift in Sources */,
 				B08B6CA629A9E427002748E9 /* DownnloadToRoundButton.swift in Sources */,
 				B0063BB52986714400FE32AC /* SettingColorViewController.swift in Sources */,
 				B0B19B85299E9FF900BE2413 /* ColorGridView.swift in Sources */,
-				B0063BB72986739D00FE32AC /* SettingColorRGB.swift in Sources */,
 				B0B19B8929A27DFA00BE2413 /* UIColorExtension.swift in Sources */,
 				B0B19B9429A5090A00BE2413 /* BackToCancelButton.swift in Sources */,
 				B0CAD10129ACD2E200124855 /* ToolsCollectionView.swift in Sources */,
@@ -401,9 +385,9 @@
 				B0A87A15298E77F7001C525A /* UIBezierPatheExtension.swift in Sources */,
 				B0B1FF2C296EBA1B00C7A487 /* EditorViewController.swift in Sources */,
 				B0B19B8B29A38EF100BE2413 /* UIImageExtension.swift in Sources */,
-				B0B19B9A29A515AC00BE2413 /* DuckViewController.swift in Sources */,
 				B05EF828298AC1FA00F05A96 /* RoundSegmentedControl.swift in Sources */,
 				B08B6CA029A76915002748E9 /* Tool.swift in Sources */,
+				B01DC19B29D4A8DB00796BE1 /* CanvasView.swift in Sources */,
 				B0A87A13298D4C77001C525A /* SegmentSliderView.swift in Sources */,
 				B05DE14628F475CB0082A662 /* SceneDelegate.swift in Sources */,
 				B00FDDC929892D6500F8F92F /* BlurGradientView.swift in Sources */,

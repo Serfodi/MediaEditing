@@ -26,9 +26,6 @@ class GalleryCollectionViewController: UICollectionViewController {
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
     
-    
-    
-    
     var fetchResult: PHFetchResult<PHAsset>!
     var assetCollection: PHAssetCollection!
     var availableWidth: CGFloat = 0
@@ -41,6 +38,7 @@ class GalleryCollectionViewController: UICollectionViewController {
     
     /// Кол-во cell в ряду
     var itemsPerRow: CGFloat = 3
+    
     
     
     // MARK: - UIViewController / Life Cycle
