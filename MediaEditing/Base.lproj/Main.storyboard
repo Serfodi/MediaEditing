@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="SF-Pro-Text-Regular.otf">
+            <string>SFProText-Regular</string>
+        </array>
         <array key="SF-Pro-Text-Semibold.otf">
             <string>SFProText-Semibold</string>
         </array>
@@ -18,7 +21,7 @@
         <!--Gallery Collection View Controller-->
         <scene sceneID="0a9-xg-9ID">
             <objects>
-                <collectionViewController id="eq4-Ed-8Fl" customClass="GalleryCollectionViewController" customModule="MediaEditing" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="GalleryColletionVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eq4-Ed-8Fl" customClass="GalleryCollectionViewController" customModule="MediaEditing" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="3NZ-9Z-Xme">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,13 +85,19 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GX5-Qp-DSI" customClass="BlurGradientView" customModule="MediaEditing" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="112"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="135"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="startLocations">
-                                        <real key="value" value="0.29999999999999999"/>
+                                        <real key="value" value="0.20000000000000001"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="endLocations">
                                         <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -96,7 +105,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="53"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="48X-Mq-bGh">
-                                        <rect key="frame" x="146.66666666666666" y="10" width="99.666666666666657" height="33"/>
+                                        <rect key="frame" x="145" y="10" width="103" height="33"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="zoomOut" translatesAutoresizingMaskIntoConstraints="NO" id="jQC-E0-a0h">
                                                 <rect key="frame" x="0.0" y="0.0" width="22" height="33"/>
@@ -105,11 +114,11 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zoom out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oF7-Z0-buB">
-                                                <rect key="frame" x="26" y="0.0" width="73.666666666666671" height="33"/>
+                                                <rect key="frame" x="26" y="0.0" width="77" height="33"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="33" id="ubo-23-lMF"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -124,7 +133,7 @@
                                             <constraint firstAttribute="height" constant="33" id="NCM-v8-wYs"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="66" id="xUq-u2-jW3"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                         <state key="normal" title="Clear all"/>
                                         <connections>
                                             <action selector="clearAll:" destination="l3t-7F-sqD" eventType="touchUpInside" id="KUl-81-tNL"/>
@@ -155,6 +164,23 @@
                                     <constraint firstAttribute="bottom" secondItem="pb1-p0-Wfv" secondAttribute="bottom" constant="10" id="jX2-Zx-hoZ"/>
                                     <constraint firstAttribute="bottom" secondItem="yaJ-f3-y69" secondAttribute="bottom" constant="10" id="oyl-cC-L3e"/>
                                 </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZO-76-BOS" customClass="BlurGradientView" customModule="MediaEditing" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="698" width="393" height="154"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="startLocations">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="endLocations">
+                                        <real key="value" value="0.59999999999999998"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Src-Ct-nR5">
                                 <rect key="frame" x="0.0" y="720" width="393" height="49"/>
@@ -217,32 +243,16 @@
                                     </collectionView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="MoA-dz-6Hh" secondAttribute="bottom" constant="-8" id="04N-ve-oJw"/>
                                     <constraint firstAttribute="trailing" secondItem="xce-5L-ZOa" secondAttribute="trailing" constant="8" id="8rd-ci-gYh"/>
-                                    <constraint firstItem="auC-KI-QX8" firstAttribute="centerY" secondItem="Src-Ct-nR5" secondAttribute="centerY" id="EWI-K6-FfE"/>
+                                    <constraint firstItem="auC-KI-QX8" firstAttribute="top" secondItem="Src-Ct-nR5" secondAttribute="top" constant="8" id="KET-qd-nVT"/>
                                     <constraint firstItem="xce-5L-ZOa" firstAttribute="leading" secondItem="MoA-dz-6Hh" secondAttribute="trailing" constant="16" id="SPT-vm-mu3"/>
+                                    <constraint firstAttribute="bottom" secondItem="xce-5L-ZOa" secondAttribute="bottom" constant="8" id="SoH-YM-WgD"/>
                                     <constraint firstItem="auC-KI-QX8" firstAttribute="leading" secondItem="Src-Ct-nR5" secondAttribute="leading" constant="8" id="Tr8-gE-ZKP"/>
-                                    <constraint firstItem="xce-5L-ZOa" firstAttribute="centerY" secondItem="Src-Ct-nR5" secondAttribute="centerY" id="cO2-4Y-sQm"/>
                                     <constraint firstItem="MoA-dz-6Hh" firstAttribute="leading" secondItem="auC-KI-QX8" secondAttribute="trailing" constant="16" id="eiS-Hw-09o"/>
-                                    <constraint firstAttribute="bottom" secondItem="MoA-dz-6Hh" secondAttribute="bottom" constant="-8" id="jjI-ym-fJT"/>
+                                    <constraint firstItem="xce-5L-ZOa" firstAttribute="top" secondItem="Src-Ct-nR5" secondAttribute="top" constant="8" id="kaQ-7Z-dZk"/>
                                     <constraint firstAttribute="height" constant="49" id="zhm-QP-QGz"/>
                                 </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZO-76-BOS" customClass="BlurGradientView" customModule="MediaEditing" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="769" width="393" height="83"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="startLocations">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="endLocations">
-                                        <real key="value" value="0.20000000000000001"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" white="0.0" alpha="0.01" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p42-n0-DYe">
                                 <rect key="frame" x="0.0" y="769" width="393" height="49"/>
@@ -271,13 +281,10 @@
                                 <constraints>
                                     <constraint firstItem="ABo-WQ-Iv4" firstAttribute="leading" secondItem="p42-n0-DYe" secondAttribute="leading" constant="8" id="Ex7-CM-0gA"/>
                                     <constraint firstItem="MZn-fD-705" firstAttribute="top" secondItem="p42-n0-DYe" secondAttribute="top" constant="8" id="EyF-Of-YYS"/>
-                                    <constraint firstAttribute="height" constant="49" id="MYS-UZ-toX"/>
-                                    <constraint firstAttribute="bottom" secondItem="ABo-WQ-Iv4" secondAttribute="bottom" constant="8" id="OTb-JO-9xO"/>
+                                    <constraint firstAttribute="height" constant="49" id="QYK-5V-mtM"/>
                                     <constraint firstItem="ABo-WQ-Iv4" firstAttribute="top" secondItem="p42-n0-DYe" secondAttribute="top" constant="8" id="Ufh-K0-uct"/>
-                                    <constraint firstAttribute="bottom" secondItem="O0E-Fl-9hG" secondAttribute="bottom" constant="8" id="e0L-I7-a4b"/>
                                     <constraint firstAttribute="trailing" secondItem="MZn-fD-705" secondAttribute="trailing" constant="8" id="h7m-gt-jFV"/>
                                     <constraint firstItem="O0E-Fl-9hG" firstAttribute="top" secondItem="p42-n0-DYe" secondAttribute="top" constant="8" id="hAC-Rt-F1P"/>
-                                    <constraint firstAttribute="bottom" secondItem="MZn-fD-705" secondAttribute="bottom" constant="8" id="qUi-9T-2lv"/>
                                     <constraint firstItem="O0E-Fl-9hG" firstAttribute="leading" secondItem="ABo-WQ-Iv4" secondAttribute="trailing" constant="16" id="y6f-n9-eKW"/>
                                     <constraint firstItem="MZn-fD-705" firstAttribute="leading" secondItem="O0E-Fl-9hG" secondAttribute="trailing" constant="16" id="zcD-Bn-IoH"/>
                                 </constraints>
@@ -291,23 +298,24 @@
                             <constraint firstItem="ZZO-76-BOS" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="4Yv-Xw-0pK"/>
                             <constraint firstItem="TAh-6R-lYf" firstAttribute="trailing" secondItem="GX5-Qp-DSI" secondAttribute="trailing" id="8pe-ao-Q8i"/>
                             <constraint firstItem="ZZO-76-BOS" firstAttribute="trailing" secondItem="TAh-6R-lYf" secondAttribute="trailing" id="CKb-TQ-gsT"/>
-                            <constraint firstItem="p42-n0-DYe" firstAttribute="top" secondItem="Src-Ct-nR5" secondAttribute="bottom" id="Cpm-1H-XNy"/>
-                            <constraint firstItem="TAh-6R-lYf" firstAttribute="bottom" secondItem="p42-n0-DYe" secondAttribute="bottom" id="F3j-X2-Xl3"/>
                             <constraint firstItem="p42-n0-DYe" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="Kkf-NR-18t"/>
                             <constraint firstItem="Src-Ct-nR5" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="Kmz-Z1-ugI"/>
                             <constraint firstItem="TAh-6R-lYf" firstAttribute="trailing" secondItem="p42-n0-DYe" secondAttribute="trailing" id="Yre-p7-0WI"/>
+                            <constraint firstItem="p42-n0-DYe" firstAttribute="bottom" secondItem="TAh-6R-lYf" secondAttribute="bottom" id="b6b-vp-uec"/>
                             <constraint firstItem="V7V-EQ-sqG" firstAttribute="top" secondItem="TAh-6R-lYf" secondAttribute="top" id="ba1-b8-gmo"/>
                             <constraint firstItem="TAh-6R-lYf" firstAttribute="trailing" secondItem="V7V-EQ-sqG" secondAttribute="trailing" id="cfn-8Z-4z7"/>
                             <constraint firstItem="V7V-EQ-sqG" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="ea4-xh-RWh"/>
-                            <constraint firstItem="V7V-EQ-sqG" firstAttribute="top" secondItem="GX5-Qp-DSI" secondAttribute="bottom" constant="-53" id="mlc-CD-nGL"/>
+                            <constraint firstItem="V7V-EQ-sqG" firstAttribute="bottom" secondItem="GX5-Qp-DSI" secondAttribute="bottom" constant="-23" id="mlc-CD-nGL"/>
+                            <constraint firstItem="p42-n0-DYe" firstAttribute="top" secondItem="Src-Ct-nR5" secondAttribute="bottom" id="q32-au-OYf"/>
                             <constraint firstItem="GX5-Qp-DSI" firstAttribute="top" secondItem="hYN-Ve-wbd" secondAttribute="top" id="rsI-le-p8L"/>
-                            <constraint firstItem="ZZO-76-BOS" firstAttribute="top" secondItem="p42-n0-DYe" secondAttribute="bottom" constant="-49" id="tau-qX-tQI"/>
+                            <constraint firstItem="ZZO-76-BOS" firstAttribute="top" secondItem="p42-n0-DYe" secondAttribute="bottom" constant="-120" id="tau-qX-tQI"/>
                             <constraint firstAttribute="bottom" secondItem="ZZO-76-BOS" secondAttribute="bottom" id="wjO-Tt-2eJ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addButton" destination="xce-5L-ZOa" id="gpA-b6-kda"/>
                         <outlet property="backToCancelButtonView" destination="ABo-WQ-Iv4" id="Q2Y-3E-kCD"/>
+                        <outlet property="blureView" destination="ZZO-76-BOS" id="0CX-kL-fm5"/>
                         <outlet property="clearAllButton" destination="pb1-p0-Wfv" id="7z5-Nf-s0a"/>
                         <outlet property="colorPickerButton" destination="auC-KI-QX8" id="HD5-TG-kDs"/>
                         <outlet property="downloadButton" destination="MZn-fD-705" id="u3x-ed-FkP"/>
@@ -523,8 +531,8 @@
         <image name="add" width="49.5" height="49.5"/>
         <image name="cancel" width="49.5" height="49.5"/>
         <image name="eyedropper" catalog="system" width="128" height="118"/>
-        <image name="undo" width="36" height="36"/>
-        <image name="zoomOut" width="36" height="36"/>
+        <image name="undo" width="72" height="72"/>
+        <image name="zoomOut" width="72" height="72"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -18,12 +18,16 @@ class Tool {
         case eraser = "eraser"
     }
     
+    public let widhtPozition: [ToolName : CGFloat] = [ .pen : 40, .brush : 36, .pencil : 40 ]
+    
+    
+    
     let toolName: ToolName
     
-    var widht:Float!
-    var color:UIColor!
+    open var widht:Float!
+    open var color:UIColor!
     
-    var eraser: PKEraserTool.EraserType = .bitmap
+    open var eraser: PKEraserTool.EraserType = .bitmap
     
     init(toolName: ToolName, color: UIColor! = nil, widht: Float! = nil) {
         self.toolName = toolName

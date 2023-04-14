@@ -46,7 +46,10 @@ class GalleryCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
+        
         resetCachedAssets()
+        
         PHPhotoLibrary.shared().register(self)
         
         if fetchResult == nil {
@@ -55,6 +58,7 @@ class GalleryCollectionViewController: UICollectionViewController {
             fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
         }
     }
+    
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
@@ -138,6 +142,30 @@ class GalleryCollectionViewController: UICollectionViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateCachedAssets()
     }
+    
+    
+    // MARK: - setupView
+    
+    func setupView() {
+        
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        var height = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        
+        let app = UIApplication.shared
+        height = app.statusBarFrame.size.height
+        
+        height += 10
+        
+        let blureView = BlurGradientView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: height))
+        blureView.locationsGradient = [0.5, 1]
+        blureView.colors = [CGColor(gray: 0, alpha: 1), CGColor(gray: 0, alpha: 0)]
+        view.addSubview(blureView)
+    }
+
+    
+    
+    
+    
     
     
     
@@ -244,6 +272,9 @@ extension GalleryCollectionViewController: PHPhotoLibraryChangeObserver {
         // As such, re-dispatch execution to the main queue before acting
         // on the change, so you can update the UI.
         DispatchQueue.main.sync {
+            
+            
+            
             // Hang on to the new fetch result.
             fetchResult = changes.fetchResultAfterChanges
             // If we have incremental changes, animate them in the collection view.

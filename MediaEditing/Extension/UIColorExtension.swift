@@ -28,4 +28,21 @@ extension UIColor {
             self.init(hue: hue, saturation: newSaturation, brightness: brightness, alpha: alpha)
         }
     
+
+    func getComponents() -> [CGFloat] {
+        
+        var components: [CGFloat] = []
+        
+        if let rgb = self.cgColor.components {
+            if rgb.count == 2 {
+                components = [rgb[0], rgb[0], rgb[0], 1]
+            } else {
+                components = rgb
+            }
+        }
+        
+        return components
+    }
+    
+    
 }

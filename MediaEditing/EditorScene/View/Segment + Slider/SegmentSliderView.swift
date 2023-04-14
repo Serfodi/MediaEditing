@@ -7,10 +7,6 @@
 
 import UIKit
 
-
-
-
-@IBDesignable
 class SegmentSliderView: UIView {
     
     enum Controller {

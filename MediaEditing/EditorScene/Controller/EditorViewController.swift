@@ -36,6 +36,8 @@ class EditorViewController: UIViewController {
     @IBOutlet weak var widhtButtonConstraint: NSLayoutConstraint!
     
     
+    @IBOutlet weak var blureView: BlurGradientView!
+    
     var animationWidhtTool: AnimationWidhtTool = .tools
     
     
@@ -112,7 +114,7 @@ class EditorViewController: UIViewController {
         case "closeSettingColorVC":
             if let SCVC = unwindSegue.source as? SettingColorViewController {
                 toolseCollectionView.currentCell.tool.color = SCVC.color
-                colorUp(toolseCollectionView.currentCell.tool.color)
+                colorUp(SCVC.color)
             }
         default:
             fatalError("Error segue in EditorViewController")
@@ -180,20 +182,6 @@ class EditorViewController: UIViewController {
     }
     
     
-//    func saveImage(drawing : UIImage) -> UIImage? {
-//        let bottomImage = self.imageDrawView.image
-//        let newImage = autoreleasepool { () -> UIImage in
-//            UIGraphicsBeginImageContextWithOptions(self.canvasView!.frame.size, false, 0.0)
-//            bottomImage.draw(in: CGRect(origin: CGPoint.zero, size: self.canvasView!.frame.size))
-//            drawing.draw(in: CGRect(origin: CGPoint.zero, size: self.canvasView!.frame.size))
-//            let createdImage = UIGraphicsGetImageFromCurrentImageContext()
-//            UIGraphicsEndImageContext() return createdImage!
-//        } return newImage
-//    }
-    
-    
-    
-    
     
     // MARK: - view
     
@@ -216,6 +204,27 @@ class EditorViewController: UIViewController {
             segmentedControl.slider.value = widht
         }
     }
+    
+    
+    static func filteredImage(cgImage: CGImage, size:CGSize) -> UIImage? {
+        if let matrixFilter = CIFilter(name: "CIColorMatrix") {
+            matrixFilter.setDefaults()
+            matrixFilter.setValue(CIImage(cgImage: cgImage), forKey: kCIInputImageKey)
+            let rgbVector = CIVector(x: 0, y: 0, z: 0, w: 0)
+            let aVector = CIVector(x: 1, y: 1, z: 1, w: 0)
+            matrixFilter.setValue(rgbVector, forKey: "inputRVector")
+            matrixFilter.setValue(rgbVector, forKey: "inputGVector")
+            matrixFilter.setValue(rgbVector, forKey: "inputBVector")
+            matrixFilter.setValue(aVector, forKey: "inputAVector")
+            matrixFilter.setValue(CIVector(x: 1, y: 1, z: 1, w: 0), forKey: "inputBiasVector")
+            
+            if let matrixOutput = matrixFilter.outputImage, let cgImage = CIContext().createCGImage(matrixOutput, from: matrixOutput.extent) {
+                return UIImage(cgImage: cgImage).resizableImage(withCapInsets: UIEdgeInsets(top: size.height, left: 0, bottom: 0, right: 0))
+            }
+        }
+        return nil
+    }
+    
     
     
     

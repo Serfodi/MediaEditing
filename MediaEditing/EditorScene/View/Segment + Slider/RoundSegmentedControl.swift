@@ -39,11 +39,6 @@ class RoundSegmentedControl: UIView {
         setupView()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-    }
-    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
@@ -84,6 +79,7 @@ class RoundSegmentedControl: UIView {
     
     private func setupView() {
         buttons = [buttonCreate(title: "Draw", tag: 0), buttonCreate(title: "Text", tag: 1)]
+//        currentIndex = 0
         stackViewCreate(buttons: buttons)
         pinEdges(to: stackView)
         addSubview(slideView)
@@ -106,26 +102,21 @@ class RoundSegmentedControl: UIView {
     
     open func setupFirstSelection() {
         stackView.layoutSubviews()
-        
         let newButton = buttons[currentIndex]
         slideView.frame = CGRect(origin: newButton.frame.origin, size: newButton.frame.size)
         slideView.frame.origin.y = 2
-        slideView.layer.cornerRadius = slideView.frame.height / 2
+        slideView.layer.cornerRadius = slideView.frame.height / 2.0
         slideViewRect = slideView.frame
     }
     
     
     private func stackViewCreate(buttons: [UIButton]) {
-        for button in buttons {
-            button.sizeToFit()
-        }
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         for button in buttons {
             stackView.addArrangedSubview(button)
         }
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
     }
     
@@ -135,14 +126,13 @@ class RoundSegmentedControl: UIView {
         button.tag = tag
         button.setTitle(title, for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 11)
+        button.titleLabel?.font = UIFont(name: "SF-Pro-Text-Semibold.otf", size: 11)
         button.addTarget(self, action: #selector(RoundSegmentedControl.buttonTapped(sender:)), for: .touchUpInside)
         return button
     }
     
     
     func pinEdges(to other: UIView) {
-        
         other.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 2).isActive = true
         other.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -2).isActive = true
         other.topAnchor.constraint(equalTo: self.topAnchor, constant: 2).isActive = true

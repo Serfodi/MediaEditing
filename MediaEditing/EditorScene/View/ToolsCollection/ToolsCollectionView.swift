@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 protocol ToolsCollectionViewDelegate: AnyObject {
     
     func cellTap()
@@ -14,12 +15,15 @@ protocol ToolsCollectionViewDelegate: AnyObject {
     
 }
 
+
 class ToolsCollectionView: UICollectionView {
     
     enum State {
         case selected
         case deselected
     }
+    
+    private let gradientLayer = CAGradientLayer()
     
     open var tools: [Tool] = [] {
         didSet { reloadData() }
@@ -29,7 +33,7 @@ class ToolsCollectionView: UICollectionView {
     private var cell: ToolsDrawCell! {
         didSet {
             if let cell = oldValue{
-                cell.frame.origin.y = 16
+                cell.frame.origin.y += 16
             }
         }
         willSet {
@@ -46,12 +50,18 @@ class ToolsCollectionView: UICollectionView {
     
     open var toolsCollectionViewDelegate: ToolsCollectionViewDelegate?
     
-    // MARK: init
+    
+    
+    
+    
+    // MARK: - init
+    
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
     }
+    
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
@@ -59,11 +69,30 @@ class ToolsCollectionView: UICollectionView {
     }
     
     
-    // MARK: setup
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        gradientLayer.frame = bounds
+        
+        gradientLayer.frame = CGRect(
+            x: -bounds.width * 0.25,
+            y:  -bounds.height * 0.5,
+            width: bounds.width * 1.5,
+            height: bounds.height * 1.5)
+    }
+    
+    
+    
+    // MARK: - setup
     
     private func setup() {
         delegate = self
         dataSource = self
+        
+        gradientLayer.locations = [0.85, 1]
+        gradientLayer.colors = [CGColor(gray: 0, alpha: 1), CGColor(gray: 0, alpha: 0)]
+        self.layer.mask = gradientLayer
+        
         setupCollectionView()
     }
     
@@ -122,7 +151,7 @@ class ToolsCollectionView: UICollectionView {
     
     private func deselectedAnimation() {
         
-        let duration = 0.3
+        let duration = 0.2
         
         let time = UISpringTimingParameters(damping: 0.8, response: 1, initialVelocity: CGVector(dx: -5, dy: -5))
         
@@ -133,6 +162,7 @@ class ToolsCollectionView: UICollectionView {
             }
             self.cell.transform = .identity
         }
+        animtaion.isInterruptible = true
         animtaion.startAnimation()
     }
     
@@ -180,7 +210,6 @@ extension ToolsCollectionView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "toolCell", for: indexPath) as! ToolsDrawCell
         cell.tool = tools[indexPath.row]
         cell.tag = indexPath.row
-        cell.frame.origin.y = 16
         if indexPath.row == 0 {
             self.cell = cell
         }
@@ -203,7 +232,7 @@ extension ToolsCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: centerCollectionCellLine(), bottom: 0, right: centerCollectionCellLine())
+        return UIEdgeInsets(top: 16, left: centerCollectionCellLine(), bottom: 0, right: centerCollectionCellLine())
     }
     
     private func centerCollectionCellLine() -> CGFloat {

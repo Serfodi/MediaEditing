@@ -21,13 +21,7 @@ class ColorSlidersView: UIView {
     
     open var color: UIColor! {
         set {
-            if let rgb = newValue.cgColor.components {
-                if rgb.count == 2 {
-                    self.rgb = [rgb[0], rgb[0], rgb[0], 1]
-                } else {
-                    self.rgb = rgb
-                }
-            }
+            rgb = newValue.getComponents()
             setupColor(color: newValue)
         }
         get {
@@ -98,6 +92,8 @@ class ColorSlidersView: UIView {
             { CGColor(red: self.rgb[0], green: self.rgb[1], blue: $0, alpha: 1) }
         ]
         
+        
+
         let isWhiteThember = colorRGBSliders.contains { slider in
             slider.value > 60
         }

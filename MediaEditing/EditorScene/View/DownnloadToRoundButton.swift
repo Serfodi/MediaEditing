@@ -13,6 +13,7 @@ protocol ButtonTwo: AnyObject {
     func round()
 }
 
+@IBDesignable
 class DownnloadToRoundView: UIView {
 
     enum StateButton {

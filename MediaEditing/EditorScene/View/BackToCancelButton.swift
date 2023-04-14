@@ -16,7 +16,7 @@ protocol ButtonDelegate: AnyObject {
     
 }
 
-
+@IBDesignable
 class BackToCancelButton: UIView {
     
     enum ButtonState {

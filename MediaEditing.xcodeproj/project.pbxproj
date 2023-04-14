@@ -40,6 +40,10 @@
 		B0B1FF2C296EBA1B00C7A487 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */; };
 		B0CAD10129ACD2E200124855 /* ToolsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CAD10029ACD2E200124855 /* ToolsCollectionView.swift */; };
 		B0CAD11729B8818C00124855 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05DE14928F475CB0082A662 /* Main.storyboard */; };
+		B0DBE21629E84D2900D7B47C /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B0DBE21429E846B300D7B47C /* SF-Pro-Text-Medium.otf */; };
+		B0DBE21729E84D2C00D7B47C /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B0DBE21529E8495B00D7B47C /* SF-Pro-Text-Regular.otf */; };
+		B0DBE21829E86E6800D7B47C /* DuckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B9929A515AC00BE2413 /* DuckViewController.swift */; };
+		B0DBE21D29E9A3F200D7B47C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DBE21C29E9A3F200D7B47C /* DataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +83,9 @@
 		B0B19B9929A515AC00BE2413 /* DuckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuckViewController.swift; sourceTree = "<group>"; };
 		B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
 		B0CAD10029ACD2E200124855 /* ToolsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsCollectionView.swift; sourceTree = "<group>"; };
+		B0DBE21429E846B300D7B47C /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
+		B0DBE21529E8495B00D7B47C /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
+		B0DBE21C29E9A3F200D7B47C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,9 +104,12 @@
 			isa = PBXGroup;
 			children = (
 				B00FDDC029867CC500F8F92F /* SF-Pro-Text-Semibold.otf */,
+				B0DBE21429E846B300D7B47C /* SF-Pro-Text-Medium.otf */,
+				B0DBE21529E8495B00D7B47C /* SF-Pro-Text-Regular.otf */,
 			);
 			path = fount;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		B00FDDC32986AD7100F8F92F /* SettingColorScene */ = {
 			isa = PBXGroup;
@@ -152,6 +162,7 @@
 		B05DE14228F475CB0082A662 /* MediaEditing */ = {
 			isa = PBXGroup;
 			children = (
+				B0DBE21C29E9A3F200D7B47C /* DataModel.swift */,
 				B05DE15728F47A550082A662 /* Delegate */,
 				B05DE14E28F475D20082A662 /* LaunchScreen.storyboard */,
 				B05DE14928F475CB0082A662 /* Main.storyboard */,
@@ -355,7 +366,9 @@
 				B00FDDC129867CC500F8F92F /* SF-Pro-Text-Semibold.otf in Resources */,
 				B0B19B9629A509C400BE2413 /* backToCancel.json in Resources */,
 				B05DE15028F475D20082A662 /* LaunchScreen.storyboard in Resources */,
+				B0DBE21629E84D2900D7B47C /* SF-Pro-Text-Medium.otf in Resources */,
 				B0B19B82299E600A00BE2413 /* ColorSlidersView.xib in Resources */,
+				B0DBE21729E84D2C00D7B47C /* SF-Pro-Text-Regular.otf in Resources */,
 				B05DE14D28F475D20082A662 /* Assets.xcassets in Resources */,
 				B0B19B9829A509F900BE2413 /* duck.json in Resources */,
 			);
@@ -375,6 +388,8 @@
 				B08B6CA629A9E427002748E9 /* DownnloadToRoundButton.swift in Sources */,
 				B0063BB52986714400FE32AC /* SettingColorViewController.swift in Sources */,
 				B0B19B85299E9FF900BE2413 /* ColorGridView.swift in Sources */,
+				B0DBE21829E86E6800D7B47C /* DuckViewController.swift in Sources */,
+				B0DBE21D29E9A3F200D7B47C /* DataModel.swift in Sources */,
 				B0B19B8929A27DFA00BE2413 /* UIColorExtension.swift in Sources */,
 				B0B19B9429A5090A00BE2413 /* BackToCancelButton.swift in Sources */,
 				B0CAD10129ACD2E200124855 /* ToolsCollectionView.swift in Sources */,
