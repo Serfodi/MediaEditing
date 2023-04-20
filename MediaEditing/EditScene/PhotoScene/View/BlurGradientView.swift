@@ -64,7 +64,6 @@ class BlurGradientView: UIView {
         let bluerEffect = UIBlurEffect(style: .dark)
         bluerView.effect = bluerEffect
         
-                
         backgroundColor = .clear
         
         bluerView.layer.mask = gradientLayer

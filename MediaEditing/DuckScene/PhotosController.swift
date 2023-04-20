@@ -1,5 +1,5 @@
 //
-//  DataModel.swift
+//  PhotosController.swift
 //  MediaEditing
 //
 //  Created by Сергей Насыбуллин on 14.04.2023.
@@ -8,13 +8,8 @@
 import UIKit
 import Photos
 
-struct DataModel {
-    
-    
-    
-}
 
-class DataModelController {
+class PhotosController {
  
     static func accsesPhoto() -> Bool {
         if #available(iOS 14, *) {

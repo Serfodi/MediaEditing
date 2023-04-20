@@ -13,26 +13,48 @@ import Photos
 class DuckViewController: UIViewController {
 
     
-    var duckView: AnimationView!
-    var label: UILabel!
-//    var accessButton: UIButton!
+    var duckView: AnimationView! = {
+        let duckView = AnimationView(name: "duck")
+        duckView.frame = CGRect(origin: .zero, size: CGSize(width: 144, height: 144))
+        duckView.loopMode = .autoReverse
+        duckView.contentMode = .scaleAspectFill
+        return duckView
+    }()
+    
+    var label: UILabel! = {
+        let label = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: 0, height: 24)))
+        label.text = "Access Your Photos and Videos"
+        label.font = UIFont(name: "SF-Pro-Text-Semibold", size: 20)
+        label.textColor = .white
+        label.textAlignment = .center
+        label.numberOfLines = 2
+       return label
+    }()
+    
+    var accessButton: ShineButton! = {
+        let accessButton = ShineButton(frame: CGRect(origin: .zero, size: CGSize(width: 0, height: 50)) )
+        accessButton.setTitle("Allow Access", for: .normal)
+        accessButton.titleLabel?.font = UIFont(name: "SF-Pro-Text-Semibold", size: 20)
+        accessButton.setTitleColor( .white, for: .normal)
+        accessButton.backgroundColor = UIColor(red: 0, green: 121 / 255, blue: 1, alpha: 1)
+        accessButton.layer.cornerRadius = 10
+        return accessButton
+    }()
     
     var stackView: UIStackView = UIStackView(arrangedSubviews: [])
     
-    var shineButton: ShineButton!
     
     // MARK: - UIViewController / Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = .black
         setup()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        shineButton.animationLayer()
+        accessButton.animationLayer()
         duckView.play()
     }
     
@@ -42,17 +64,10 @@ class DuckViewController: UIViewController {
     }
     
     
-    
-    
-    
-    
     // MARK: - Action
     
     @objc func allowAccess(_ sender: UIButton) {
-        
-        let isWriteRead = DataModelController.accsesPhoto()
-        
-        if isWriteRead {
+        if PhotosController.accsesPhoto() {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             guard let gallary = storyboard.instantiateViewController(withIdentifier: "GalleryColletionVC") as? GalleryCollectionViewController else { return }
@@ -87,7 +102,6 @@ class DuckViewController: UIViewController {
             
         }
         alert.addAction(openSettingsAction)
-        
         present(alert, animated: true, completion: nil)
     }
     
@@ -97,7 +111,6 @@ class DuckViewController: UIViewController {
                 assertionFailure("Not able to open App privacy settings")
                 return
         }
-
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
@@ -105,12 +118,10 @@ class DuckViewController: UIViewController {
     // MARK: - setup
     
     func setup() {
-        setupDuckView()
-        setupLabel()
         setupButton()
         stackView.addArrangedSubview(duckView)
         stackView.addArrangedSubview(label)
-        stackView.addArrangedSubview(shineButton)
+        stackView.addArrangedSubview(accessButton)
         self.view.addSubview(stackView)
         setupStack()
         stackViewConstraint()
@@ -133,60 +144,21 @@ class DuckViewController: UIViewController {
         stackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -16).isActive = true
     }
     
-    func setupDuckView() {
-        duckView = .init(name: "duck")
-        duckView.frame = CGRect(origin: .zero, size: CGSize(width: 144, height: 144))
-        duckView.loopMode = .autoReverse
-        duckView.contentMode = .scaleAspectFill
-    }
-    
     func setupDuckViewConstraint() {
         duckView.translatesAutoresizingMaskIntoConstraints = false
         duckView.heightAnchor.constraint(equalToConstant: 144).isActive = true
         duckView.widthAnchor.constraint(equalToConstant: 144).isActive = true
     }
-    
-    func setupLabel() {
-        label = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: 0, height: 24)))
-        label.text = "Access Your Photos and Videos"
-        label.font = UIFont(name: "SF-Pro-Text-Semibold", size: 20)
-        label.textColor = .white
-        label.textAlignment = .center
-        label.numberOfLines = 2
-    }
 
     func setupButton() {
-//        shim = Shine(frame: CGRect(origin: .zero, size: CGSize(width: 0, height: 50)))
-//        shim.backgroundColor = UIColor(red: 0, green: 121 / 255, blue: 1, alpha: 1)
-//        shim.text = "Allow Access"
-//        shim.font = UIFont(name: "SF-Pro-Text-Semibold", size: 20)
-//        shim.textColor = .white
-//        shim.textAlignment = .center
-//        shim.layer.cornerRadius = 10
-        
-//        accessButton = UIButton(type: .custom)
-//        accessButton.frame = CGRect(origin: .zero, size: CGSize(width: 0, height: 50))
-//        accessButton.setTitle("Allow Access", for: .normal)
-//        accessButton.titleLabel?.font = UIFont(name: "SF-Pro-Text-Semibold", size: 20)
-//        accessButton.setTitleColor( .white, for: .normal)
-//        accessButton.backgroundColor = UIColor(red: 0, green: 121 / 255, blue: 1, alpha: 1)
-//        accessButton.layer.cornerRadius = 10
-//        accessButton.addTarget(self, action: #selector(allowAccess), for: .touchUpInside)
-        
-        shineButton = ShineButton(frame: CGRect(origin: .zero, size: CGSize(width: 0, height: 50)) )
-        shineButton.setTitle("Allow Access", for: .normal)
-        shineButton.titleLabel?.font = UIFont(name: "SF-Pro-Text-Semibold", size: 20)
-        shineButton.setTitleColor( .white, for: .normal)
-        shineButton.backgroundColor = UIColor(red: 0, green: 121 / 255, blue: 1, alpha: 1)
-        shineButton.layer.cornerRadius = 10
-        shineButton.addTarget(self, action: #selector(allowAccess), for: .touchUpInside)
+        accessButton.addTarget(self, action: #selector(allowAccess), for: .touchUpInside)
     }
     
     func accessButtonConstraint() {
-        shineButton.translatesAutoresizingMaskIntoConstraints = false
-        shineButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        shineButton.leftAnchor.constraint(equalTo: self.stackView.leftAnchor, constant: 0).isActive = true
-        shineButton.rightAnchor.constraint(equalTo: self.stackView.rightAnchor, constant: 0).isActive = true
+        accessButton.translatesAutoresizingMaskIntoConstraints = false
+        accessButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        accessButton.leftAnchor.constraint(equalTo: self.stackView.leftAnchor, constant: 0).isActive = true
+        accessButton.rightAnchor.constraint(equalTo: self.stackView.rightAnchor, constant: 0).isActive = true
     }
     
 }
@@ -245,17 +217,15 @@ final class ShineButton: UIButton {
     
     
     func animationLayer() {
-        
         let theAnimation = CABasicAnimation(keyPath: "position")
         theAnimation.fromValue = [-self.frame.width * 2, self.frame.height / 2]
         theAnimation.toValue = [self.frame.width * 3, self.frame.height / 2]
-        theAnimation.duration = 1.0 * 4.0
+        theAnimation.duration = 5
         theAnimation.autoreverses = true
         theAnimation.repeatCount = .infinity
         
         self.gradientBaseLayer.add(theAnimation, forKey: "animatePosition")
         self.gradientBorderBLayer.add(theAnimation, forKey: "animatePosition")
     }
-    
     
 }

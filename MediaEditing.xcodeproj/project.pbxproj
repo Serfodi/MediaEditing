@@ -8,10 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		B0063BB52986714400FE32AC /* SettingColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0063BB42986714400FE32AC /* SettingColorViewController.swift */; };
+		B00DFEB129EDD37700FE6CAE /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00DFEB029EDD37700FE6CAE /* ColorView.swift */; };
+		B00DFEB529EECDD200FE6CAE /* UISpringTimingParametersExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00DFEB429EECDD200FE6CAE /* UISpringTimingParametersExtension.swift */; };
+		B00DFEB729F0488600FE6CAE /* CGSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00DFEB629F0488600FE6CAE /* CGSizeExtension.swift */; };
 		B00FDDC129867CC500F8F92F /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B00FDDC029867CC500F8F92F /* SF-Pro-Text-Semibold.otf */; };
 		B00FDDC72986B94600F8F92F /* ColorPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00FDDC62986B94600F8F92F /* ColorPickerButton.swift */; };
 		B00FDDC929892D6500F8F92F /* BlurGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00FDDC829892D6500F8F92F /* BlurGradientView.swift */; };
 		B01DC19B29D4A8DB00796BE1 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01DC19A29D4A8DB00796BE1 /* CanvasView.swift */; };
+		B03BEE9429EB0951004BF773 /* DrawingFigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03BEE9229EAF6A6004BF773 /* DrawingFigure.swift */; };
+		B03BEE9629EB0CE0004BF773 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03BEE9529EB0CE0004BF773 /* AddButton.swift */; };
+		B04F043A29EC7E6400B19CD0 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F043929EC7E6400B19CD0 /* UIViewExtension.swift */; };
+		B04F043B29EC9AD700B19CD0 /* ColorSlidersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0B19B81299E600A00BE2413 /* ColorSlidersView.xib */; };
+		B057437429F17A560002EC1D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B057437329F17A560002EC1D /* Model.swift */; };
+		B057437629F183EB0002EC1D /* MenuCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03BEE9029EAF4F7004BF773 /* MenuCollectionView.swift */; };
 		B05DE14428F475CB0082A662 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DE14328F475CB0082A662 /* AppDelegate.swift */; };
 		B05DE14628F475CB0082A662 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DE14528F475CB0082A662 /* SceneDelegate.swift */; };
 		B05DE14D28F475D20082A662 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B05DE14C28F475D20082A662 /* Assets.xcassets */; };
@@ -26,10 +35,8 @@
 		B0A45FA0299765FE0063D74A /* ColorSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A45F9F299765FE0063D74A /* ColorSpectrumView.swift */; };
 		B0A87A13298D4C77001C525A /* SegmentSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A12298D4C77001C525A /* SegmentSliderView.swift */; };
 		B0A87A15298E77F7001C525A /* UIBezierPatheExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A14298E77F6001C525A /* UIBezierPatheExtension.swift */; };
-		B0A87A1729943977001C525A /* ColorOpacitySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A1629943976001C525A /* ColorOpacitySlider.swift */; };
 		B0A87A1929950113001C525A /* ToolsDrawCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A87A1829950112001C525A /* ToolsDrawCell.swift */; };
 		B0B19B80299E5FE200BE2413 /* ColorSlidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B7F299E5FE200BE2413 /* ColorSlidersView.swift */; };
-		B0B19B82299E600A00BE2413 /* ColorSlidersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0B19B81299E600A00BE2413 /* ColorSlidersView.xib */; };
 		B0B19B85299E9FF900BE2413 /* ColorGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B84299E9FF900BE2413 /* ColorGridView.swift */; };
 		B0B19B8929A27DFA00BE2413 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B8829A27DFA00BE2413 /* UIColorExtension.swift */; };
 		B0B19B8B29A38EF100BE2413 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B8A29A38EF100BE2413 /* UIImageExtension.swift */; };
@@ -43,16 +50,23 @@
 		B0DBE21629E84D2900D7B47C /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B0DBE21429E846B300D7B47C /* SF-Pro-Text-Medium.otf */; };
 		B0DBE21729E84D2C00D7B47C /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B0DBE21529E8495B00D7B47C /* SF-Pro-Text-Regular.otf */; };
 		B0DBE21829E86E6800D7B47C /* DuckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B19B9929A515AC00BE2413 /* DuckViewController.swift */; };
-		B0DBE21D29E9A3F200D7B47C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DBE21C29E9A3F200D7B47C /* DataModel.swift */; };
+		B0DBE21D29E9A3F200D7B47C /* PhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DBE21C29E9A3F200D7B47C /* PhotosController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B0063BB42986714400FE32AC /* SettingColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingColorViewController.swift; sourceTree = "<group>"; };
+		B00DFEB029EDD37700FE6CAE /* ColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
+		B00DFEB429EECDD200FE6CAE /* UISpringTimingParametersExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISpringTimingParametersExtension.swift; sourceTree = "<group>"; };
+		B00DFEB629F0488600FE6CAE /* CGSizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtension.swift; sourceTree = "<group>"; };
 		B00FDDC029867CC500F8F92F /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		B00FDDC62986B94600F8F92F /* ColorPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerButton.swift; sourceTree = "<group>"; };
 		B00FDDC829892D6500F8F92F /* BlurGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurGradientView.swift; sourceTree = "<group>"; };
 		B01DC19A29D4A8DB00796BE1 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
-		B02630802971CC26003E94AB /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
+		B03BEE9029EAF4F7004BF773 /* MenuCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionView.swift; sourceTree = "<group>"; };
+		B03BEE9229EAF6A6004BF773 /* DrawingFigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingFigure.swift; sourceTree = "<group>"; };
+		B03BEE9529EB0CE0004BF773 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		B04F043929EC7E6400B19CD0 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		B057437329F17A560002EC1D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B05DE14028F475CB0082A662 /* MediaEditing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaEditing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B05DE14328F475CB0082A662 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B05DE14528F475CB0082A662 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,7 +84,6 @@
 		B0A45F9F299765FE0063D74A /* ColorSpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSpectrumView.swift; sourceTree = "<group>"; };
 		B0A87A12298D4C77001C525A /* SegmentSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentSliderView.swift; sourceTree = "<group>"; };
 		B0A87A14298E77F6001C525A /* UIBezierPatheExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPatheExtension.swift; sourceTree = "<group>"; };
-		B0A87A1629943976001C525A /* ColorOpacitySlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorOpacitySlider.swift; sourceTree = "<group>"; };
 		B0A87A1829950112001C525A /* ToolsDrawCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsDrawCell.swift; sourceTree = "<group>"; };
 		B0B19B7F299E5FE200BE2413 /* ColorSlidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSlidersView.swift; sourceTree = "<group>"; };
 		B0B19B81299E600A00BE2413 /* ColorSlidersView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorSlidersView.xib; sourceTree = "<group>"; };
@@ -85,7 +98,7 @@
 		B0CAD10029ACD2E200124855 /* ToolsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsCollectionView.swift; sourceTree = "<group>"; };
 		B0DBE21429E846B300D7B47C /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
 		B0DBE21529E8495B00D7B47C /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
-		B0DBE21C29E9A3F200D7B47C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		B0DBE21C29E9A3F200D7B47C /* PhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +113,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B00DFEB229EE84C200FE6CAE /* EditScene */ = {
+			isa = PBXGroup;
+			children = (
+				B057437329F17A560002EC1D /* Model.swift */,
+				B08B6C9F29A76915002748E9 /* Tool.swift */,
+				B03BEE9229EAF6A6004BF773 /* DrawingFigure.swift */,
+				B0B1FF29296EB8DE00C7A487 /* PhotoScene */,
+				B00FDDC32986AD7100F8F92F /* SettingColorScene */,
+			);
+			path = EditScene;
+			sourceTree = "<group>";
+		};
+		B00DFEB329EE859100FE6CAE /* ViewButton */ = {
+			isa = PBXGroup;
+			children = (
+				B08B6CA529A9E427002748E9 /* DownnloadToRoundButton.swift */,
+				B0B19B9329A5090A00BE2413 /* BackToCancelButton.swift */,
+				B00FDDC62986B94600F8F92F /* ColorPickerButton.swift */,
+				B03BEE9529EB0CE0004BF773 /* AddButton.swift */,
+			);
+			path = ViewButton;
+			sourceTree = "<group>";
+		};
 		B00FDDC229867CCC00F8F92F /* fount */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,14 +159,12 @@
 		B00FDDC42986B85600F8F92F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B02630802971CC26003E94AB /* ImageScrollView.swift */,
 				B01DC19A29D4A8DB00796BE1 /* CanvasView.swift */,
-				B0CAD10229ACEB5800124855 /* ToolsCollection */,
-				B08B6CA529A9E427002748E9 /* DownnloadToRoundButton.swift */,
-				B0B19B9329A5090A00BE2413 /* BackToCancelButton.swift */,
-				B00FDDC62986B94600F8F92F /* ColorPickerButton.swift */,
 				B00FDDC829892D6500F8F92F /* BlurGradientView.swift */,
+				B0CAD10229ACEB5800124855 /* ToolsCollection */,
+				B00DFEB329EE859100FE6CAE /* ViewButton */,
 				B0B19B7E299E5EA000BE2413 /* Segment + Slider */,
+				B03BEE9029EAF4F7004BF773 /* MenuCollectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -141,6 +175,15 @@
 				B0B1FF2B296EBA1B00C7A487 /* EditorViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		B057437529F17BA30002EC1D /* AnimationJson */ = {
+			isa = PBXGroup;
+			children = (
+				B0B19B9529A509C400BE2413 /* backToCancel.json */,
+				B0B19B9729A509F900BE2413 /* duck.json */,
+			);
+			path = AnimationJson;
 			sourceTree = "<group>";
 		};
 		B05DE13728F475CB0082A662 = {
@@ -162,17 +205,15 @@
 		B05DE14228F475CB0082A662 /* MediaEditing */ = {
 			isa = PBXGroup;
 			children = (
-				B0DBE21C29E9A3F200D7B47C /* DataModel.swift */,
 				B05DE15728F47A550082A662 /* Delegate */,
-				B05DE14E28F475D20082A662 /* LaunchScreen.storyboard */,
 				B05DE14928F475CB0082A662 /* Main.storyboard */,
+				B05DE14E28F475D20082A662 /* LaunchScreen.storyboard */,
 				B0CAD0FF29ACBBFF00124855 /* DuckScene */,
 				B05DE15C28F48C7F0082A662 /* GallaryScene */,
-				B0B1FF29296EB8DE00C7A487 /* EditorScene */,
-				B00FDDC32986AD7100F8F92F /* SettingColorScene */,
+				B00DFEB229EE84C200FE6CAE /* EditScene */,
 				B0B19B7D299E5E4D00BE2413 /* Extension */,
-				B05DE15128F475D20082A662 /* Info.plist */,
 				B0B1FF26296EB84000C7A487 /* Support File */,
+				B05DE15128F475D20082A662 /* Info.plist */,
 			);
 			path = MediaEditing;
 			sourceTree = "<group>";
@@ -195,21 +236,14 @@
 			path = GallaryScene;
 			sourceTree = "<group>";
 		};
-		B08B6CA429A798B7002748E9 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				B08B6C9F29A76915002748E9 /* Tool.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		B0A45F9A2997652B0063D74A /* View */ = {
 			isa = PBXGroup;
 			children = (
 				B0B19B84299E9FF900BE2413 /* ColorGridView.swift */,
 				B0A45F9F299765FE0063D74A /* ColorSpectrumView.swift */,
 				B0B19B83299E603C00BE2413 /* ColorSlidersView */,
-				B0B19B7C299E5DDF00BE2413 /* Sliders */,
+				B05EF8232989A8FB00F05A96 /* ColorGradientSlider.swift */,
+				B00DFEB029EDD37700FE6CAE /* ColorView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -222,21 +256,15 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		B0B19B7C299E5DDF00BE2413 /* Sliders */ = {
-			isa = PBXGroup;
-			children = (
-				B05EF8232989A8FB00F05A96 /* ColorGradientSlider.swift */,
-				B0A87A1629943976001C525A /* ColorOpacitySlider.swift */,
-			);
-			path = Sliders;
-			sourceTree = "<group>";
-		};
 		B0B19B7D299E5E4D00BE2413 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				B0A87A14298E77F6001C525A /* UIBezierPatheExtension.swift */,
 				B0B19B8829A27DFA00BE2413 /* UIColorExtension.swift */,
 				B0B19B8A29A38EF100BE2413 /* UIImageExtension.swift */,
+				B04F043929EC7E6400B19CD0 /* UIViewExtension.swift */,
+				B00DFEB429EECDD200FE6CAE /* UISpringTimingParametersExtension.swift */,
+				B00DFEB629F0488600FE6CAE /* CGSizeExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -263,27 +291,26 @@
 		B0B1FF26296EB84000C7A487 /* Support File */ = {
 			isa = PBXGroup;
 			children = (
-				B0B19B9529A509C400BE2413 /* backToCancel.json */,
-				B0B19B9729A509F900BE2413 /* duck.json */,
 				B05DE14C28F475D20082A662 /* Assets.xcassets */,
+				B057437529F17BA30002EC1D /* AnimationJson */,
 				B00FDDC229867CCC00F8F92F /* fount */,
 			);
 			path = "Support File";
 			sourceTree = "<group>";
 		};
-		B0B1FF29296EB8DE00C7A487 /* EditorScene */ = {
+		B0B1FF29296EB8DE00C7A487 /* PhotoScene */ = {
 			isa = PBXGroup;
 			children = (
-				B08B6CA429A798B7002748E9 /* Model */,
 				B00FDDC42986B85600F8F92F /* View */,
 				B00FDDC52986B86600F8F92F /* Controller */,
 			);
-			path = EditorScene;
+			path = PhotoScene;
 			sourceTree = "<group>";
 		};
 		B0CAD0FF29ACBBFF00124855 /* DuckScene */ = {
 			isa = PBXGroup;
 			children = (
+				B0DBE21C29E9A3F200D7B47C /* PhotosController.swift */,
 				B0B19B9929A515AC00BE2413 /* DuckViewController.swift */,
 			);
 			path = DuckScene;
@@ -366,8 +393,8 @@
 				B00FDDC129867CC500F8F92F /* SF-Pro-Text-Semibold.otf in Resources */,
 				B0B19B9629A509C400BE2413 /* backToCancel.json in Resources */,
 				B05DE15028F475D20082A662 /* LaunchScreen.storyboard in Resources */,
+				B04F043B29EC9AD700B19CD0 /* ColorSlidersView.xib in Resources */,
 				B0DBE21629E84D2900D7B47C /* SF-Pro-Text-Medium.otf in Resources */,
-				B0B19B82299E600A00BE2413 /* ColorSlidersView.xib in Resources */,
 				B0DBE21729E84D2C00D7B47C /* SF-Pro-Text-Regular.otf in Resources */,
 				B05DE14D28F475D20082A662 /* Assets.xcassets in Resources */,
 				B0B19B9829A509F900BE2413 /* duck.json in Resources */,
@@ -384,15 +411,22 @@
 				B0A87A1929950113001C525A /* ToolsDrawCell.swift in Sources */,
 				B05DE14428F475CB0082A662 /* AppDelegate.swift in Sources */,
 				B0A45FA0299765FE0063D74A /* ColorSpectrumView.swift in Sources */,
+				B057437629F183EB0002EC1D /* MenuCollectionView.swift in Sources */,
+				B03BEE9629EB0CE0004BF773 /* AddButton.swift in Sources */,
 				B05DE15928F47BE00082A662 /* GalleryCollectionViewController.swift in Sources */,
 				B08B6CA629A9E427002748E9 /* DownnloadToRoundButton.swift in Sources */,
 				B0063BB52986714400FE32AC /* SettingColorViewController.swift in Sources */,
 				B0B19B85299E9FF900BE2413 /* ColorGridView.swift in Sources */,
 				B0DBE21829E86E6800D7B47C /* DuckViewController.swift in Sources */,
-				B0DBE21D29E9A3F200D7B47C /* DataModel.swift in Sources */,
+				B0DBE21D29E9A3F200D7B47C /* PhotosController.swift in Sources */,
 				B0B19B8929A27DFA00BE2413 /* UIColorExtension.swift in Sources */,
 				B0B19B9429A5090A00BE2413 /* BackToCancelButton.swift in Sources */,
+				B00DFEB529EECDD200FE6CAE /* UISpringTimingParametersExtension.swift in Sources */,
+				B04F043A29EC7E6400B19CD0 /* UIViewExtension.swift in Sources */,
+				B00DFEB129EDD37700FE6CAE /* ColorView.swift in Sources */,
+				B03BEE9429EB0951004BF773 /* DrawingFigure.swift in Sources */,
 				B0CAD10129ACD2E200124855 /* ToolsCollectionView.swift in Sources */,
+				B00DFEB729F0488600FE6CAE /* CGSizeExtension.swift in Sources */,
 				B05DE15B28F4804E0082A662 /* MediaCell.swift in Sources */,
 				B00FDDC72986B94600F8F92F /* ColorPickerButton.swift in Sources */,
 				B0B19B80299E5FE200BE2413 /* ColorSlidersView.swift in Sources */,
@@ -402,11 +436,11 @@
 				B0B19B8B29A38EF100BE2413 /* UIImageExtension.swift in Sources */,
 				B05EF828298AC1FA00F05A96 /* RoundSegmentedControl.swift in Sources */,
 				B08B6CA029A76915002748E9 /* Tool.swift in Sources */,
+				B057437429F17A560002EC1D /* Model.swift in Sources */,
 				B01DC19B29D4A8DB00796BE1 /* CanvasView.swift in Sources */,
 				B0A87A13298D4C77001C525A /* SegmentSliderView.swift in Sources */,
 				B05DE14628F475CB0082A662 /* SceneDelegate.swift in Sources */,
 				B00FDDC929892D6500F8F92F /* BlurGradientView.swift in Sources */,
-				B0A87A1729943977001C525A /* ColorOpacitySlider.swift in Sources */,
 				B05EF8242989A8FB00F05A96 /* ColorGradientSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,7 +518,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -539,7 +573,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -566,7 +600,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -600,7 +634,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

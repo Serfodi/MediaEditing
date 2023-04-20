@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-Pro-Text-Semibold.otf">
+            <string>SFProText-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ColorSlidersView" customModule="MediaEditing" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="E6g-n1-k1z"/>
+                <outlet property="hexTextField" destination="F3j-8G-QTu" id="xWU-OL-jOb"/>
+                <outletCollection property="colorRGBField" destination="FMu-JQ-P65" collectionClass="NSMutableArray" id="XWi-5F-1Qq"/>
+                <outletCollection property="colorRGBSliders" destination="bw9-9S-nk4" collectionClass="NSMutableArray" id="FtI-aM-WpU"/>
+                <outletCollection property="colorRGBField" destination="RmS-s6-KEJ" collectionClass="NSMutableArray" id="TsJ-uT-EW9"/>
+                <outletCollection property="colorRGBSliders" destination="lLj-a9-Ccc" collectionClass="NSMutableArray" id="cJn-Jp-rBa"/>
+                <outletCollection property="colorRGBField" destination="tcA-F0-601" collectionClass="NSMutableArray" id="ixz-Sb-tG8"/>
+                <outletCollection property="colorRGBSliders" destination="vid-Qa-lVK" collectionClass="NSMutableArray" id="HYe-cy-8fj"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="610" height="261"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="XGH-P1-eQg">
+                    <rect key="frame" x="0.0" y="0.0" width="678" height="246"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1L7-JS-nlz">
+                            <rect key="frame" x="0.0" y="0.0" width="678" height="55.666666666666664"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text=" RED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9G5-sY-Qk9">
+                                    <rect key="frame" x="0.0" y="0.0" width="678" height="15.666666666666666"/>
+                                    <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="13"/>
+                                    <color key="textColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.96078431369999995" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="rfL-R7-3Lz">
+                                    <rect key="frame" x="0.0" y="19.666666666666671" width="678" height="36"/>
+                                    <subviews>
+                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="144" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="bw9-9S-nk4" customClass="ColorGradientSlider" customModule="MediaEditing" customModuleProvider="target">
+                                            <rect key="frame" x="-2" y="0.0" width="593" height="37"/>
+                                            <connections>
+                                                <action selector="colorChanges:" destination="-1" eventType="valueChanged" id="hFk-e2-Psz"/>
+                                            </connections>
+                                        </slider>
+                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="255" borderStyle="roundedRect" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="FMu-JQ-P65">
+                                            <rect key="frame" x="601" y="0.0" width="77" height="36"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="77" id="DGm-Wn-jph"/>
+                                                <constraint firstAttribute="height" constant="36" id="jE2-CK-SOS"/>
+                                            </constraints>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="no"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="Uey-nS-WiJ"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Kr7-nd-zAW">
+                            <rect key="frame" x="0.0" y="70" width="678" height="55.666666666666657"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text=" GREEN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJh-ze-SUW">
+                                    <rect key="frame" x="0.0" y="0.0" width="678" height="15.666666666666666"/>
+                                    <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="13"/>
+                                    <color key="textColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.96078431369999995" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="5lo-dh-ozv">
+                                    <rect key="frame" x="0.0" y="19.666666666666671" width="678" height="36"/>
+                                    <subviews>
+                                        <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="144" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="vid-Qa-lVK" customClass="ColorGradientSlider" customModule="MediaEditing" customModuleProvider="target">
+                                            <rect key="frame" x="-2" y="0.0" width="593" height="37"/>
+                                            <connections>
+                                                <action selector="colorChanges:" destination="-1" eventType="valueChanged" id="bGp-Rr-hEn"/>
+                                            </connections>
+                                        </slider>
+                                        <textField opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="255" borderStyle="roundedRect" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="tcA-F0-601">
+                                            <rect key="frame" x="601" y="0.0" width="77" height="36"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="77" id="0K4-5H-o76"/>
+                                                <constraint firstAttribute="height" constant="36" id="7om-tY-1e2"/>
+                                            </constraints>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="ASCIICapableNumberPad" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="QaF-nv-PNB"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="3dp-2R-TZx">
+                            <rect key="frame" x="0.0" y="140" width="678" height="55.666666666666657"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text=" BLUE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yd-vx-gBd">
+                                    <rect key="frame" x="0.0" y="0.0" width="678" height="15.666666666666666"/>
+                                    <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="13"/>
+                                    <color key="textColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.96078431369999995" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="e8E-XG-FoS">
+                                    <rect key="frame" x="0.0" y="19.666666666666657" width="678" height="36"/>
+                                    <subviews>
+                                        <slider opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="144" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="lLj-a9-Ccc" customClass="ColorGradientSlider" customModule="MediaEditing" customModuleProvider="target">
+                                            <rect key="frame" x="-2" y="0.0" width="593" height="37"/>
+                                            <connections>
+                                                <action selector="colorChanges:" destination="-1" eventType="valueChanged" id="Jdf-U0-81x"/>
+                                            </connections>
+                                        </slider>
+                                        <textField opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="255" borderStyle="roundedRect" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="RmS-s6-KEJ">
+                                            <rect key="frame" x="601" y="0.0" width="77" height="36"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="77" id="j7V-6t-coz"/>
+                                                <constraint firstAttribute="height" constant="36" id="qwh-WO-HYB"/>
+                                            </constraints>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="ASCIICapableNumberPad" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="jjZ-Fb-uBl"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="8Ci-Xk-048">
+                            <rect key="frame" x="0.0" y="210" width="678" height="36"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display P3  Hex Color #" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGN-NR-o2b">
+                                    <rect key="frame" x="0.0" y="0.0" width="589" height="36"/>
+                                    <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="BA4646" borderStyle="roundedRect" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="F3j-8G-QTu">
+                                    <rect key="frame" x="601" y="0.0" width="77" height="36"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="36" id="CxW-Oj-3dD"/>
+                                        <constraint firstAttribute="width" constant="77" id="KDG-ca-O7h"/>
+                                    </constraints>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="17"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                    <connections>
+                                        <action selector="inputColorHex:" destination="-1" eventType="editingDidEnd" id="z50-OO-c2A"/>
+                                    </connections>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="XGH-P1-eQg" secondAttribute="bottom" constant="15" id="5r7-ip-Ev3"/>
+                <constraint firstAttribute="trailing" secondItem="XGH-P1-eQg" secondAttribute="trailing" priority="750" id="ALD-Xr-88O"/>
+                <constraint firstItem="XGH-P1-eQg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oek-KM-0hC"/>
+                <constraint firstItem="XGH-P1-eQg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xj6-ID-OZg"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="42.748091603053432" y="20.774647887323944"/>
+        </view>
+    </objects>
+</document>

@@ -28,7 +28,7 @@ class DownnloadToRoundView: UIView {
     lazy var label: UILabel = {
         let label = UILabel()
         label.text = "Round"
-        label.font = UIFont(name: "SF-Pro-Text-Semibold", size: 16)
+        label.font = UIFont(name: "SF-Pro-Text-Semibold", size: 15)
         label.minimumScaleFactor = 0.5
         label.textColor = .white
         return label
@@ -47,9 +47,13 @@ class DownnloadToRoundView: UIView {
     
     open var imageName: String! {
         didSet {
-            shapeImageView.image = UIImage(named: imageName)
+            if let image = UIImage(named: imageName) {
+                shapeImageView.image = image
+            }
         }
     }
+    
+    
     
     var button = UIButton()
     
@@ -85,6 +89,7 @@ class DownnloadToRoundView: UIView {
         stackView.isHidden = true
         button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         addSubview(button)
+        overrideUserInterfaceStyle = .dark
     }
     
     private func setupImageView() {
@@ -94,30 +99,26 @@ class DownnloadToRoundView: UIView {
         imageDownloadView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         imageDownloadView.heightAnchor.constraint(equalToConstant: 33).isActive = true
         imageDownloadView.widthAnchor.constraint(equalToConstant: 33).isActive = true
-        shapeImageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 22, height: 22)) )
-        addSubview(shapeImageView)
-        
-        imageName = "roundTip"
     }
     
     private func setupStackView() {
-        label.sizeToFit()
-        stackView.addArrangedSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
-//        shapeImageView.sizeToFit()
-//        shapeImageView.heightAnchor.constraint(equalToConstant: 29).isActive = true
-//        shapeImageView.widthAnchor.constraint(equalToConstant: 29).isActive = true
+        shapeImageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 25, height: 25)) )
         
+        stackView = UIStackView(arrangedSubviews: [])
+        addSubview(stackView)
+        stackView.addArrangedSubview(label)
         stackView.addArrangedSubview(shapeImageView)
+        
+        stackView.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
-        
         stackView.frame = bounds
         
-        addSubview(stackView)
+        shapeImageView.translatesAutoresizingMaskIntoConstraints = false
+        shapeImageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        shapeImageView.widthAnchor.constraint(equalToConstant: 25).isActive = true
     }
     
     

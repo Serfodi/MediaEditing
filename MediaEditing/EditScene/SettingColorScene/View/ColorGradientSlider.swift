@@ -8,21 +8,9 @@
 import UIKit
 
 
-extension UIView {
-    
-    var snapshot: UIImage {
-        let renderer = UIGraphicsImageRenderer(bounds: bounds)
-        let capturedImage = renderer.image { context in
-            layer.render(in: context.cgContext)
-        }
-        return capturedImage
-    }
-}
-
-
 class ColorGradientSlider: UISlider {
     
-    var thumbViewColor = CGColor(gray: 1, alpha: 1)
+    private let trackLayer = CAGradientLayer()
     
     private let thumbView = {
         let view = ThumbRingView(frame: .init(x: 0, y: 0, width: 36, height: 36))
@@ -31,45 +19,33 @@ class ColorGradientSlider: UISlider {
     }()
     
     
-    private let trackLayer = CAGradientLayer()
+    // MARK: - life cirls
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         setup()
     }
     
-    open func colorsGradient(_ closure: (CGFloat)-> CGColor) {
-        var colors:[CGColor] = []
-        let countColorGradient = 2
-        let stepColor = 1.0 / CGFloat(countColorGradient - 1)
-        for n in 0...(countColorGradient - 1) { colors.append(closure(stepColor * CGFloat(n))) }
-        trackLayer.colors = colors
-        setNeedsDisplay()
-    }
     
-    open func colorSetThumbView(_ color: CGColor) {
-        thumbView.color = color
-        setNeedsDisplay()
-    }
+    
+    // MARK: - configuration
+    
     
     private func setup() {
-        clear()
+        clipsToBounds = true
+        tintColor = .clear
+        maximumTrackTintColor = .clear
+        thumbTintColor = .clear
         createThumbImageView()
         configureTrackLayer()
     }
     
-    private func clear() {
-        tintColor = .clear
-        maximumTrackTintColor = .clear
-        backgroundColor = .clear
-        thumbTintColor = .clear
-    }
-    
     private func configureTrackLayer() {
         trackLayer.masksToBounds = true
-        trackLayer.startPoint = .init(x: 0, y: 0.5)
-        trackLayer.endPoint = .init(x: 1, y: 0.5)
-        trackLayer.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
+        trackLayer.locations = [0, 1]
+        trackLayer.startPoint = .init(x: 0.15, y: 0.5)
+        trackLayer.endPoint = .init(x: 0.85, y: 0.5)
+        trackLayer.frame = bounds
         trackLayer.cornerRadius = trackLayer.frame.height / 2
         layer.insertSublayer(trackLayer, at: 0)
     }
@@ -84,16 +60,31 @@ class ColorGradientSlider: UISlider {
         setThumbImage(thumbSnapshot, for: .reserved)
         setThumbImage(thumbSnapshot, for: .selected)
     }
+    
+    
+    // MARK: - color
+    
+    open func colorsGradient(colors: [CGColor]) {
+        trackLayer.colors = colors
+        setNeedsDisplay()
+    }
+    
+    open func colorSetThumbView(color: UIColor) {
+        thumbView.fillColor = color
+    }
 }
+
 
 
 final class ThumbRingView: UIView {
     
-    var view = UIView()
+    private var view = UIView()
+    private var colorLayer = CALayer()
     
-    var color: CGColor = CGColor(gray: 0, alpha: 1) {
+    var fillColor = UIColor(white: 1, alpha: 1) {
         didSet {
-            view.layer.borderColor = color
+            colorLayer.backgroundColor = fillColor.cgColor
+            setBorderColor()
         }
     }
     
@@ -109,11 +100,27 @@ final class ThumbRingView: UIView {
     
     private func setup() {
         view.frame =  CGRect(x: 3.5, y: 3.5, width: frame.width - 7, height: frame.height - 7)
-        view.backgroundColor = .clear
+        view.layer.backgroundColor = CGColor(gray: 0, alpha: 1)
         view.layer.borderWidth = 3
         view.layer.cornerRadius = view.frame.height / 2
-        view.layer.borderColor = color
+        view.backgroundColor = .black
+        view.clipsToBounds = true
         addSubview(view)
+        
+        colorLayer.frame = bounds
+        view.layer.insertSublayer(colorLayer, at: 0)
     }
+    
+    private func setBorderColor() {
+        var rgba = fillColor.getComponents()
+        let _ = rgba.removeLast()
+        let isWhiteThember = rgba.contains { component in component > 60 }
+        if isWhiteThember {
+            view.layer.borderColor = CGColor(gray: 0, alpha: 1)
+        } else {
+            view.layer.borderColor = CGColor(gray: 0.1, alpha: 1)
+        }
+    }
+    
 }
 

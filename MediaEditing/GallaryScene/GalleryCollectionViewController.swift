@@ -70,7 +70,7 @@ class GalleryCollectionViewController: UICollectionViewController {
         if availableWidth != width {
             availableWidth = width
             let columnCount = 3.0
-            let itemLength = (availableWidth - 2 * (columnCount - 1)) / columnCount
+            let itemLength = (availableWidth - 1 * (columnCount - 1)) / columnCount
             collectionViewFlowLayout.itemSize = CGSize(width: itemLength, height: itemLength)
         }
     }
@@ -249,11 +249,11 @@ extension GalleryCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
+        return 1
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
+        return 1
     }
 }
 

@@ -11,10 +11,10 @@ class SettingColorViewController: UIViewController {
     
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var opacityLabel: UILabel!
-    @IBOutlet weak var opacitySlider: ColorOpacitySlider!
+    @IBOutlet weak var opacitySlider: ColorGradientSlider!
     @IBOutlet weak var colorSegmentedController: UISegmentedControl!
     @IBOutlet weak var colorContainerView: UIView!
-    @IBOutlet weak var colorView: UIView!
+    @IBOutlet weak var colorView: ColorView!
     
     var colorGridView: ColorGridCollectionView!
     var colorSpectrumView: ColorSpectrumView!
@@ -41,12 +41,15 @@ class SettingColorViewController: UIViewController {
     }
     
     
+    
     // MARK: - Action
     
-    @IBAction func opacityChanges(_ sender: ColorOpacitySlider) {
+    @IBAction func opacityChanges(_ sender: ColorGradientSlider) {
         opacityLabel.text = NSString(format: "%d", Int(sender.value)) as String
         color = color.withAlphaComponent(CGFloat(sender.value / 100.0))
+        updataColor()
     }
+    
     
     @IBAction func paletteSelection(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -64,7 +67,7 @@ class SettingColorViewController: UIViewController {
             colorSliderView.isHidden = true
         case 2:
             colorContainerView.bringSubviewToFront(colorSliderView)
-            colorSliderView.color = color
+            colorSliderView.setColor(color)
             colorGridView.isHidden = true
             colorSpectrumView.isHidden = true
             colorSliderView.isHidden = false
@@ -75,7 +78,9 @@ class SettingColorViewController: UIViewController {
     }
     
     
+    
     // MARK: - Setup View
+    
     
     private func setupView() {
         setupBlureBG()
@@ -105,12 +110,18 @@ class SettingColorViewController: UIViewController {
     private func setupOpacitySlider() {
         opacitySlider.value = Float(color.cgColor.alpha * 100)
         opacityLabel.text = NSString(format: "%d", Int(color.cgColor.alpha * 100.0)) as String
+        opacityLabel.clipsToBounds = true
+        opacitySlider.backgroundColor = renderCheckerboardPattern(colors:
+                                                                    (dark: UIColor(white: 1, alpha: 0.5),
+                                                                     light: UIColor(white: 0, alpha: 0)),
+                                                                  height: opacitySlider.bounds.height)
+        opacitySlider.layer.cornerRadius = opacitySlider.bounds.height / 2
     }
     
     private func setupBlureBG() {
         let bluerView = UIVisualEffectView()
         let bluerEffect = UIBlurEffect(style: .dark)
-        bluerView.frame = view.frame
+        bluerView.frame = view.bounds
         bluerView.effect = bluerEffect
         
         let path = UIBezierPath(roundedRect: bluerView.frame, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: 15, height: 10))
@@ -121,11 +132,35 @@ class SettingColorViewController: UIViewController {
         menuView.insertSubview(bluerView, at: 0)
     }
     
+    
+    private func setupColorView() {}
+    
+    
+    // MARK: - renderCheckerboardPattern
+    
+    
+    private func renderCheckerboardPattern(colors: (dark: UIColor, light: UIColor), height:CGFloat) -> UIColor {
+        let size = height/3
+        let image = UIGraphicsImageRenderer(size: CGSize(width: size * 2, height: size * 2)).image { context in
+            colors.dark.setFill()
+            context.fill(CGRect(x: 0, y: 0, width: size * 2, height: size * 2))
+            colors.light.setFill()
+            context.fill(CGRect(x: size, y: 0, width: size, height: size))
+            context.fill(CGRect(x: 0, y: size, width: size, height: size))
+        }
+        return UIColor(patternImage: image)
+    }
+    
+    
+    
+    
+    
     // MARK: - updata
     
     func updataColor() {
         updataColorView(color: color)
         updataSlider(color: color)
+        colorSliderView.setColor(color)
     }
     
     
@@ -134,14 +169,15 @@ class SettingColorViewController: UIViewController {
     
     private func updataSlider(color: UIColor) {
         guard opacitySlider != nil else { return }
-        opacitySlider.colorsGradient(color: color)
+        opacitySlider.colorsGradient(colors: [color.withAlphaComponent(0).cgColor, color.withAlphaComponent(1).cgColor])
+        opacitySlider.colorSetThumbView(color: color)
     }
     
     // MARK: - updata color View
     
     private func updataColorView(color: UIColor) {
         guard colorView != nil else { return }
-        colorView.backgroundColor = color
+        colorView.color = color
     }
 }
 
@@ -158,18 +194,21 @@ extension SettingColorViewController: ColorObserver {
         case 0:
             if let color = colorGridView.colorSelected {
                 self.color = color
+                updataColor()
             }
         case 1:
             if let color = colorSpectrumView.selectedColor {
                 self.color = color
+                updataColor()
             }
         case 2:
-            if let color = colorSliderView.color {
+            if let color = colorSliderView.getColor() {
                 self.color = color
+                updataColorView(color: color)
+                updataSlider(color: color)
             }
         default: return
         }
-        updataColor()
     }
 }
 

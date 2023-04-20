@@ -33,6 +33,10 @@ class ToolsDrawCell: UICollectionViewCell {
     var tipImageView: UIImageView!
     let gradientLayer = CAGradientLayer()
     
+    
+    
+    // MARK: - init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -43,6 +47,9 @@ class ToolsDrawCell: UICollectionViewCell {
         setup()
     }
    
+    
+    
+    
     /// Устонавливает цвет картинки грифиля
     open func setColor(_ color: UIColor) {
         if tipImageView.image != nil {
@@ -105,14 +112,6 @@ class ToolsDrawCell: UICollectionViewCell {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
     // MARK: - Reuse
     
     override func prepareForReuse() {
@@ -120,5 +119,10 @@ class ToolsDrawCell: UICollectionViewCell {
         toolImageView.image = nil
         tipImageView.image = nil
     }
+    
+    
+    
+
+    
     
 }

@@ -80,9 +80,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xrv-Dn-bP6" customClass="CanvasView" customModule="MediaEditing" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="170" width="393" height="476"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xrv-Dn-bP6" customClass="CanvasView" customModule="MediaEditing" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GX5-Qp-DSI" customClass="BlurGradientView" customModule="MediaEditing" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="135"/>
@@ -104,30 +103,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V7V-EQ-sqG">
                                 <rect key="frame" x="0.0" y="59" width="393" height="53"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="48X-Mq-bGh">
-                                        <rect key="frame" x="145" y="10" width="103" height="33"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="zoomOut" translatesAutoresizingMaskIntoConstraints="NO" id="jQC-E0-a0h">
-                                                <rect key="frame" x="0.0" y="0.0" width="22" height="33"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="22" id="Qwt-l7-Eji"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zoom out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oF7-Z0-buB">
-                                                <rect key="frame" x="26" y="0.0" width="77" height="33"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="33" id="ubo-23-lMF"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUb-Zy-jzy">
+                                        <rect key="frame" x="145.66666666666666" y="10" width="102" height="33"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="33" id="tDt-6g-OeL"/>
+                                            <constraint firstAttribute="height" constant="33" id="BvL-vQ-BSU"/>
+                                            <constraint firstAttribute="width" constant="102" id="JzA-79-IUw"/>
                                         </constraints>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pb1-p0-Wfv">
+                                        <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
+                                        <state key="normal" title="Zoom out"/>
+                                        <connections>
+                                            <action selector="zooming:" destination="l3t-7F-sqD" eventType="touchUpInside" id="K5k-RN-TVZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pb1-p0-Wfv">
                                         <rect key="frame" x="317" y="10" width="66" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="33" id="NCM-v8-wYs"/>
@@ -135,11 +123,14 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                         <state key="normal" title="Clear all"/>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="clearAll:" destination="l3t-7F-sqD" eventType="touchUpInside" id="KUl-81-tNL"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yaJ-f3-y69">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yaJ-f3-y69">
                                         <rect key="frame" x="10" y="10" width="33" height="33"/>
                                         <rect key="contentStretch" x="0.0" y="1" width="1" height="1"/>
                                         <constraints>
@@ -148,18 +139,19 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <inset key="contentEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
-                                        <state key="normal" image="undo"/>
+                                        <state key="normal" image="undo">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="undo:" destination="l3t-7F-sqD" eventType="touchUpInside" id="uFq-1s-YvR"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="EUb-Zy-jzy" firstAttribute="centerX" secondItem="V7V-EQ-sqG" secondAttribute="centerX" id="05P-pD-1b6"/>
                                     <constraint firstAttribute="height" constant="53" id="9UQ-oe-99L"/>
                                     <constraint firstItem="yaJ-f3-y69" firstAttribute="leading" secondItem="V7V-EQ-sqG" secondAttribute="leading" constant="10" id="AAZ-gu-zkz"/>
-                                    <constraint firstItem="pb1-p0-Wfv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="48X-Mq-bGh" secondAttribute="trailing" constant="8" symbolic="YES" id="Hoq-3C-wLE"/>
-                                    <constraint firstItem="48X-Mq-bGh" firstAttribute="centerX" secondItem="V7V-EQ-sqG" secondAttribute="centerX" id="NAL-tR-UrY"/>
-                                    <constraint firstAttribute="bottom" secondItem="48X-Mq-bGh" secondAttribute="bottom" constant="10" id="V6d-vX-0DE"/>
+                                    <constraint firstItem="EUb-Zy-jzy" firstAttribute="centerY" secondItem="V7V-EQ-sqG" secondAttribute="centerY" id="aRY-fe-Rqv"/>
                                     <constraint firstAttribute="trailing" secondItem="pb1-p0-Wfv" secondAttribute="trailing" constant="10" id="i3v-92-2gf"/>
                                     <constraint firstAttribute="bottom" secondItem="pb1-p0-Wfv" secondAttribute="bottom" constant="10" id="jX2-Zx-hoZ"/>
                                     <constraint firstAttribute="bottom" secondItem="yaJ-f3-y69" secondAttribute="bottom" constant="10" id="oyl-cC-L3e"/>
@@ -200,7 +192,7 @@
                                             <segue destination="Gw6-AE-Vls" kind="presentation" identifier="SettingColorVC" modalPresentationStyle="overCurrentContext" id="fya-V7-aeX"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xce-5L-ZOa">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xce-5L-ZOa" customClass="AddButton" customModule="MediaEditing" customModuleProvider="target">
                                         <rect key="frame" x="352" y="8" width="33" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="0.1011809292218543" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -217,8 +209,11 @@
                                                 <integer key="value" value="16"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="addPatch:" destination="l3t-7F-sqD" eventType="touchUpInside" id="tCP-kH-JHs"/>
+                                        </connections>
                                     </button>
-                                    <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MoA-dz-6Hh" customClass="ToolsCollectionView" customModule="MediaEditing" customModuleProvider="target">
+                                    <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MoA-dz-6Hh" customClass="ToolsCollectionView" customModule="MediaEditing" customModuleProvider="target">
                                         <rect key="frame" x="57" y="-31" width="279" height="88"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="88" id="Trh-UA-Gkz"/>
@@ -300,16 +295,20 @@
                             <constraint firstItem="ZZO-76-BOS" firstAttribute="trailing" secondItem="TAh-6R-lYf" secondAttribute="trailing" id="CKb-TQ-gsT"/>
                             <constraint firstItem="p42-n0-DYe" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="Kkf-NR-18t"/>
                             <constraint firstItem="Src-Ct-nR5" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="Kmz-Z1-ugI"/>
+                            <constraint firstAttribute="bottom" secondItem="Xrv-Dn-bP6" secondAttribute="bottom" id="Q3u-If-2EU"/>
+                            <constraint firstItem="TAh-6R-lYf" firstAttribute="trailing" secondItem="Xrv-Dn-bP6" secondAttribute="trailing" id="YiN-64-OY2"/>
                             <constraint firstItem="TAh-6R-lYf" firstAttribute="trailing" secondItem="p42-n0-DYe" secondAttribute="trailing" id="Yre-p7-0WI"/>
                             <constraint firstItem="p42-n0-DYe" firstAttribute="bottom" secondItem="TAh-6R-lYf" secondAttribute="bottom" id="b6b-vp-uec"/>
                             <constraint firstItem="V7V-EQ-sqG" firstAttribute="top" secondItem="TAh-6R-lYf" secondAttribute="top" id="ba1-b8-gmo"/>
                             <constraint firstItem="TAh-6R-lYf" firstAttribute="trailing" secondItem="V7V-EQ-sqG" secondAttribute="trailing" id="cfn-8Z-4z7"/>
                             <constraint firstItem="V7V-EQ-sqG" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="ea4-xh-RWh"/>
                             <constraint firstItem="V7V-EQ-sqG" firstAttribute="bottom" secondItem="GX5-Qp-DSI" secondAttribute="bottom" constant="-23" id="mlc-CD-nGL"/>
+                            <constraint firstItem="Xrv-Dn-bP6" firstAttribute="leading" secondItem="TAh-6R-lYf" secondAttribute="leading" id="mzt-ic-pZT"/>
                             <constraint firstItem="p42-n0-DYe" firstAttribute="top" secondItem="Src-Ct-nR5" secondAttribute="bottom" id="q32-au-OYf"/>
                             <constraint firstItem="GX5-Qp-DSI" firstAttribute="top" secondItem="hYN-Ve-wbd" secondAttribute="top" id="rsI-le-p8L"/>
                             <constraint firstItem="ZZO-76-BOS" firstAttribute="top" secondItem="p42-n0-DYe" secondAttribute="bottom" constant="-120" id="tau-qX-tQI"/>
                             <constraint firstAttribute="bottom" secondItem="ZZO-76-BOS" secondAttribute="bottom" id="wjO-Tt-2eJ"/>
+                            <constraint firstItem="Xrv-Dn-bP6" firstAttribute="top" secondItem="hYN-Ve-wbd" secondAttribute="top" id="wyl-CH-8pJ"/>
                         </constraints>
                     </view>
                     <connections>
@@ -325,7 +324,7 @@
                         <outlet property="toolseCollectionView" destination="MoA-dz-6Hh" id="BJY-5n-8iz"/>
                         <outlet property="undoButton" destination="yaJ-f3-y69" id="pOA-zo-AOo"/>
                         <outlet property="widhtButtonConstraint" destination="hSV-MR-Kr3" id="3JB-Ht-ahX"/>
-                        <outlet property="zoomView" destination="48X-Mq-bGh" id="2Cp-Zz-zUf"/>
+                        <outlet property="zoomButton" destination="EUb-Zy-jzy" id="5cN-ZC-CcS"/>
                         <segue destination="Si2-Bf-oaW" kind="unwind" identifier="closeEditor" unwindAction="closeUnwindSegueWithUnwindSegue:" id="5Cg-BK-4nj"/>
                     </connections>
                 </viewController>
@@ -420,7 +419,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="hoW-Ig-O5h">
                                                         <rect key="frame" x="0.0" y="20" width="361" height="36"/>
                                                         <subviews>
-                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="vWG-8s-cr5" customClass="ColorOpacitySlider" customModule="MediaEditing" customModuleProvider="target">
+                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="vWG-8s-cr5" customClass="ColorGradientSlider" customModule="MediaEditing" customModuleProvider="target">
                                                                 <rect key="frame" x="-2" y="0.0" width="276" height="37"/>
                                                                 <connections>
                                                                     <action selector="opacityChanges:" destination="Gw6-AE-Vls" eventType="valueChanged" id="9xl-wS-Lb8"/>
@@ -466,7 +465,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="8dc-Ml-Lov">
                                                 <rect key="frame" x="0.0" y="482" width="361" height="82"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uFa-i7-oJo">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uFa-i7-oJo" customClass="ColorView" customModule="MediaEditing" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="82" height="82"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
@@ -532,7 +531,6 @@
         <image name="cancel" width="49.5" height="49.5"/>
         <image name="eyedropper" catalog="system" width="128" height="118"/>
         <image name="undo" width="72" height="72"/>
-        <image name="zoomOut" width="72" height="72"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

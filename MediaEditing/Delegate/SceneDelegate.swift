@@ -16,9 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        let accses = UserDefaults.standard.bool(forKey: "accses")
-        
-        if !DataModelController.accsesPhoto() {
+        if !PhotosController.accsesPhoto() {
             window?.rootViewController = DuckViewController()
             window?.makeKeyAndVisible()
         }
