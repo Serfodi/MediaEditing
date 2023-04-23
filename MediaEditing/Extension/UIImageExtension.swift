@@ -33,4 +33,12 @@ extension UIImage {
         return UIColor(red: r, green: g, blue: b, alpha: a)
     }
     
+    func resizeImage(size: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
+        self.draw(in: CGRect(origin: .zero, size: size))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+    
 }

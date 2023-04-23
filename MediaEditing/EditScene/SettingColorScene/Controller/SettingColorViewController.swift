@@ -20,13 +20,24 @@ class SettingColorViewController: UIViewController {
     var colorSpectrumView: ColorSpectrumView!
     var colorSliderView: ColorSlidersView!
     
-    open var color: UIColor!
+    var delegate: ColorObserver!
+    
+    open var dataModelController: DataModelController!
+    
+    private var color: UIColor!
     
     
     // MARK: - UIViewController / Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let color = dataModelController.getCurrentColor() {
+            self.color = color
+        } else {
+            color = UIColor(white: 1, alpha: 1)
+        }
+        
         setupView()
         colorGridView.delegate = self
         colorSpectrumView.delegate = self
@@ -39,6 +50,20 @@ class SettingColorViewController: UIViewController {
         colorSpectrumView.frame = colorContainerView.bounds
         colorSliderView.frame = colorContainerView.bounds
     }
+    
+    
+    
+    // MARK: - Segue
+        
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if dataModelController.currentTool is Pen {
+            delegate.colorChanged(color)
+        } else {
+            delegate.colorChanged(nil)
+        }
+    }
+
     
     
     
@@ -184,12 +209,13 @@ class SettingColorViewController: UIViewController {
 
 protocol ColorObserver: AnyObject {
     
-    func colorChanged()
+    func colorChanged(_ color: UIColor?)
 }
+
 
 extension SettingColorViewController: ColorObserver {
     
-    func colorChanged() {
+    func colorChanged(_ color: UIColor?) {
         switch colorSegmentedController.selectedSegmentIndex {
         case 0:
             if let color = colorGridView.colorSelected {

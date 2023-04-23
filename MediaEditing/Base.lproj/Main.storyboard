@@ -314,13 +314,11 @@
                     <connections>
                         <outlet property="addButton" destination="xce-5L-ZOa" id="gpA-b6-kda"/>
                         <outlet property="backToCancelButtonView" destination="ABo-WQ-Iv4" id="Q2Y-3E-kCD"/>
-                        <outlet property="blureView" destination="ZZO-76-BOS" id="0CX-kL-fm5"/>
                         <outlet property="clearAllButton" destination="pb1-p0-Wfv" id="7z5-Nf-s0a"/>
                         <outlet property="colorPickerButton" destination="auC-KI-QX8" id="HD5-TG-kDs"/>
                         <outlet property="downloadButton" destination="MZn-fD-705" id="u3x-ed-FkP"/>
-                        <outlet property="imageDrawView" destination="Xrv-Dn-bP6" id="gkc-th-hhm"/>
+                        <outlet property="drawView" destination="Xrv-Dn-bP6" id="H9A-LB-Pwz"/>
                         <outlet property="segmentedControl" destination="O0E-Fl-9hG" id="j0t-eb-gPL"/>
-                        <outlet property="toolBarView" destination="Src-Ct-nR5" id="rXl-eH-FdT"/>
                         <outlet property="toolseCollectionView" destination="MoA-dz-6Hh" id="BJY-5n-8iz"/>
                         <outlet property="undoButton" destination="yaJ-f3-y69" id="pOA-zo-AOo"/>
                         <outlet property="widhtButtonConstraint" destination="hSV-MR-Kr3" id="3JB-Ht-ahX"/>

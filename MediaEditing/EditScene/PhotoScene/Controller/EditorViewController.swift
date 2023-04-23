@@ -13,30 +13,33 @@ import Lottie
 
 
 class EditorViewController: UIViewController {
+        
+    // Canvas
+    @IBOutlet weak var drawView: CanvasView!
     
-    enum AnimationWidhtTool {
-        case tools
-        case width
-    }
-    
-    var animationWidhtTool: AnimationWidhtTool = .tools
-    
-    var asset: PHAsset!
-    
-    @IBOutlet weak var imageDrawView: CanvasView!
-    @IBOutlet weak var toolBarView: UIView!
+    // (Navigation bar)
     @IBOutlet weak var zoomButton: UIButton!
-    @IBOutlet weak var segmentedControl: SegmentSliderView!
-    @IBOutlet weak var downloadButton: DownnloadToRoundView!
     @IBOutlet weak var undoButton: UIButton!
     @IBOutlet weak var clearAllButton: UIButton!
+    
+    // ToolBar
     @IBOutlet weak var colorPickerButton: ColorPickerButton!
     @IBOutlet weak var toolseCollectionView: ToolsCollectionView!
-    @IBOutlet weak var backToCancelButtonView: BackToCancelButton!
     @IBOutlet weak var addButton: AddButton!
+    
+    // Bar
+    @IBOutlet weak var backToCancelButtonView: BackToCancelButton!
+    @IBOutlet weak var segmentedControl: SegmentSliderView!
+    @IBOutlet weak var downloadButton: DownnloadToRoundView!
+    
+    // Constraint
     @IBOutlet weak var widhtButtonConstraint: NSLayoutConstraint!
     
-    var colorRoundView: UIView = {
+    /**
+     Кружочек для обозначения выборо ширины.
+     Есть неявная анимация ширины
+     */
+    var widhtRoundView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.shadowRadius = 10
@@ -47,37 +50,34 @@ class EditorViewController: UIViewController {
         return view
     }()
     
-    @IBOutlet weak var blureView: BlurGradientView!
-    
+    var asset: PHAsset!
     
     var dataModelController: DataModelController = DataModelController()
+    
+    var zoomAnimator = UIViewPropertyAnimator()
+    
     
     
     // MARK: - UIViewController / Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         PHPhotoLibrary.shared().register(self)
         
         setupImageDrawView()
+        setupView()
         
-        toolseCollectionView.tools = DataModel.tools
+        toolseCollectionView.tools = dataModelController.dataModel.tools
         
-        imageDrawView.delegate = self
-        toolseCollectionView.toolsCollectionViewDelegate = self
+        
+        drawView.delegate = self
+        toolseCollectionView.toolsCellDelegate = self
+        toolseCollectionView.toolsCellTouchDelegate = self
         segmentedControl.slider.delegate = self
         backToCancelButtonView.delegate = self
         downloadButton.delegate = self
         addButton.delegate = self
-        
-        // Перенести !!!!!!!!!!!!!
-        segmentedControl.slider.maximumValue = 24
-        segmentedControl.slider.minimumValue = 4
-        
-        
-        colorUp(dataModelController.currentTool.color)
-        
-        setupView()
     }
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
@@ -97,19 +97,19 @@ class EditorViewController: UIViewController {
     
     // Navigation bar
     @IBAction func undo(_ sender: UIButton) {
-        imageDrawView.undoManager?.undo()
-        undoButton.isEnabled = (imageDrawView.undoManager?.canUndo ?? true)
-        clearAllButton.isEnabled = (imageDrawView.undoManager?.canUndo ?? true)
+        drawView.undoManager?.undo()
+        undoButton.isEnabled = (drawView.undoManager?.canUndo ?? true)
+        clearAllButton.isEnabled = (drawView.undoManager?.canUndo ?? true)
     }
     
     @IBAction func clearAll(_ sender: UIButton) {
-        imageDrawView.drawing = PKDrawing()
+        drawView.drawing = PKDrawing()
         undoButton.isEnabled = false
         clearAllButton.isEnabled = false
     }
     
     @IBAction func zooming(_ sender: UIButton) {
-        imageDrawView.setZoomScale(imageDrawView.minimumZoomScale, animated: true)
+        drawView.setZoomScale(drawView.minimumZoomScale, animated: true)
     }
     
     @IBAction func addPatch(_ sender: UIButton) {}
@@ -122,8 +122,7 @@ class EditorViewController: UIViewController {
         switch unwindSegue.identifier {
         case "closeSettingColorVC":
             if let SCVC = unwindSegue.source as? SettingColorViewController {
-                toolseCollectionView.currentTool.color = SCVC.color
-                colorUp(SCVC.color)
+                dataModelController = SCVC.dataModelController
             }
         default:
             fatalError("Error segue in EditorViewController")
@@ -134,11 +133,8 @@ class EditorViewController: UIViewController {
         switch segue.identifier {
         case "SettingColorVC":
             if let SCVC = segue.destination as? SettingColorViewController {
-                if toolseCollectionView.currentTool.color != nil {
-                    SCVC.color = toolseCollectionView.currentTool.color
-                } else {
-                    SCVC.color = UIColor(white: 1, alpha: 1)
-                }
+                SCVC.dataModelController = dataModelController
+                SCVC.delegate = self
             }
         default:
             fatalError("Error segue in EditorViewController")
@@ -151,12 +147,10 @@ class EditorViewController: UIViewController {
     
     var targetSize: CGSize {
         let scale = UIScreen.main.scale
-        return CGSize(width: imageDrawView.bounds.width * scale, height: imageDrawView.bounds.height * scale)
+        return CGSize(width: drawView.bounds.width * scale, height: drawView.bounds.height * scale)
     }
     
-    func updateImage() {
-        updateStaticImage()
-    }
+    func updateImage() { updateStaticImage() }
     
     func updateStaticImage() {
         let options = PHImageRequestOptions()
@@ -165,10 +159,8 @@ class EditorViewController: UIViewController {
         
         PHImageManager.default().requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options, resultHandler: { image, _ in
             guard let image = image else { return }
-            self.imageDrawView.image = image
+            self.drawView.image = image
         })
-        
-        imageDrawView.set(DataModel.tools[0])
     }
     
     
@@ -176,11 +168,11 @@ class EditorViewController: UIViewController {
     // MARK:  Image downlaound
     
     func imageDownlound() {
-        UIGraphicsBeginImageContextWithOptions(imageDrawView.imageView.bounds.size, false, UIScreen.main.scale / 2)
-        let imageDraws = imageDrawView.drawing.image(from: imageDrawView.imageView.bounds, scale: UIScreen.main.scale / 2)
+        UIGraphicsBeginImageContextWithOptions(drawView.imageView.bounds.size, false, UIScreen.main.scale / 2)
+        let imageDraws = drawView.drawing.image(from: drawView.imageView.bounds, scale: UIScreen.main.scale / 2)
         // Merge tempImageView into mainImageView
-        imageDrawView.imageView.image?.draw(in: imageDrawView.imageView.bounds, blendMode: .normal, alpha: 1)
-        imageDraws.draw(in: imageDrawView.imageView.bounds, blendMode: .normal, alpha: 1)
+        drawView.imageView.image?.draw(in: drawView.imageView.bounds, blendMode: .normal, alpha: 1)
+        imageDraws.draw(in: drawView.imageView.bounds, blendMode: .normal, alpha: 1)
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -198,79 +190,78 @@ class EditorViewController: UIViewController {
     
     
     func setupView() {
-        self.view.addSubview(colorRoundView)
+        
+        if let pen = dataModelController.currentTool as? Pen {
+            colorPickerButton.color = pen.color
+            drawView.setPen(pen)
+        } else {
+            colorPickerButton.color = nil
+        }
+        
+        self.view.addSubview(widhtRoundView)
         undoButton.isEnabled = false
         clearAllButton.isEnabled = false
         
-        let image = UIImage(named: "zoomOut")
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 23, height: 23), false, UIScreen.main.scale)
-        image?.draw(in: CGRect(origin: .zero, size: CGSize(width: 23, height: 23)))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        zoomButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 4)
-        zoomButton.setImage(newImage, for: .normal)
-    }
-    
-    
-    // MARK: - viewUp
-    
-    
-    func colorUp(_ color: UIColor) {
-        colorPickerButton.color = color
-        if let cell = toolseCollectionView.currentCell {
-            cell.setColor(color)
-            imageDrawView.set(toolseCollectionView.currentTool)
+        if let image = UIImage(named: "zoomOut")?.resizeImage(size: CGSize(width: 23, height: 23)) {
+            zoomButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 4)
+            zoomButton.setImage(image, for: .normal)
         }
     }
     
-    func colorPickerButtonUP() {
-        colorPickerButton.color = toolseCollectionView.currentTool.color
+    
+    
+    // MARK: - Updates
+    
+    func updateColor(_ newColor: UIColor) {
+        if let pen = dataModelController.currentTool as? Pen {
+            colorPickerButton.color = pen.color
+        } else {
+            colorPickerButton.color = nil
+        }
+        toolseCollectionView.currentCell.setColor(newColor)
     }
     
-    func sliderWidthUp() {
-        if let widht = toolseCollectionView.currentTool.widht {
-            segmentedControl.slider.value = widht
-        }
-    }
+    
     
     
     
     // MARK: - Сonstraint
     
     func setupImageDrawView() {
-        imageDrawView.translatesAutoresizingMaskIntoConstraints = false
-        imageDrawView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        imageDrawView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        imageDrawView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        imageDrawView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        drawView.translatesAutoresizingMaskIntoConstraints = false
+        drawView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        drawView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        drawView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        drawView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     }
  
     
     
     // MARK: - Animation
     
-    
-    func animationWidht(_ widht: AnimationWidhtTool) {
-        animationWidhtTool = widht
-        switch widht {
+    func animationWidht(_ state: ToolsCollectionView.CollectionShows) {
+        switch state {
         case .tools:
-            animationWidhtDownloadButton(to: .downnload)
+            toolseCollectionView.currentStateCollection = .tools
+            addButton.animationShow(is: true)
+            colorPickerButton.animationShow(is: true)
             downloadButton.animationSwicht(to: .downnload)
+            animationWidhtDownloadButton(to: downloadButton.isButton)
             segmentedControl.animationControler(to: .segment)
             backToCancelButtonView.animationButton(state: .back)
-            animationScaleButton(to: .tools)
-            toolseCollectionView.animation(to: .deselected)
-        case .width:
-            animationWidhtDownloadButton(to: .round)
+        case .toolSelected:
+            toolseCollectionView.currentStateCollection = .toolSelected
+            addButton.animationShow(is: false)
+            colorPickerButton.animationShow(is: false)
             downloadButton.animationSwicht(to: .round)
+            animationWidhtDownloadButton(to: downloadButton.isButton)
             segmentedControl.animationControler(to: .slider)
             backToCancelButtonView.animationButton(state: .cancel)
-            animationScaleButton(to: .width)
-            toolseCollectionView.animation(to: .selected)
         }
     }
     
-    private func animationWidhtDownloadButton(to state:DownnloadToRoundView.StateButton) {
+    /// Обновляет ограничения для downloadButton. Для раскрыитя выбора наконечника (Tip)
+    private func animationWidhtDownloadButton(to state: DownnloadToRoundView.IsButton) {
         switch state {
         case .round:
             widhtButtonConstraint.constant = 76
@@ -283,46 +274,18 @@ class EditorViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    private func animationScaleButton(to state:AnimationWidhtTool) {
-        switch state {
-        case .width:
-            UIView.animate(withDuration: 0.4, delay: 0, animations: {
-                self.colorPickerButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-                self.colorPickerButton.alpha = 0
-                self.addButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-                self.addButton.alpha = 0
-            }) { (true) in
-                self.addButton.isHidden = true
-                self.colorPickerButton.isHidden = true
-            }
-        case .tools:
-            self.addButton.isHidden = false
-            self.colorPickerButton.isHidden = false
-            UIView.animate(withDuration: 0.4, delay: 0) {
-                self.colorPickerButton.transform = .identity
-                self.colorPickerButton.alpha = 1
-                self.addButton.transform = .identity
-                self.addButton.alpha = 1
-            }
-        }
-    }
-    
-    
+    // Перенести в отдельый класс 
     func colorRoundViewAnimation(width: CGFloat) {
-        colorRoundView.frame = CGRect(origin: CGPoint(x: (self.view.bounds.width - width) / 2 , y: (self.view.bounds.height - width) / 2),
+        widhtRoundView.frame = CGRect(origin: CGPoint(x: (self.view.bounds.width - width) / 2 , y: (self.view.bounds.height - width) / 2),
                                       size: CGSize(width: width, height: width))
-        colorRoundView.layer.cornerRadius = colorRoundView.bounds.height / 2
-        colorRoundView.layer.shadowPath = UIBezierPath(ovalIn: colorRoundView.bounds).cgPath
+        widhtRoundView.layer.cornerRadius = widhtRoundView.bounds.height / 2
+        widhtRoundView.layer.shadowPath = UIBezierPath(ovalIn: widhtRoundView.bounds).cgPath
     }
     
-    
-    var zoomAnimator = UIViewPropertyAnimator()
-    
+    // Перенести в отделый класс
     func showZoomOutAnimation(_ isShow: Bool) {
         guard !zoomAnimator.isRunning else { return }
-        
         zoomAnimator = UIViewPropertyAnimator(duration: 0.15, curve: .easeIn)
-        
         switch isShow {
         case true:
             // Show "zoom"
@@ -345,6 +308,7 @@ class EditorViewController: UIViewController {
     }
     
     
+    
     // MARK: - UIFeedbackGenerator
     
     
@@ -360,68 +324,88 @@ class EditorViewController: UIViewController {
 
 
 
-// MARK: - Controllers Action
+// MARK: - Tool Changes
 
-
-extension EditorViewController: WidthSliderDelegate {
+// ToolsCollectionView
+extension EditorViewController: ToolsDrawCellTouchDelegate, ToolsCollectionViewDelegate {
     
-    func getValue() {
-        toolseCollectionView.currentCell.setWidth(CGFloat(segmentedControl.slider.value))
-        imageDrawView.set(toolseCollectionView.currentCell.tool)
-    }
-}
-
-
-extension EditorViewController: ToolsCollectionViewDelegate {
-    
-    func startTouch() {}
-    
-    func beginTouch(widht: CGFloat) {
-        colorRoundView.isHidden = false
-        toolseCollectionView.currentCell.setWidth(CGFloat(widht))
-        imageDrawView.set(toolseCollectionView.currentCell.tool)
-        sliderWidthUp()
-        colorRoundViewAnimation(width: widht)
-    }
-    
-    func endTouch() {
-        colorRoundView.isHidden = true
-    }
-    
-    func cellTap() {
-        if animationWidhtTool == .tools {
-            sliderWidthUp()
-            colorPickerButtonUP()
-            imageDrawView.set(toolseCollectionView.currentCell.tool)
+    // Выбрали новый инструмент
+    func selectedNewCell(_ cell: ToolsDrawCell) {
+        // Устновоить новый инструмент
+        dataModelController.setNewTool(index: cell.tag)
+        
+        if let pen = dataModelController.currentTool as? Pen {
+            colorPickerButton.color = pen.color
+        } else {
+            colorPickerButton.color = nil
         }
     }
     
-    func cellWidht() {
-        if animationWidhtTool == .tools {
-            if let _ = toolseCollectionView.currentCell.tool.widht {
-                // Получения ширины если она есть.
-                sliderWidthUp()
-                // Устноовить ширину слайдера.
-                // Анимация. Передйает все предустоновки до.
-                animationWidht(.width)
-                // Устновока кнопки наконечника
-                downloadButton.imageName = toolseCollectionView.currentCell.tool.currentTip.rawValue + "Tip"
-                downloadButton.label.text = toolseCollectionView.currentCell.tool.currentTip.rawValue
+    // Анимация выдиления
+    // На экране виден: slider, downloadButton.roundButton. Устоновить значения перед анимацией
+    func openWidthTool(_ cell: ToolsDrawCell) {
+        if let pen = dataModelController.currentTool as? Pen {
+            segmentedControl.slider.setWidthRange(range: pen.validWidthRange, value: pen.width)
+            downloadButton.typeRoundButton = pen.tipType
+        } else if let eraser = dataModelController.currentTool as? Eraser {
+            segmentedControl.slider.setWidthRange(range: eraser.validWidthRange, value: eraser.width)
+            downloadButton.typeEraserButton = eraser.typeEraser
+        }
+        animationWidht(.toolSelected)
+    }
+    
+    func beginTouch(_ deltaWidth: CGFloat) {
+        if let pen = dataModelController.currentTool as? Pen {
+            let newWdith = pen.width + ( deltaWidth / pen.validWidthRange.lowerBound)
+            if pen.validWidthRange.contains(newWdith) {
+                colorRoundViewAnimation(width: newWdith)
+                widhtRoundView.isHidden = false
+                dataModelController.setWidth(newWdith)
+                toolseCollectionView.currentCell.setWidth(newWdith)
+            }
+        } else if let eraser = dataModelController.currentTool as? Eraser {
+            let newWdith = eraser.width + ( deltaWidth / eraser.validWidthRange.lowerBound)
+            if eraser.validWidthRange.contains(newWdith) {
+                colorRoundViewAnimation(width: newWdith)
+                widhtRoundView.isHidden = false
+                dataModelController.setWidth(newWdith)
             }
         }
     }
+    
+    func endTouch() {
+        widhtRoundView.isHidden = true
+    }
+    
+}
+
+// Segment Control
+extension EditorViewController: WidthSliderDelegate {
+    
+    
+    // Новая ширина
+    func getValue(_ value: Float) {
+        if dataModelController.currentTool is Pen {
+            colorRoundViewAnimation(width: CGFloat(value))
+            toolseCollectionView.currentCell.setWidth(CGFloat(value))
+        }
+        dataModelController.setWidth(CGFloat(value))
+    }
+    
+    func beginTouchSlider(_ width: CGFloat) { widhtRoundView.isHidden = false }
+    
+    func endTouchSlider() { widhtRoundView.isHidden = true }
 }
 
 
-extension EditorViewController: ButtonDelegate {
-    
-    func tap() {
-        switch animationWidhtTool {
-        case .width:
-            animationWidht(.tools)
-        case .tools:
-            imageDrawView.setZoomScale(imageDrawView.minimumZoomScale, animated: true)
-            dismiss(animated: true)
+// Setting Color View Controller | Изменения цвета
+extension EditorViewController: ColorObserver {
+    // Изменения цвета
+    func colorChanged(_ color: UIColor?) {
+        colorPickerButton.color = color
+        if let color = color {
+            dataModelController.setColor(color)
+            toolseCollectionView.currentCell.setColor(color)
         }
     }
 }
@@ -429,37 +413,51 @@ extension EditorViewController: ButtonDelegate {
 
 /// Кнопка загрузки / выбор наконечника
 extension EditorViewController: ButtonTwo {
+    // Загрузка фото
+    func downnload() { imageDownlound() }
     
-    func downnload() {
-        imageDownlound()
+    // Выбрали новый наконечник
+    func newTip(_ newTip: Pen.TipType) {
+        dataModelController.setPenTip(newTip)
     }
     
-    func round() {
-        var actions:[UIAction] = []
-        for i in self.toolseCollectionView.currentTool.toolTip.reversed() {
-            let action = UIAction(title: NSLocalizedString(i.rawValue , comment: ""),
-                     image: UIImage(named: i.rawValue  + "Tip")) { action in
-                self.tipPen(i)
-            }
-            actions.append(action)
-        }
-        downloadButton.button.menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: actions)
-        downloadButton.button.showsMenuAsPrimaryAction = true
-    }
-    
-    func tipPen(_ tip: ToolTip.Tip) {
-        downloadButton.imageName = tip.rawValue + "Tip"
-        downloadButton.label.text = tip.rawValue
-        downloadButton.button.showsMenuAsPrimaryAction = false
-        downloadButton.button.menu = nil
-        toolseCollectionView.currentCell.tool.currentTip = tip
-        print(tip.rawValue)
+    // Выбрали новый ластик
+    func newEraser(_ type: Eraser.TypeEraser) {
+        dataModelController.setEraser(type)
+        toolseCollectionView.currentCell.tool = dataModelController.currentTool
     }
 }
 
+
+
+// MARK:  Canves add
+
+
+/// Кнопка добавить (addButton)
 extension EditorViewController: AddButtonDelegate {
+    
     func getFigure(_ figure: DrawingFigure.Figure) {
-        print(figure.rawValue)
+        // Обновить содержимое холста
+        print("Добавленая фигура")
+    }
+}
+
+
+
+// MARK: -  Clouse
+
+extension EditorViewController: ButtonDelegate {
+    
+    func tap() {
+        switch backToCancelButtonView.isState {
+        case .cancel:
+            // Кнопка закрыть
+            drawView.setZoomScale(drawView.minimumZoomScale, animated: false)
+            dismiss(animated: true)
+        case .back:
+            // Вернутся обратно
+            animationWidht(.tools)
+        }
     }
 }
 
@@ -472,28 +470,27 @@ extension EditorViewController: PKCanvasViewDelegate {
     
     // Responding to drawing-related changes
     
-    func canvasViewDidFinishRendering(_ canvasView: PKCanvasView) {
-//        print("canvasViewDidFinishRendering")
-//        undoButton.isEnabled = true
-//        clearAllButton.isEnabled = true
-    }
+    func canvasViewDidFinishRendering(_ canvasView: PKCanvasView) {}
     
     func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
-//        print("canvasViewDrawingDidChange")
-        undoButton.isEnabled = (imageDrawView.undoManager?.canUndo ?? false)
-        clearAllButton.isEnabled = (imageDrawView.undoManager?.canUndo ?? false)
+        undoButton.isEnabled = (drawView.undoManager?.canUndo ?? false)
+        clearAllButton.isEnabled = (drawView.undoManager?.canUndo ?? false)
     }
     
     
     // Responding to new event sequences
     
     func canvasViewDidBeginUsingTool(_ canvasView: PKCanvasView) {
-//        print("canvasViewDidBeginUsingTool")
+        if let pen = dataModelController.currentTool as? Pen {
+            drawView.setPen(pen)
+        } else if let eraser = dataModelController.currentTool as? Eraser {
+            drawView.setEraser(eraser)
+        } else if let lasso = dataModelController.currentTool as? Lasso {
+            drawView.setLasso(lasso)
+        }
     }
     
-    func canvasViewDidEndUsingTool(_ canvasView: PKCanvasView) {
-//        print("canvasViewDidEndUsingTool")
-    }
+    func canvasViewDidEndUsingTool(_ canvasView: PKCanvasView) {}
     
 }
 
@@ -510,39 +507,12 @@ extension EditorViewController: UIScrollViewDelegate {
             }
         }
     }
+    
+    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        drawView.becomeFirstResponder()
+    }
+    
 }
-
-
-
-//  scrolling and dragging
-
-/*
- func scrollViewDidScroll(_ scrollView: UIScrollView) {}
- 
- func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
- print("scrollViewWillBeginDecelerating")
- }
- func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
- print("scrollViewDidEndDecelerating")
- }
- func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
- print("scrollViewWillEndDragging")
- }
- func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
- print("scrollViewWillBeginDragging")
- }
- func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
- print("scrollViewDidEndDragging")
- }
- */
-
-// zooming
-
-/*
- func scrollViewWillBeginZooming(_: UIScrollView, with: UIView?) {}
- */
-
-
 
 
 

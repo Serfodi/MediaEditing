@@ -31,12 +31,6 @@ class WidthSlider: UISlider {
         setup()
     }
     
-    
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        setup()
-    }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         baseLayer.path = baseLayerPath(frame).cgPath
@@ -49,7 +43,33 @@ class WidthSlider: UISlider {
     // MARK: - Action
     
     @objc func getValue() {
-        delegate?.getValue?()
+        delegate?.getValue(value)
+    }
+    
+    
+    
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        delegate?.beginTouchSlider(CGFloat(value))
+        return true
+    }
+    
+    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        delegate?.endTouchSlider()
+    }
+    
+    
+    // MARK: - set
+    
+    open func setWidthRange(max: Float, min: Float, value: Float) {
+        maximumValue = max
+        minimumValue = min
+        self.value = value
+    }
+    
+    open func setWidthRange(range: ClosedRange<CGFloat>, value: CGFloat) {
+        maximumValue = Float(range.upperBound)
+        minimumValue = Float(range.lowerBound)
+        self.value = Float(value)
     }
     
     
@@ -82,6 +102,9 @@ class WidthSlider: UISlider {
         let trackRect = self.trackRect(forBounds: bounds)
         return self.thumbRect(forBounds: bounds, trackRect: trackRect, value: value)
     }
+    
+    
+    
     
     
     // MARK: - setup
@@ -123,8 +146,12 @@ class WidthSlider: UISlider {
 }
 
 
-@objc protocol WidthSliderDelegate: AnyObject {
+protocol WidthSliderDelegate: AnyObject {
     
-    @objc optional func getValue()
+    func getValue(_ value: Float)
+    
+    func beginTouchSlider(_ width: CGFloat)
+    
+    func endTouchSlider()
     
 }

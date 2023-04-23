@@ -18,6 +18,8 @@ class ColorPickerButton: UIButton {
     
     private var gradientСirclePath = UIBezierPath()
     
+    /// Цвет кружочка или его отсутсивие.
+    /// Устоноавливет цвет
     open var color: UIColor? {
         willSet {
             if newValue == nil {
@@ -55,7 +57,28 @@ class ColorPickerButton: UIButton {
     
     // MARK: - animation
     
-    func animationColorCircleOpen() {
+    open func animationShow(is show: Bool) {
+        let animation = UIViewPropertyAnimator(duration: 0.4, curve: .easeIn)
+        switch show {
+        case true:
+            isHidden = false
+            animation.addAnimations {
+                self.alpha = 1
+                self.transform = .identity
+            }
+        case false:
+            animation.addAnimations {
+                self.alpha = 0
+                self.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            }
+            animation.addCompletion { _ in
+                self.isHidden = true
+            }
+        }
+        animation.startAnimation()
+    }
+    
+    private func animationColorCircleOpen() {
         self.colorCircle.isHidden = false
         UIView.animate(withDuration: 0.15) {
             self.colorCircle.transform = .identity
@@ -64,7 +87,7 @@ class ColorPickerButton: UIButton {
         (gradientLayer.mask as? CAShapeLayer)?.path = getPacthGradien("board").cgPath
     }
     
-    func animationColorCircleClouse() {
+    private func animationColorCircleClouse() {
         (gradientLayer.mask as? CAShapeLayer)?.path = getPacthGradien("fill").cgPath
         UIView.animate(withDuration: 0.15) {
             self.colorCircle.transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
@@ -74,8 +97,6 @@ class ColorPickerButton: UIButton {
         }
     }
     
-    
-    
     private func animationForm(at one: CGPath, to two: CGPath) -> CABasicAnimation {
         let patchAnimation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.path))
         patchAnimation.fromValue = one
@@ -84,6 +105,7 @@ class ColorPickerButton: UIButton {
         patchAnimation.duration = 1
         return patchAnimation
     }
+    
     
     
     // MARK: - setup
