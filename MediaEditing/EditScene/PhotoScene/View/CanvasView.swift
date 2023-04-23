@@ -15,14 +15,29 @@ class CanvasView: PKCanvasView {
     
     
     // MARK: - Draw
-    
+            
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         setUpCanvasView()
     }
     
-    
     // MARK: - set
+    
+    func setPen(_ pen: Pen) {
+        tool = pen.tool
+    }
+    
+    func setEraser(_ eraser: Eraser) {
+        tool = eraser.tool
+    }
+    
+    func setLasso(_ lasso: Lasso) {
+        tool = lasso.tool
+    }
+    
+    
+    
+    
     
     /// Устонвалвивает картинку
     private func set(image: UIImage) {
@@ -39,10 +54,6 @@ class CanvasView: PKCanvasView {
         contentInset = UIEdgeInsets(top: insets[1], left: insets[0], bottom: insets[1], right: insets[0])
     }
     
-    /// Устонвалвивает инструмент
-    open func set(_ tool: Tool) {
-        self.tool = tool.getTool(Float(maximumZoomScale))
-    }
     
     // MARK: - setup
     
@@ -70,15 +81,18 @@ class CanvasView: PKCanvasView {
     
     
     private func setUpCanvasView() {
+//        allowsFingerDrawing = true
         drawingPolicy = .anyInput
         backgroundColor = .clear
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
         isOpaque = false
-        
         bouncesZoom = true
-        
     }
+    
+    
+    
+    
 }
 
 

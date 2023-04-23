@@ -21,6 +21,7 @@
 		B04F043B29EC9AD700B19CD0 /* ColorSlidersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0B19B81299E600A00BE2413 /* ColorSlidersView.xib */; };
 		B057437429F17A560002EC1D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B057437329F17A560002EC1D /* Model.swift */; };
 		B057437629F183EB0002EC1D /* MenuCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03BEE9029EAF4F7004BF773 /* MenuCollectionView.swift */; };
+		B057437A29F2F9D70002EC1D /* BoolExtesion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B057437929F2F9D70002EC1D /* BoolExtesion.swift */; };
 		B05DE14428F475CB0082A662 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DE14328F475CB0082A662 /* AppDelegate.swift */; };
 		B05DE14628F475CB0082A662 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DE14528F475CB0082A662 /* SceneDelegate.swift */; };
 		B05DE14D28F475D20082A662 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B05DE14C28F475D20082A662 /* Assets.xcassets */; };
@@ -67,6 +68,7 @@
 		B03BEE9529EB0CE0004BF773 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		B04F043929EC7E6400B19CD0 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		B057437329F17A560002EC1D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		B057437929F2F9D70002EC1D /* BoolExtesion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolExtesion.swift; sourceTree = "<group>"; };
 		B05DE14028F475CB0082A662 /* MediaEditing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaEditing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B05DE14328F475CB0082A662 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B05DE14528F475CB0082A662 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,9 +118,7 @@
 		B00DFEB229EE84C200FE6CAE /* EditScene */ = {
 			isa = PBXGroup;
 			children = (
-				B057437329F17A560002EC1D /* Model.swift */,
-				B08B6C9F29A76915002748E9 /* Tool.swift */,
-				B03BEE9229EAF6A6004BF773 /* DrawingFigure.swift */,
+				B057437C29F437A80002EC1D /* Model */,
 				B0B1FF29296EB8DE00C7A487 /* PhotoScene */,
 				B00FDDC32986AD7100F8F92F /* SettingColorScene */,
 			);
@@ -184,6 +184,16 @@
 				B0B19B9729A509F900BE2413 /* duck.json */,
 			);
 			path = AnimationJson;
+			sourceTree = "<group>";
+		};
+		B057437C29F437A80002EC1D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B057437329F17A560002EC1D /* Model.swift */,
+				B08B6C9F29A76915002748E9 /* Tool.swift */,
+				B03BEE9229EAF6A6004BF773 /* DrawingFigure.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B05DE13728F475CB0082A662 = {
@@ -265,6 +275,7 @@
 				B04F043929EC7E6400B19CD0 /* UIViewExtension.swift */,
 				B00DFEB429EECDD200FE6CAE /* UISpringTimingParametersExtension.swift */,
 				B00DFEB629F0488600FE6CAE /* CGSizeExtension.swift */,
+				B057437929F2F9D70002EC1D /* BoolExtesion.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -441,6 +452,7 @@
 				B0A87A13298D4C77001C525A /* SegmentSliderView.swift in Sources */,
 				B05DE14628F475CB0082A662 /* SceneDelegate.swift in Sources */,
 				B00FDDC929892D6500F8F92F /* BlurGradientView.swift in Sources */,
+				B057437A29F2F9D70002EC1D /* BoolExtesion.swift in Sources */,
 				B05EF8242989A8FB00F05A96 /* ColorGradientSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

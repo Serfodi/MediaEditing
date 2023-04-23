@@ -56,7 +56,7 @@ class ColorSlidersView: UIView {
         colorSlidersUpdate()
         hexTextFildUpdate()
         
-        delegate?.colorChanged()
+        delegate?.colorChanged(color)
     }
 
     
@@ -158,14 +158,14 @@ extension ColorSlidersView: UITextFieldDelegate {
                 rgba[textField.tag] = CGFloat(component)
                 sliderValueUpdate()
                 colorSlidersUpdate()
-                delegate?.colorChanged()
+                delegate?.colorChanged(color)
             }
         case 3:
             if let color = UIColor(hex: textField.text ?? "0") {
                 rgba = color.getComponents()
                 sliderValueUpdate()
                 colorSlidersUpdate()
-                delegate?.colorChanged()
+                delegate?.colorChanged(color)
             }
         default:
             return

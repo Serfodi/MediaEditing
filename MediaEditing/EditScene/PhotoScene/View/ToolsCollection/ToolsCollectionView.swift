@@ -10,69 +10,68 @@ import UIKit
 
 protocol ToolsCollectionViewDelegate: AnyObject {
     
-    func cellTap()
-    func cellWidht()
+    /// Выбрана новая яцека
+    func selectedNewCell(_ cell: ToolsDrawCell)
+    /// Нажали еще раз на туже яцейку
+    func openWidthTool(_ cell: ToolsDrawCell)
+}
+
+@objc protocol ToolsDrawCellTouchDelegate: AnyObject {
     
-    func startTouch()
-    func beginTouch(widht: CGFloat)
-    func endTouch()
+    // touch
+    @objc optional func startTouch()
+    @objc optional func beginTouch(_ deltaWidth: CGFloat)
+    @objc optional func endTouch()
     
 }
 
 
+
 class ToolsCollectionView: UICollectionView {
     
-    enum State {
-        case selected
-        case deselected
-    }
+    // Коллекция инструментов
+    var tools: [Tool]! { didSet { reloadData() } }
     
-    private let selectTool: [State:Double] = [ .selected: -16, .deselected: 16]
-    
-    private let gradientLayer = CAGradientLayer()
-    
-    open var tools: [Tool] = [] {
-        didSet {
-            reloadData()
-        }
-    }
-    
-    open var currentTool: Tool! {
-        get {
-            if let cell = cell {
-                return cell.tool
-            } else {
-                return nil
-            }
-        }
-    }
-    open var currentCell: ToolsDrawCell! { get { cell } }
-    
-    private var cell: ToolsDrawCell! {
+    open var currentCell: ToolsDrawCell! {
         didSet {
             if let cell = oldValue {
-                selectToolAnimation(.deselected, cell: cell)
+                cell.isSelectedTool = false
             }
         }
         willSet {
             if let cell = newValue {
-                selectToolAnimation(.selected, cell: cell)
+                cell.isSelectedTool = true
             }
         }
     }
     
-    open var currentState: State { get { return state } }
+    /*
+     Градиент от черного к прозрачному.
+     За приделами градиента виды обрезаются.
+     Используется как маска для CollectionView.
+     */
+    private let gradientLayer = CAGradientLayer()
     
-    private var state: State = .deselected
+    /// Отоброжение коллекции
+    enum CollectionShows {
+        /// Показать все инструменты (ячейки)
+        case tools
+        /// Выделить один (Одна большая)
+        case toolSelected
+    }
+   
+    open var currentStateCollection: CollectionShows = .tools {
+        didSet {
+            animation(to: currentStateCollection)
+        }
+    }
     
-    private var collectionViewFlowLayout = UICollectionViewFlowLayout()
-    
-    open var toolsCollectionViewDelegate: ToolsCollectionViewDelegate?
-    
-    open var toolsAnimation = UIViewPropertyAnimator()
+    var animationCell: UIViewPropertyAnimator!
     
     
-    private var startTouchLocal: CGPoint!
+    weak var toolsCellDelegate: ToolsCollectionViewDelegate?
+    
+    weak var toolsCellTouchDelegate: ToolsDrawCellTouchDelegate?
     
     
     // MARK: - init
@@ -82,7 +81,6 @@ class ToolsCollectionView: UICollectionView {
         super.init(coder: coder)
         setup()
     }
-    
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
@@ -118,63 +116,66 @@ class ToolsCollectionView: UICollectionView {
     
     // MARK: - Touches
     
+    private var startWidth: CGFloat!
+    private var startTouchLocal: CGPoint!
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         if let touch = touches.first {
-            startTouchLocal = touch.location(in: cell)
-            toolsCollectionViewDelegate?.startTouch()
+            startTouchLocal = touch.location(in: self)
+            toolsCellTouchDelegate?.startTouch?()
         }
     }
     
-    let oldWidth: Float = 0.0
     
+    // Изменения ширины путем перемещения пальца вверх или вниз по экрану
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard currentState == .deselected else { return }
-        guard cell.tool.widht != nil else { return }
+        super.touchesMoved(touches, with: event)
+        guard currentCell.isSelectedTool else { return }
+        guard currentStateCollection == .tools else { return }
         if let touch = touches.first {
-            let currentLocal = touch.location(in: cell)
-            
+            let currentLocal = touch.location(in: self)
             let distance = (startTouchLocal.y - currentLocal.y)
+            guard  abs(distance) > 1 else { return }
             startTouchLocal = currentLocal
-            
-            let deltaWidth = distance / 24.0 * 3
-            
-            let newWidth = CGFloat(cell.tool.widht) + deltaWidth
-            
-            if newWidth >= 4 && newWidth <= 24 {
-                cell.setWidth(newWidth)
-                toolsCollectionViewDelegate?.beginTouch(widht: newWidth)
-            }
+            toolsCellTouchDelegate?.beginTouch?(distance.rounded())
         }
     }
+    
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        toolsCollectionViewDelegate?.endTouch()
+        toolsCellTouchDelegate?.endTouch?()
     }
+    
+    
+    
+    
+    
+    
     
     
     // MARK: - Animation
     
     
-    open func animation(to state: State) {
-        self.state = state
+    private func animation(to state: CollectionShows) {
         switch state {
-        case .selected:
-            selectedAnimation()
-        case .deselected:
+        case .tools:
             deselectedAnimation()
+        case .toolSelected:
+            selectedAnimation()
         }
     }
     
-    
+    /// Функция создания анимации выделения инструмента.
+    /// Анимация в виде пирамидки
     private func selectedAnimation() {
         let duration = 0.5
         let accelerate = 0.4
-        let topTag = cell.tag
-        let distanceToCenter = bounds.width / 2 - cell.frame.origin.x - cell.frame.width / 2
+        let topTag = currentCell.tag
+        let distanceToCenter = bounds.width / 2 - currentCell.frame.origin.x - currentCell.frame.width / 2
         
+        // Позиция левый ячеек. Опускает вниз влево. Ускоряя их в зависимости от позиции выбранного
         func leftCell(tag:Int, speed: Double) {
             let left = tag - 1
             if left >= 0 {
@@ -184,6 +185,7 @@ class ToolsCollectionView: UICollectionView {
             }
         }
         
+        // Позиция правых ячеек. Опускает вниз вправо. Ускоряя их в зависимости от позиции выбранного
         func rightCell(tag:Int, speed: Double) {
             let right = tag + 1
             if right < tools.count {
@@ -197,10 +199,10 @@ class ToolsCollectionView: UICollectionView {
             leftCell(tag: topTag, speed: 1)
             rightCell(tag: topTag, speed: 1)
             
-            // анимация выделения ячейки
+            // анимация выделения (увилечения и перемещения в центр) ячейки
             var transform = CGAffineTransform(translationX: distanceToCenter / 2, y: 0)
             transform = transform.concatenating(CGAffineTransform(scaleX: 2, y: 1.5))
-            self.cell.transform = transform
+            self.currentCell.transform = transform
         }
     }
     
@@ -209,25 +211,13 @@ class ToolsCollectionView: UICollectionView {
         let duration = 0.2
         let time = UISpringTimingParameters(damping: 0.8, response: 1, initialVelocity: CGVector(dx: -5, dy: -5))
         
+        
         let animtaion = UIViewPropertyAnimator(duration: duration, timingParameters: time)
         animtaion.addAnimations {
             for cell in self.visibleCells.reversed() {
                 cell.transform = .identity
             }
-            self.cell.transform = .identity
-        }
-        animtaion.isInterruptible = true
-        animtaion.startAnimation()
-    }
-    
-    
-    private func selectToolAnimation(_ state: State, cell: UICollectionViewCell) {
-        let duration = 0.05
-        let time = UISpringTimingParameters(damping: 0.5, response: 0.3)
-        
-        let animtaion = UIViewPropertyAnimator(duration: duration, timingParameters: time)
-        animtaion.addAnimations {
-            cell.frame.origin.y += self.selectTool[state]!
+            self.currentCell.transform = .identity
         }
         animtaion.isInterruptible = true
         animtaion.startAnimation()
@@ -236,18 +226,24 @@ class ToolsCollectionView: UICollectionView {
 }
 
 
+
 // MARK: UICollectionViewDelegate
 
 extension ToolsCollectionView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Только в режиме инструменты (tools)
+        guard currentStateCollection != .toolSelected else { return }
         let cell = collectionView.cellForItem(at: indexPath) as! ToolsDrawCell
-        if cell != self.cell {
-            self.cell = cell
+        
+        if cell != self.currentCell {
+            self.currentCell = cell
+            toolsCellDelegate?.selectedNewCell(cell)
         } else {
-            toolsCollectionViewDelegate?.cellWidht()
+            if cell.tool is Pen || cell.tool is Eraser {
+                toolsCellDelegate?.openWidthTool(cell)
+            }
         }
-        toolsCollectionViewDelegate?.cellTap()
     }
 }
 
@@ -266,7 +262,7 @@ extension ToolsCollectionView: UICollectionViewDataSource {
         cell.tool = tools[indexPath.row]
         cell.tag = indexPath.row
         if indexPath.row == 0 {
-            self.cell = cell
+            self.currentCell = cell
         }
         return cell
     }
@@ -295,3 +291,4 @@ extension ToolsCollectionView: UICollectionViewDelegateFlowLayout {
         return freeLine
     }
 }
+

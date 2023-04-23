@@ -33,6 +33,30 @@ class AddButton: UIButton {
     }
     
     
+    open func animationShow(is show: Bool) {
+        let animation = UIViewPropertyAnimator(duration: 0.4, curve: .easeIn)
+        switch show {
+        case true:
+            isHidden = false
+            animation.addAnimations {
+                self.alpha = 1
+                self.transform = .identity
+            }
+        case false:
+            animation.addAnimations {
+                self.alpha = 0
+                self.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            }
+            animation.addCompletion { _ in
+                self.isHidden = true
+            }
+        }
+        animation.startAnimation()
+    }
+    
+    
+    
+    
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()

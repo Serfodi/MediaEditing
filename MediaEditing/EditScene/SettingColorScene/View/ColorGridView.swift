@@ -173,7 +173,7 @@ extension ColorGridCollectionView: UICollectionViewDelegate {
         selectedShape.frame = cell!.frame
         currectCell = cell
         colorSelected = colors[indexPath.row]
-        delegate?.colorChanged()
+        delegate?.colorChanged(colorSelected)
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {

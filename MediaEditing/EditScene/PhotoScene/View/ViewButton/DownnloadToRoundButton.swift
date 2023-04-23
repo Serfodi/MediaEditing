@@ -10,154 +10,197 @@ import UIKit
 protocol ButtonTwo: AnyObject {
     
     func downnload()
-    func round()
+    func newTip(_ newTip: Pen.TipType)
+    func newEraser(_ type: Eraser.TypeEraser)
 }
+
 
 @IBDesignable
 class DownnloadToRoundView: UIView {
 
-    enum StateButton {
+    enum IsButton {
         case downnload
         case round
     }
     
+    var isButton: IsButton = .downnload
+    
     var delegate: ButtonTwo!
     
-    open var isState: StateButton = .downnload
-    
-    lazy var label: UILabel = {
-        let label = UILabel()
-        label.text = "Round"
-        label.font = UIFont(name: "SF-Pro-Text-Semibold", size: 15)
-        label.minimumScaleFactor = 0.5
-        label.textColor = .white
-        return label
+    private lazy var downladButton: UIButton = {
+        let button = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 33, height: 33)))
+        if let image = UIImage(named: "download") {
+            button.setBackgroundImage(image, for: .normal)
+        }
+        return button
     }()
     
-    lazy var imageDownloadView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.image = UIImage(named: "download")
-        return imageView
+    private lazy var roundButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.textColor = .white
+        button.titleLabel?.font = UIFont(name: "SF-Pro-Text-Semibold", size: 15)
+        return button
     }()
     
-    private var shapeImageView: UIImageView!
-    
-    private var stackView: UIStackView = UIStackView(arrangedSubviews: [])
-    
-    
-    open var imageName: String! {
+    /// Устонавливает наконечник карандаша
+    open var typeRoundButton: Pen.TipType = .roundTip {
         didSet {
-            if let image = UIImage(named: imageName) {
-                shapeImageView.image = image
-            }
+            setTip(typeRoundButton)
         }
     }
     
-    
-    
-    var button = UIButton()
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        stackView.frame = bounds
-        button.frame = bounds
+    open var typeEraserButton: Eraser.TypeEraser = .eraser {
+        didSet {
+            setEraser(typeEraserButton)
+        }
     }
     
-    // MARK: Draw
+    /// 0 – title, 1 – image name
+    let titleName: [Eraser.TypeEraser: (String, String)] = [
+        .eraser : ("Eraser", "RoundTip"),
+        .objectEraser : ("Object", "xmarkTip"),
+        .blurEraser : ("Blure", "BlurTip")
+    ]
     
-    override func draw(_ rect: CGRect) {
+    // MARK: - init
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupView()
     }
     
-    @objc func tapButton() {
-        switch isState {
-        case .downnload:
-            delegate.downnload()
-        case .round:
-            delegate.round()
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let space = (bounds.height - 22) / 2.0
+        roundButton.imageEdgeInsets = UIEdgeInsets(top: space, left: bounds.width - 22, bottom: space, right: -(bounds.width - 22))
+        roundButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -22, bottom: 0, right: 22)
+    }
+    
+    // MARK: - Action
+    
+    @objc func downladButtonTapped() {
+        delegate.downnload()
+    }
+    
+    func newToolTip(_ tip: Pen.TipType) {
+        typeRoundButton = tip
+        delegate.newTip(tip)
+    }
+    
+    func newEraer(_ type: Eraser.TypeEraser) {
+        typeEraserButton = type
+        delegate.newEraser(type)
+    }
+    
+    // MARK: - Set func
+    
+    private func setTip(_ type: Pen.TipType) {
+        roundButton.setTitle(type.rawValue, for: .normal)
+        if let image = UIImage(named: type.rawValue + "Tip")?.resizeImage(size: CGSize(width: 22, height: 22)) {
+            roundButton.setImage(image, for: .normal)
         }
+        setButtonMenu()
+    }
+    
+    private func setEraser(_ type: Eraser.TypeEraser) {
+        roundButton.setTitle(titleName[type]?.0, for: .normal)
+        if let image = UIImage(named: titleName[type]!.1)?.resizeImage(size: CGSize(width: 22, height: 22)) {
+            roundButton.setImage(image, for: .normal)
+        }
+        
+        setEraserMenu()
     }
     
     
-    // MARK: SetupView
+    // MARK: Setup View
     
-    
-    func setupView() {
-        setupImageView()
-        setupStackView()
-        stackView.alpha = 0
-        stackView.isHidden = true
-        button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
-        addSubview(button)
+    private func setupView() {
         overrideUserInterfaceStyle = .dark
+        addSubview(roundButton)
+        addSubview(downladButton)
+        roundButton.alpha = 0
+        roundButton.transform = CGAffineTransformMakeScale(0.2, 0.2)
+        roundButton.showsMenuAsPrimaryAction = true
+        downladButton.addTarget(self, action: #selector(downladButtonTapped), for: .touchUpInside)
+        setRoundButtonConstraints(for: roundButton)
+        setDownladButtonConstraints(for: downladButton)
+        roundButton.isHidden = true
     }
     
-    private func setupImageView() {
-        imageDownloadView.frame = bounds
-        addSubview(imageDownloadView)
-        imageDownloadView.translatesAutoresizingMaskIntoConstraints = false
-        imageDownloadView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        imageDownloadView.heightAnchor.constraint(equalToConstant: 33).isActive = true
-        imageDownloadView.widthAnchor.constraint(equalToConstant: 33).isActive = true
+    private func setRoundButtonConstraints(for view: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        view.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        view.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
     }
     
-    private func setupStackView() {
-        shapeImageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 25, height: 25)) )
-        
-        stackView = UIStackView(arrangedSubviews: [])
-        addSubview(stackView)
-        stackView.addArrangedSubview(label)
-        stackView.addArrangedSubview(shapeImageView)
-        
-        stackView.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.frame = bounds
-        
-        shapeImageView.translatesAutoresizingMaskIntoConstraints = false
-        shapeImageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        shapeImageView.widthAnchor.constraint(equalToConstant: 25).isActive = true
+    private func setDownladButtonConstraints(for view: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        view.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        view.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        view.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
     }
     
     
-    // MARK: Animation
+    private func setButtonMenu() {
+        roundButton.menu = nil
+        var actions:[UIAction] = []
+        for i in Pen.TipType.allCases.reversed()  {
+            let action = UIAction(title: NSLocalizedString(i.rawValue , comment: ""), image: UIImage(named: i.rawValue  + "Tip")) { action in
+                self.newToolTip(i)
+            }
+            actions.append(action)
+        }
+        roundButton.menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: actions)
+    }
     
-    open func animationSwicht(to state: StateButton) {
+    
+    private func setEraserMenu() {
+        roundButton.menu = nil
+        var actions:[UIAction] = []
+        for i in Eraser.TypeEraser.allCases.reversed()  {
+            let action = UIAction(title: NSLocalizedString(titleName[i]!.0, comment: ""), image: UIImage(named: titleName[i]!.1 )) { action in
+                self.newEraer(i)
+            }
+            actions.append(action)
+        }
+        roundButton.menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: actions)
+    }
+    
+    
+    
+    // MARK: - Animation
+    
+    open func animationSwicht(to state: IsButton) {
         switch state {
         case .downnload:
-            animtaionDownnload()
+            animationButton(to: roundButton, from: downladButton)
         case .round:
-            animationRound()
+            animationButton(to: downladButton, from: roundButton)
         }
-        isState = state
-    }
-
-    
-    
-    // Из Downnload -> Round
-    private func animationRound() {
-        stackView.isHidden = false
-        UIView.animate(withDuration: 0.5, delay: 0, animations: {
-            self.imageDownloadView.transform = CGAffineTransformMakeScale(0.2, 0.2)
-            self.stackView.alpha = 1
-        }) { (true) in
-            self.imageDownloadView.isHidden = true
-        }
-        
-        
+        isButton = state
     }
     
-    // Из Round -> Downnload
-    private func animtaionDownnload() {
-        self.imageDownloadView.isHidden = false
-        UIView.animate(withDuration: 0.5, delay: 0, animations: {
-            self.imageDownloadView.transform = .identity
-            self.stackView.alpha = 0
-        }) { (true) in
-            self.stackView.isHidden = true
+    private func animationButton(to: UIView, from: UIView) {
+        let animateButton = UIViewPropertyAnimator(duration: 0.4, curve: .linear)
+        from.isHidden = false
+        animateButton.addAnimations {
+            to.transform = CGAffineTransformMakeScale(0.4, 0.4)
+            to.alpha = 0
+            from.transform = .identity
+            from.alpha = 1
         }
+        animateButton.addCompletion { _ in
+            to.isHidden = true
+        }
+        animateButton.startAnimation()
     }
-    
+     
 }

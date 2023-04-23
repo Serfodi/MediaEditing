@@ -14,7 +14,7 @@ class ColorSpectrumView: UIView {
     
     private var image: UIImage!
     
-    open var selectedColor:UIColor!
+    open var selectedColor: UIColor!
     
     override func draw(_ rect: CGRect) {
         layer.cornerRadius = 10
@@ -37,7 +37,7 @@ class ColorSpectrumView: UIView {
     // MARK: - Touches
     
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        <#code#>
+//
 //    }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -45,7 +45,7 @@ class ColorSpectrumView: UIView {
         guard location.x >= 0 && location.y >= 0 else { return }
         guard location.x <= image.size.width && location.y <= image.size.height else { return }
         selectedColor = image.getPixelColor(atLocation: location, withFrameSize: self.frame.size)
-        delegate?.colorChanged()
+        delegate?.colorChanged(selectedColor)
     }
     
 //    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
