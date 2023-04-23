@@ -25,13 +25,12 @@ class GalleryCollectionViewController: UICollectionViewController {
     
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
-    var viewNew: UICollectionViewFlowLayout!
     
     var fetchResult: PHFetchResult<PHAsset>!
     var assetCollection: PHAssetCollection!
     var availableWidth: CGFloat = 0
-    
     fileprivate let imageManager = PHCachingImageManager()
+    
     
     fileprivate var thumbnailSize: CGSize!
     fileprivate var previousPreheatRect = CGRect.zero
@@ -42,15 +41,15 @@ class GalleryCollectionViewController: UICollectionViewController {
     
     
     
-    
-    
     // MARK: - UIViewController / Life Cycle
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
+        
         resetCachedAssets()
+        
         PHPhotoLibrary.shared().register(self)
         
         if fetchResult == nil {
@@ -58,8 +57,8 @@ class GalleryCollectionViewController: UICollectionViewController {
             allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
             fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
         }
-        
     }
+    
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
@@ -71,7 +70,7 @@ class GalleryCollectionViewController: UICollectionViewController {
         if availableWidth != width {
             availableWidth = width
             let columnCount = 3.0
-            let itemLength = (availableWidth - 2 * (columnCount - 1)) / columnCount
+            let itemLength = (availableWidth - 1 * (columnCount - 1)) / columnCount
             collectionViewFlowLayout.itemSize = CGSize(width: itemLength, height: itemLength)
         }
     }
@@ -100,11 +99,7 @@ class GalleryCollectionViewController: UICollectionViewController {
     }
     
     
-    
-    
     // MARK: - Segue
-    
-    @IBAction func closeUnwindSegue(unwindSegue: UIStoryboardSegue) {}
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -117,15 +112,8 @@ class GalleryCollectionViewController: UICollectionViewController {
     }
     
     
-    
-    
-    
-    
-    
-    
     // MARK: - UICollectionViewDataSource
     
-
     // Добавления контента в ячейку
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
@@ -149,19 +137,39 @@ class GalleryCollectionViewController: UICollectionViewController {
     }
     
     
-    
-    
     // MARK: UIScrollView
-    
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateCachedAssets()
     }
     
     
+    // MARK: - setupView
+    
+    func setupView() {
+        
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        var height = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        
+        let app = UIApplication.shared
+        height = app.statusBarFrame.size.height
+        
+        height += 10
+        
+        let blureView = BlurGradientView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: height))
+        blureView.locationsGradient = [0.5, 1]
+        blureView.colors = [CGColor(gray: 0, alpha: 1), CGColor(gray: 0, alpha: 0)]
+        view.addSubview(blureView)
+    }
+
+    
+    
+    
+    
+    
+    
     
     // MARK: - Asset Caching
-    
     
     fileprivate func resetCachedAssets() {
         imageManager.stopCachingImagesForAllAssets()
@@ -241,16 +249,13 @@ extension GalleryCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
+        return 1
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
+        return 1
     }
-
 }
-
-
 
 
 // MARK: - PHPhotoLibraryChangeObserver
@@ -267,6 +272,9 @@ extension GalleryCollectionViewController: PHPhotoLibraryChangeObserver {
         // As such, re-dispatch execution to the main queue before acting
         // on the change, so you can update the UI.
         DispatchQueue.main.sync {
+            
+            
+            
             // Hang on to the new fetch result.
             fetchResult = changes.fetchResultAfterChanges
             // If we have incremental changes, animate them in the collection view.
